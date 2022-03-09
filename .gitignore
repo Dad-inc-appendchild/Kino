@@ -52,7 +52,6 @@ out/
 .idea/libraries/
 
 *.iml
-modules.xml
 *.ipr
 
 ### macOS ###
