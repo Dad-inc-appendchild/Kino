@@ -6,7 +6,7 @@ body:
     attributes:
       label: User story
       options:
-        - label: epic
+        - label: "`epic`"
   - type: textarea
     id: story
     attributes:
@@ -39,8 +39,8 @@ body:
     attributes:
       label: Priority
       options:
-        - label: `high`
-        - label: `medium`
-        - label: `low`
-        - label: `unprioritized`
+        - label: "`high`"
+        - label: "`medium`"
+        - label: "`low`"
+        - label: "`unprioritized`"
   
