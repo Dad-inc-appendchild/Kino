@@ -38,7 +38,6 @@ body:
   - type: checkboxes
     attributes:
       label: Priority
-      description: <optional>
       options:
         - label: High
         - label: Medium
