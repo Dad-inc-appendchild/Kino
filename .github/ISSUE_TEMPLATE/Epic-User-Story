@@ -1,0 +1,54 @@
+name: 🚀 Epic User Story
+description: What this user story is about
+labels: [ "Epic-User-story", "New" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to fill out this bug report. Please take the time to provide as much detail as possible. Following our [bug report guidelines](https://devdocs.prestashop.com/1.7/contribute/contribute-reporting-issues/#best-practices-for-writing-an-issue) will help maintainers qualify your report faster.
+  - type: textarea
+    id: story
+    attributes:
+      label: Story
+      placeholder: As a <type of user>, I want <to perform some task>, so that I can <achieve some goal>.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Scenario A <What should happen>Given that <some context>, when <some action is done>, then <such outcomes are expected to occur>.
+    validations:
+      required: true
+  - type: textarea
+    id: stretch-goals
+    attributes:
+      label: Stretch Goals
+      description: <optional>
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: <optional>
+    validations:
+      required: false
+  - type: checkboxes
+    attributes:
+      label: Priority
+      description: <optional>
+      options:
+        - label: Highest
+        - label: High
+        - label: Medium
+        - label: Low
+        - label: Lowest
+        - label: Unprioritized
+  - type: textarea
+    id: story-points
+    attributes:
+      label: Story points
+      description: <optional>
+    validations:
+      required: false
