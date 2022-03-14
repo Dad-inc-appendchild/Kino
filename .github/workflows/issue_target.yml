@@ -1,9 +1,9 @@
 name: Auto Labeling
 
 on:
-  issue_comment:
+  issues:
     types:
-      - created
+      - opened
       - edited
 
 jobs:
