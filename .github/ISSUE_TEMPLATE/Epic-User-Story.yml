@@ -17,7 +17,7 @@ body:
     id: acceptance-criteria
     attributes:
       label: Acceptance Criteria
-      description: Scenario A <What should happen>Given that <some context>, when <some action is done>, then <such outcomes are expected to occur>.
+      placeholder: Scenario A <What should happen>Given that <some context>, when <some action is done>, then <such outcomes are expected to occur>.
     validations:
       required: true
   - type: textarea
