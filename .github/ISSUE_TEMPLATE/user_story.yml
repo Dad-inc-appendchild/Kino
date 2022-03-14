@@ -3,7 +3,6 @@ description: What this user story is about
 labels: [ "User-story", "New" ]
 body:
   - type: checkboxes
-    id: epic
     attributes:
     label: Priority
     description: <optional>
@@ -42,10 +41,8 @@ body:
       label: Priority
       description: <optional>
       options:
-        - label: Highest
         - label: High
         - label: Medium
         - label: Low
-        - label: Lowest
         - label: Unprioritized
   
