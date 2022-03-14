@@ -5,7 +5,6 @@ body:
   - type: checkboxes
     attributes:
       label: User story
-      description: <optional>
       options:
         - label: Epic
   - type: textarea
