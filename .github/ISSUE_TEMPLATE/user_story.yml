@@ -6,7 +6,7 @@ body:
     attributes:
       label: User story
       options:
-        - label: Epic
+        - label: epic
   - type: textarea
     id: story
     attributes:
