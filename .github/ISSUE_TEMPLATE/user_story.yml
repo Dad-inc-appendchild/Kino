@@ -4,7 +4,7 @@ labels: [ "User-story", "New" ]
 body:
   - type: checkboxes
     attributes:
-      label: Type
+      label: User story
       description: <optional>
       options:
         - label: Epic
