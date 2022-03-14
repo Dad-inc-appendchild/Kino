@@ -1,7 +1,14 @@
 name: 🚀 User Story
 description: What this user story is about
-labels: [ "User-story", "New" ]
+labels: [ "User-story", "New" ] epic.value
 body:
+  - type: checkboxes
+    id: epic
+    attributes:
+    label: Priority
+    description: <optional>
+    options:
+      - label: Epic
   - type: textarea
     id: story
     attributes:
