@@ -4,10 +4,10 @@ labels: [ "User-story", "New" ]
 body:
   - type: checkboxes
     attributes:
-    label: Priority
-    description: <optional>
-    options:
-      - label: Epic
+      label: Priority
+      description: <optional>
+      options:
+        - label: Epic
   - type: textarea
     id: story
     attributes:
