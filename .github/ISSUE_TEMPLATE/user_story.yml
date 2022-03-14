@@ -13,20 +13,20 @@ body:
     id: acceptance-criteria
     attributes:
       label: Acceptance Criteria
-      description: Scenario A <What should happen>Given that <some context>, when <some action is done>, then <such outcomes are expected to occur>.
+      placeholder: Scenario A <What should happen>Given that <some context>, when <some action is done>, then <such outcomes are expected to occur>.
     validations:
       required: true
-  - type: textarea
-    id: stretch-goals
-    attributes:
-      label: Stretch Goals
-      description: <optional>
-    validations:
-      required: false
   - type: textarea
     id: notes
     attributes:
       label: Notes
+      description: <optional>
+    validations:
+      required: false
+  - type: textarea
+    id: addition
+    attributes:
+      label: Addition
       description: <optional>
     validations:
       required: false
@@ -41,10 +41,4 @@ body:
         - label: Low
         - label: Lowest
         - label: Unprioritized
-  - type: textarea
-    id: story-points
-    attributes:
-      label: Story points
-      description: <optional>
-    validations:
-      required: false
+  
