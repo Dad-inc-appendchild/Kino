@@ -3,7 +3,8 @@ name: Google Java Format
 on:
   push:
     branches:
-      - develop
+      - dev
+
   pull_request:
     branches:
       - '*'
