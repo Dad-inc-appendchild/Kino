@@ -2,10 +2,6 @@ name: 🚀 User Story
 description: What this user story is about
 labels: [ "User-story", "New" ]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thank you for taking the time to fill out this bug report. Please take the time to provide as much detail as possible. Following our [bug report guidelines](https://devdocs.prestashop.com/1.7/contribute/contribute-reporting-issues/#best-practices-for-writing-an-issue) will help maintainers qualify your report faster.
   - type: textarea
     id: story
     attributes:
