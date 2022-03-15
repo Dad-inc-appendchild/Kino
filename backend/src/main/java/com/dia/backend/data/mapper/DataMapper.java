@@ -17,11 +17,12 @@ public class DataMapper implements CommandLineRunner {
 
         //Testdata
         Movie movie = new Movie();
-        movie.setTitle("Test title");
+        movie.setTitle("test");
         movie.setYear(2020);
         movie.setCountry("Test country");
         movie.setLanguage("Test Language");
         movieRepository.save(movie);
+
 
     }
 }
