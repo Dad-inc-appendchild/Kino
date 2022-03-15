@@ -14,9 +14,19 @@ if(document.readyState === 'loading'){
   window.addEventListener('DOMContentLoaded', () => {
     loadHtmlTemplate("./html/navbar.html", 'navbar');
     loadHtmlTemplate("./html/carusel.html", 'carusel');
+    loadHtmlTemplate("./html/movieContainer.html", 'moviecontainer');
+    loadHtmlTemplate("./html/movieCard.html", 'card1');
+    loadHtmlTemplate("./html/movieCard.html", 'card2');
+    loadHtmlTemplate("./html/movieCard.html", 'card3');
+    loadHtmlTemplate("./html/movieCard.html", 'card4');
 
   });
 }else{
   loadHtmlTemplate("./html/navbar.html", 'navbar');
   loadHtmlTemplate("./html/carusel.html", 'carusel');
+  loadHtmlTemplate("./html/movieContainer.html", 'moviecontainer');
+  loadHtmlTemplate("./html/movieCard.html", 'card1');
+  loadHtmlTemplate("./html/movieCard.html", 'card2');
+  loadHtmlTemplate("./html/movieCard.html", 'card3');
+  loadHtmlTemplate("./html/movieCard.html", 'card4');
 }
