@@ -1,7 +1,6 @@
 package com.dia.backend.view.controller;
 
 import com.dia.backend.data.repository.MovieRepository;
-import com.dia.backend.domain.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

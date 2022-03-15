@@ -1,7 +1,6 @@
 package com.dia.backend.data.mapper;
 
 import com.dia.backend.data.repository.MovieRepository;
-import com.dia.backend.domain.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
