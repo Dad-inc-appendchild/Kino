@@ -9,20 +9,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataMapper implements CommandLineRunner {
 
-    @Autowired
-    MovieRepository movieRepository;
+  @Autowired
+  MovieRepository movieRepository;
 
-    @Override
-    public void run(String... args) throws Exception {
+  @Override
+  public void run(String... args) throws Exception {
 
-        //Testdata
-        Movie movie = new Movie();
-        movie.setTitle("test");
-        movie.setYear(2020);
-        movie.setCountry("Test country");
-        movie.setLanguage("Test Language");
-        movieRepository.save(movie);
+    //Testdata
+    Movie movie = new Movie();
+    movie.setTitle("test");
+    movie.setYear(2020);
+    movie.setCountry("Test country");
+    movie.setLanguage("Test Language");
+    movieRepository.save(movie);
 
 
-    }
+  }
 }
