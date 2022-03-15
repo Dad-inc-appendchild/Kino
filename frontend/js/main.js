@@ -1,18 +1,22 @@
-
-async function loadnavbar() {
-  result = await fetch("./html/navbar.html")
+async function loadHtmlTemplate(link, elementid) {
+  result = await fetch(link)
   text = await result.text();
 
   domparser = new DOMParser();
   html = domparser.parseFromString(text, "text/html");
 
-  if((f = html.body.querySelector('nav')) !== null) {
-    document.getElementById('navbar').append(f);
+  if((f = html.body.querySelector('div')) !== null) {
+    document.getElementById(elementid).append(f);
   }
 }
 
 if(document.readyState === 'loading'){
-  window.addEventListener('DOMContentLoaded', () => {loadnavbar()});
+  window.addEventListener('DOMContentLoaded', () => {
+    loadHtmlTemplate("./html/navbar.html", 'navbar');
+    loadHtmlTemplate("./html/carusel.html", 'carusel');
+
+  });
 }else{
-  loadnavbar();
+  loadHtmlTemplate("./html/navbar.html", 'navbar');
+  loadHtmlTemplate("./html/carusel.html", 'carusel');
 }
