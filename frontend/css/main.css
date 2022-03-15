@@ -285,3 +285,11 @@ body{
   text-shadow: 0 0 4px black;
 }
 
+.movie-width{
+  max-width: 500px;
+}
+
+.carousel-maxsize{
+
+}
+
