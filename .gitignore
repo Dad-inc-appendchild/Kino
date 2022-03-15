@@ -44,15 +44,11 @@ out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
-
 .idea/azure/
-.idea/workspace.xml
 .idea/usage.statistics.xml
 .idea/shelf/
 .idea/libraries/
 
-*.iml
-*.ipr
 
 ### macOS ###
 # General
