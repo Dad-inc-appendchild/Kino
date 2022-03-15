@@ -12,23 +12,23 @@ import java.util.Optional;
 @RestController
 public class MovieController {
 
-    //Test
-    @Autowired
-    MovieRepository movieRepository;
+  //Test
+  @Autowired
+  MovieRepository movieRepository;
 
-    @GetMapping("/movies")
-    public List<Movie> displayMovie(){
-        return movieRepository.findAll();
+  @GetMapping("/movies")
+  public List<Movie> displayMovie() {
+    return movieRepository.findAll();
+  }
+
+  @GetMapping("/movies/{id}")
+  public Movie findMovieById(@PathVariable Long id) {
+    Optional<Movie> movie = movieRepository.findById(id);
+    if (movie.isPresent()) {
+      return movie.get();
+    } else {
+      return null;
     }
 
-    @GetMapping("/movies/{id}")
-    public Movie findMovieById(@PathVariable String id) {
-        Optional<Movie> movie = movieRepository.findById(id);
-        if (movie.isPresent()) {
-            return movie.get();
-        } else {
-            return null;
-        }
-
-    }
+  }
 }
