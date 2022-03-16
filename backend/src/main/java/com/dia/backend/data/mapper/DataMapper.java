@@ -22,7 +22,5 @@ public class DataMapper implements CommandLineRunner {
     movie.setCountry("Test country");
     movie.setLanguage("Test Language");
     movieRepository.save(movie);
-
-
   }
 }
