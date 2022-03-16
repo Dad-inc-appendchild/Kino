@@ -8,3 +8,5 @@
 /dataSources.local.xml
 
 aws.xml
+checkstyle-idea.xml
+runConfigurations.xml
