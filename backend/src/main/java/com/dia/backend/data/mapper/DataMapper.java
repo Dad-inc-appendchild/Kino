@@ -1,7 +1,9 @@
 package com.dia.backend.data.mapper;
 
 import com.dia.backend.data.repository.MovieRepository;
+import com.dia.backend.data.repository.ProductRepository;
 import com.dia.backend.domain.model.Movie;
+import com.dia.backend.domain.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class DataMapper implements CommandLineRunner {
 
   @Autowired MovieRepository movieRepository;
+  @Autowired ProductRepository productRepository;
 
   @Override
   public void run(String... args) throws Exception {
@@ -21,5 +24,11 @@ public class DataMapper implements CommandLineRunner {
     movie.setCountry("Test country");
     movie.setLanguage("Test Language");
     movieRepository.save(movie);
+
+    Product product = new Product();
+    product.setProductName("Test product");
+    product.setPrice(1500);
+    product.setItemGroup("vino");
+    productRepository.save(product);
   }
 }
