@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("api/movies") // prefix for endpoints
 public class MovieController {
 
-  //Test
   @Autowired
   MovieRepository movieRepository;
 
-  @GetMapping("/movies")
+  @GetMapping("")
   public List<Movie> displayMovie() {
     return movieRepository.findAll();
   }
 
-  @GetMapping("/movies/{id}")
+  @GetMapping("/{id}")
   public Movie findMovieById(@PathVariable Long id) {
     Optional<Movie> movie = movieRepository.findById(id);
     if (movie.isPresent()) {
@@ -32,13 +32,13 @@ public class MovieController {
     }
   }
 
-  @PostMapping("/movies/create")
+  @PostMapping()
   @ResponseStatus(HttpStatus.CREATED)
   public void postMovie(@RequestBody Movie movie) {
     movieRepository.save(movie);
   }
 
-  @PutMapping("/movies/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
     Optional<Movie> movie1 = movieRepository.findById(id);
     if (movie1.isPresent()) {
@@ -49,13 +49,13 @@ public class MovieController {
     }
   }
 
-  @DeleteMapping("/movies/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteMovie(@PathVariable Long id) {
     try {
       movieRepository.deleteById(id);
-      return new ResponseEntity<>("Slettet id=" + id, HttpStatus.OK);
+      return new ResponseEntity<>("Deleted: " + id, HttpStatus.OK);
     } catch (Exception err){
-      return new ResponseEntity<>("Jeg kunnne ikke slet id=" + id, HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>("Error deleting: " + id, HttpStatus.NOT_FOUND);
     }
   }
 }
