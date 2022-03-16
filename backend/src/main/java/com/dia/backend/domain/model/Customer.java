@@ -7,7 +7,7 @@ public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column
-  private Long customerId;
+  private int customerId;
   private String name;
   private String phoneNumber;
 
@@ -27,11 +27,11 @@ public class Customer {
     this.phoneNumber = phoneNumber;
   }
 
-  public Long getCustomerId() {
+  public int getCustomerId() {
     return customerId;
   }
 
-  public void setCustomerId(Long id) {
+  public void setCustomerId(int id) {
     this.customerId = id;
   }
 }

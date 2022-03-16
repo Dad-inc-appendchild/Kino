@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Movie {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private Long id;
+  private int id;
 
   @Column
   private String title;
@@ -47,11 +47,11 @@ public class Movie {
     this.parentalGuide = parentalGuide;
   }
 
-  public Long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
