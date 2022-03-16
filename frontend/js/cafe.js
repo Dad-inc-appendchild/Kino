@@ -1,3 +1,16 @@
+async function loadHtmlTemplate(link, elementid) {
+  let result = await fetch(link)
+  let text = await result.text();
+
+  let domparser = new DOMParser();
+  let html = domparser.parseFromString(text, "text/html");
+
+  if((f = html.body.querySelector('div')) !== null) {
+    document.getElementById(elementid).append(f);
+  }
+}
+
+
 let menuholder = document.getElementById("menu");
 
 let productTest = { "product":[
@@ -28,7 +41,18 @@ let productTest = { "product":[
   ]
 }
 
-setupmenu()
+if(document.readyState === 'loading'){
+  window.addEventListener('DOMContentLoaded', () => {
+    buildPage();
+  });
+}else{
+  buildPage();
+}
+
+async function buildPage(){
+  loadHtmlTemplate("./html/navbar.html", "navbar");
+  setupmenu()
+}
 
 function setupmenu(){
   //fetch goes here
