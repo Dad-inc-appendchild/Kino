@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/movies") // prefix for endpoints
+@RequestMapping("/api/movies") // prefix for endpoints
 public class MovieController {
 
   @Autowired MovieRepository movieRepository;
