@@ -30,7 +30,6 @@ public class MovieController {
     } else {
       return null;
     }
-
   }
 
   @PostMapping("/movies/create")
@@ -58,7 +57,5 @@ public class MovieController {
     } catch (Exception err){
       return new ResponseEntity<>("Jeg kunnne ikke slet id=" + id, HttpStatus.NOT_FOUND);
     }
-
   }
-
 }
