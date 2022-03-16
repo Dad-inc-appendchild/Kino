@@ -289,7 +289,36 @@ body{
   max-width: 500px;
 }
 
-.carousel-maxsize{
-
+.menu-wrapper{
+  margin-top: 1.5em;
 }
 
+.menu-img{
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.menu-price{
+  text-align: right;
+}
+
+.menu-title{
+  font-style: italic;
+  font-size: xx-large;
+}
+
+.menu-content{
+  font-size: large;
+}
+.menu-ingredients{
+  font-size: medium;
+  color: gray;
+}
+
+.menu-item{
+  border-bottom: dotted 2px wheat
+}
+
+.menu-item:hover{
+  color: greenyellow;
+}
