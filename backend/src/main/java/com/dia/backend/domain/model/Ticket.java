@@ -6,7 +6,7 @@ import java.util.UUID;
 @Entity
 public class Ticket {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int ticketId;
 
   @Column(unique = true)
