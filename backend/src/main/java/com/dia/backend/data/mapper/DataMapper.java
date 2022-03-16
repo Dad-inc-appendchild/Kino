@@ -1,13 +1,7 @@
 package com.dia.backend.data.mapper;
 
-import com.dia.backend.data.repository.CustomerRepository;
-import com.dia.backend.data.repository.MovieRepository;
-import com.dia.backend.data.repository.ScreeningRepository;
-import com.dia.backend.data.repository.SeatRepository;
-import com.dia.backend.domain.model.Customer;
-import com.dia.backend.domain.model.Movie;
-import com.dia.backend.domain.model.Screening;
-import com.dia.backend.domain.model.Seat;
+import com.dia.backend.data.repository.*;
+import com.dia.backend.domain.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -27,6 +21,9 @@ public class DataMapper implements CommandLineRunner {
   @Autowired
   SeatRepository seatRepository;
 
+  @Autowired
+  KinoHallRepository kinoHallRepository;
+
   @Override
   public void run(String... args) throws Exception {
 
@@ -45,6 +42,8 @@ public class DataMapper implements CommandLineRunner {
     screeningRepository.save(new Screening());
 
     seatRepository.save(new Seat());
+
+    kinoHallRepository.save(new KinoHall());
 
   }
 }
