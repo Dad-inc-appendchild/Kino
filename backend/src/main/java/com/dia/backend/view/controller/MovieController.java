@@ -14,8 +14,7 @@ import java.util.Optional;
 @RequestMapping("api/movies") // prefix for endpoints
 public class MovieController {
 
-  @Autowired
-  MovieRepository movieRepository;
+  @Autowired MovieRepository movieRepository;
 
   @GetMapping("")
   public List<Movie> displayMovie() {
@@ -54,7 +53,7 @@ public class MovieController {
     try {
       movieRepository.deleteById(id);
       return new ResponseEntity<>("Deleted: " + id, HttpStatus.OK);
-    } catch (Exception err){
+    } catch (Exception err) {
       return new ResponseEntity<>("Error deleting: " + id, HttpStatus.NOT_FOUND);
     }
   }

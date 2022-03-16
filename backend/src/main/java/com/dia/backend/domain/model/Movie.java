@@ -8,14 +8,10 @@ public class Movie {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
-  @Column
-  private String title;
-  @Column
-  private int year;
-  @Column
-  private String country;
-  @Column
-  private String language;
+  @Column private String title;
+  @Column private int year;
+  @Column private String country;
+  @Column private String language;
 
   public Long getId() {
     return id;
