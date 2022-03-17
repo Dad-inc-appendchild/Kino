@@ -286,7 +286,44 @@ body{
 }
 
 .movie-width{
-  max-width: 500px;
+  max-width: 240px;
+  margin-top: 30px;
+}
+
+.movie-body{
+height: 120px;
+  color: black;
+  overflow: hidden;
+}
+
+.movie-title{
+  font-size: 1.4rem;
+  line-height: 2rem;
+  font-weight: 500;
+  max-height: 4rem;
+  overflow: hidden;
+  display: block;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+
+.movie-text{
+  font-size: 1rem;
+  line-height: 2rem;
+  font-weight: 500;
+  max-height: 4rem;
+  overflow: hidden;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
 }
 
 .menu-wrapper{
@@ -321,4 +358,9 @@ body{
 
 .menu-item:hover{
   color: greenyellow;
+}
+
+.card-img-maxSize{
+  max-width: 240px;
+  max-height: 336px;
 }
