@@ -9,17 +9,17 @@ import javax.persistence.*;
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private Long id;
+  private int id;
 
   @Column private String productName;
   @Column private int price;
   @Column private String itemGroup;
 
-  public Long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
