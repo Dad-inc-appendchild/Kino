@@ -55,6 +55,7 @@ async function buildPage(){
 }
 
 function setupmenu(){
+  fetch()
   //fetch goes here
   productTest.product.forEach(addItemToElement);
 }

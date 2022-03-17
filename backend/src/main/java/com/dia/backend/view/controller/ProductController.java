@@ -28,7 +28,7 @@ public class ProductController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Product> updateProduct(
-      @PathVariable Long id, @RequestBody Product product) {
+      @PathVariable Integer id, @RequestBody Product product) {
     Optional<Product> existingProduct = productRepository.findById(id);
     if (existingProduct.isPresent()) {
       productRepository.save(product);
@@ -39,7 +39,7 @@ public class ProductController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+  public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
     try {
       productRepository.deleteById(id);
       return new ResponseEntity<>("Deleted: " + id, HttpStatus.OK);
