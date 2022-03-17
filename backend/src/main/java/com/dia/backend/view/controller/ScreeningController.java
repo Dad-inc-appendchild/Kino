@@ -38,7 +38,8 @@ public class ScreeningController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Screening> updateScreening(@PathVariable int id, @RequestBody Screening screening) {
+  public ResponseEntity<Screening> updateScreening(
+      @PathVariable int id, @RequestBody Screening screening) {
     Optional<Screening> screening1 = screeningRepository.findById(id);
     if (screening1.isPresent()) {
       screeningRepository.save(screening);

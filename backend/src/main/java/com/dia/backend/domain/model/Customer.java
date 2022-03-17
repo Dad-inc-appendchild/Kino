@@ -8,6 +8,7 @@ public class Customer {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column
   private int customerId;
+
   private String name;
   private String phoneNumber;
 

@@ -14,8 +14,7 @@ import java.util.Optional;
 @RequestMapping("/api/tickets") // prefix for endpoints
 public class TicketController {
 
-  @Autowired
-  TicketRepository ticketRepository;
+  @Autowired TicketRepository ticketRepository;
 
   @GetMapping("")
   public List<Ticket> displayTicket() {

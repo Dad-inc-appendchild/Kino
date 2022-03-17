@@ -10,6 +10,7 @@ public class Screening {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int screeningId;
+
   private int customerId;
   private int kinoId;
   private int movieId;

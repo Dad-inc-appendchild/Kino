@@ -1,13 +1,6 @@
 package com.dia.backend.data.mapper;
 
-import com.dia.backend.data.repository.CustomerRepository;
-import com.dia.backend.domain.model.Customer;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 
-import java.util.List;
 /*
 class DataMapperTest implements CommandLineRunner {
   @Autowired

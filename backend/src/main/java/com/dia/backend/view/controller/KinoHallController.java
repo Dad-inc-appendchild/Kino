@@ -14,8 +14,7 @@ import java.util.Optional;
 @RequestMapping("/api/kinoHalls") // prefix for endpoints
 public class KinoHallController {
 
-  @Autowired
-  KinoHallRepository kinoHallRepository;
+  @Autowired KinoHallRepository kinoHallRepository;
 
   @GetMapping("")
   public List<KinoHall> displayKinoHall() {
@@ -39,7 +38,8 @@ public class KinoHallController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<KinoHall> updateKinoHall(@PathVariable int id, @RequestBody KinoHall kinoHall) {
+  public ResponseEntity<KinoHall> updateKinoHall(
+      @PathVariable int id, @RequestBody KinoHall kinoHall) {
     Optional<KinoHall> kinoHall1 = kinoHallRepository.findById(id);
     if (kinoHall1.isPresent()) {
       kinoHallRepository.save(kinoHall);

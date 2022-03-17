@@ -5,8 +5,7 @@ import javax.persistence.Id;
 
 @Entity
 public class KinoHall {
-  @Id
-  private int kinoHallId;
+  @Id private int kinoHallId;
   private int row;
   private int seat;
 

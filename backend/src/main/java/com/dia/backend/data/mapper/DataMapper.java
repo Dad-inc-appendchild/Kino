@@ -9,20 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataMapper implements CommandLineRunner {
 
-  @Autowired
-  MovieRepository movieRepository;
+  @Autowired MovieRepository movieRepository;
 
-  @Autowired
-  CustomerRepository customerRepository;
+  @Autowired CustomerRepository customerRepository;
 
-  @Autowired
-  ScreeningRepository screeningRepository;
+  @Autowired ScreeningRepository screeningRepository;
 
-  @Autowired
-  SeatRepository seatRepository;
+  @Autowired SeatRepository seatRepository;
 
-  @Autowired
-  KinoHallRepository kinoHallRepository;
+  @Autowired KinoHallRepository kinoHallRepository;
 
   @Override
   public void run(String... args) throws Exception {
@@ -44,6 +39,5 @@ public class DataMapper implements CommandLineRunner {
     seatRepository.save(new Seat());
 
     kinoHallRepository.save(new KinoHall());
-
   }
 }

@@ -14,8 +14,7 @@ import java.util.Optional;
 @RequestMapping("/api/customers") // prefix for endpoints
 public class CustomerController {
 
-  @Autowired
-  CustomerRepository customerRepository;
+  @Autowired CustomerRepository customerRepository;
 
   @GetMapping("")
   public List<Customer> displayCustomers() {
@@ -39,7 +38,8 @@ public class CustomerController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Customer> updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
+  public ResponseEntity<Customer> updateCustomer(
+      @PathVariable int id, @RequestBody Customer customer) {
     Optional<Customer> customer1 = customerRepository.findById(id);
     if (customer1.isPresent()) {
       customerRepository.save(customer);
@@ -59,4 +59,3 @@ public class CustomerController {
     }
   }
 }
-

@@ -11,6 +11,7 @@ public class Ticket {
 
   @Column(unique = true)
   private UUID bookingId;
+
   private int kinoId;
   private int customerId;
 
