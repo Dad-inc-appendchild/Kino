@@ -25,36 +25,39 @@ async function buildPage(){
   makeMovieList();
 }
 
-let movieNumber = 1;
-
-function buildMovie(){
+function buildMovie(movie){
+  console.log(movie.id)
   let movieContainer = document.createElement("div");
   movieContainer.classList.add("col");
 
-  let movie = document.createElement("div");
-  movie.id = "movie" + movieNumber;
-  movie.classList.add("card");
-  movie.classList.add("movie-width");
+  let movieElement = document.createElement("div");
+  movieElement.id = movie.id;
+  movieElement.classList.add("card");
+  movieElement.classList.add("movie-width");
 
   //image source goes here
   let imagesrc = "https://m.media-amazon.com/images/M/MV5BNTBjZTBlN2YtOWQzZC00YTAzLWFiOWUtYzRiZWRmNjA5YWFmXkEyXkFqcGdeQXVyMTA0NTIyOTQ@._V1_.jpg";
   let image = document.createElement("img");
   image.src = imagesrc;
   image.classList.add("card-img-top");
+  image.classList.add("card-img-maxSize");
   image.alt="img/FrenchFriday.png";
-  movie.append(image);
+  movieElement.append(image);
 
   let cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
+  cardBody.classList.add("movie-body");
   let cardHeader = document.createElement("h5");
-  cardHeader.innerText = "Movie" + movieNumber; //title goes here
+  cardHeader.innerText = movie.title; //title goes here;
+  cardHeader.classList.add("movie-title");
   cardBody.append(cardHeader);
 
   let cardtext = document.createElement("p");
-  cardtext.innerText = "Lorem ipsum dolor sit amet consectetur adipisicing elit.Aperiam assumenda consequatur consequuntur"; //description goes here
+  cardtext.innerText = movie.year + ", " + movie.duration; //INSERT MORE DATA
   cardtext.classList.add("card-text");
+  cardtext.classList.add("movie-text");
   cardBody.append(cardtext);
-  movie.append(cardBody);
+  movieElement.append(cardBody);
 
   let cardList = document.createElement("ul"); //screenings?
   cardList.classList.add("list-group");
@@ -66,7 +69,7 @@ function buildMovie(){
     cardElement.innerText = "Screening " + i;
     cardList.append(cardElement);
   }
-  movie.append(cardList);
+  movieElement.append(cardList);
 
   cardBody = document.createElement("div");
   let link = document.createElement("a");
@@ -74,19 +77,24 @@ function buildMovie(){
   link.innerText = "Card Link"; //link to something??
   cardBody.append(link);
 
-  movie.append(cardBody);
+  movieElement.append(cardBody);
 
-  movieContainer.append(movie);
+  movieContainer.append(movieElement);
   return movieContainer;
-
 }
 
 function makeMovieList(){
+  fetchMovies();
+}
+
+function appendToList(movie){
   let movieContainer = document.getElementById("movies");
-  movieContainer.append(buildMovie());
-  movieContainer.append(buildMovie());
-  movieContainer.append(buildMovie());
-  movieContainer.append(buildMovie());
-  movieContainer.append(buildMovie());
-  movieContainer.append(buildMovie());
+  movieContainer.append(buildMovie(movie));
+}
+
+async function fetchMovies(){
+  const response = await fetch('http://127.0.0.1:8080/api/movies');
+  const resJSON = await response.json();
+  console.log(resJSON);
+  resJSON.forEach(appendToList);
 }

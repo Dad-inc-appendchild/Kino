@@ -1,3 +1,4 @@
+//SETUP MENU/HEADER
 async function loadHtmlTemplate(link, elementid) {
   let result = await fetch(link)
   let text = await result.text();
@@ -10,36 +11,7 @@ async function loadHtmlTemplate(link, elementid) {
   }
 }
 
-
 let menuholder = document.getElementById("menu");
-
-let productTest = { "product":[
-    {
-      id: "100",
-      name: "test",
-      price: "100kr",
-      itemgroup: "snacks"
-    },
-    {
-      id : "101",
-      name: "test2",
-      price : "250kr",
-      itemgroup : "kaffe"
-    },
-    {
-      id : "104",
-      name: "Tapas",
-      price : "2500kr",
-      itemgroup : "Mad"
-    },
-    {
-      id : "102",
-      name: "Rød",
-      price : "15000kr",
-      itemgroup : "vino"
-    }
-  ]
-}
 
 if(document.readyState === 'loading'){
   window.addEventListener('DOMContentLoaded', () => {
@@ -51,32 +23,40 @@ if(document.readyState === 'loading'){
 
 async function buildPage(){
   loadHtmlTemplate("./html/navbar.html", "navbar");
-  setupmenu()
+  setupMenu()
 }
 
-function setupmenu(){
+//document.createDocumentFragment()
+//Kan måske bruges i stedet for denne løsning.
+
+//SETUP MENU/HEADER END
+//_____________________________________________________________-
+
+async function setupMenu() {
   //fetch goes here
-  productTest.product.forEach(addItemToElement);
+  const response = await fetch('http://127.0.0.1:8080/api/products');
+  const resJSON = await response.json();
+  console.log(resJSON);
+  resJSON.forEach(addItemToElement)
 }
 
 function addItemToElement(item){
   //find liste eller lav hvis mangler?
-  let list = finditemgroup(item.itemgroup);
-  list.append(createproduct(item.name, item.price))
+  let list = findItemGroup(item.itemGroup);
+  list.append(createProduct(item.productName, item.price));
 }
 
-
-function finditemgroup(itemgroup){
+function findItemGroup(itemgroup){
   if( document.getElementById(itemgroup) !== null){
     return document.getElementById(itemgroup);
   }else{
     console.log(itemgroup);
-    createitemgroup(itemgroup);
-    return finditemgroup(itemgroup);
+    createItemGroup(itemgroup);
+    return findItemGroup(itemgroup);
   }
 }
 
-function createitemgroup(itemgroup){
+function createItemGroup(itemgroup){
   let container = document.createElement("div");
   container.classList.add("col")
   container.classList.add("col-lg-6")
@@ -99,37 +79,36 @@ function createitemgroup(itemgroup){
   menuholder.append(container);
 }
 
+function createProduct(name, price){
 
-function createproduct(name, price){
+let menuItem = document.createElement("div");
+menuItem.classList.add("menu-item");
 
-let menuitem = document.createElement("div");
-menuitem.classList.add("menu-item");
-
-let menucontent = document.createElement("div");
-menucontent.classList.add("menu-content");
-menucontent.classList.add("row");
+let menuContent = document.createElement("div");
+menuContent.classList.add("menu-content");
+menuContent.classList.add("row");
 
 let coloumn1 = document.createElement("div");
 coloumn1.classList.add("col-8");
 
-let itemname = document.createElement("p");
-itemname.innerText = name;
-coloumn1.append(itemname);
+let itemName = document.createElement("p");
+itemName.innerText = name;
+coloumn1.append(itemName);
 
-menucontent.append(coloumn1);
+menuContent.append(coloumn1);
 
 let coloumn2 = document.createElement("div");
 coloumn2.classList.add("col-4");
 coloumn2.classList.add("menu-price");
 
-let pricetext = document.createElement("span");
-pricetext.innerText = price;
+let priceText = document.createElement("span");
+priceText.innerText = price;
 
-coloumn2.append(pricetext);
-menucontent.append(coloumn2);
-menuitem.append(menucontent);
+coloumn2.append(priceText);
+menuContent.append(coloumn2);
+menuItem.append(menuContent);
 
-return menuitem;
+return menuItem;
 }
 
 
