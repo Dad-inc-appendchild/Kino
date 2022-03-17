@@ -5,19 +5,52 @@ import javax.persistence.*;
 @Entity
 public class Movie {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private Long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
   @Column private String title;
-  @Column private int year;
-  @Column private String country;
-  @Column private String language;
 
-  public Long getId() {
+  private int year;
+
+  private String country;
+
+  private String language;
+
+  private int duration;
+
+  private int director;
+
+  private int parentalGuide;
+
+  public int getDuration() {
+    return duration;
+  }
+
+  public void setDuration(int duration) {
+    this.duration = duration;
+  }
+
+  public int getDirector() {
+    return director;
+  }
+
+  public void setDirector(int director) {
+    this.director = director;
+  }
+
+  public int getParentalGuide() {
+    return parentalGuide;
+  }
+
+  public void setParentalGuide(int parentalGuide) {
+    this.parentalGuide = parentalGuide;
+  }
+
+  public int getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(int id) {
     this.id = id;
   }
 
