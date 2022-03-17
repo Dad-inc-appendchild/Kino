@@ -1,6 +1,5 @@
 package com.dia.backend.data.mapper;
 
-
 /*
 class DataMapperTest implements CommandLineRunner {
   @Autowired
