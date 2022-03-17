@@ -28,17 +28,131 @@ public class DataMapper implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     Movie movie = new Movie();
-    movie.setTitle("test");
+    movie.setTitle("test MAJOR LONG TITLE HERE FOR THIS MOVIE");
     movie.setYear(2020);
-    movie.setCountry("Test country");
-    movie.setLanguage("Test Language");
+    movie.setCountry("THIS IS THE COUNTRY OF THE MOVIE");
+    movie.setLanguage("THIS LANGUAGE IS VERY VERY VERY LONG");
+    movie.setDuration(120);
+    movieRepository.save(movie);
+
+     movie = new Movie();
+    movie.setTitle("Die HARD1");
+    movie.setYear(2004);
+    movie.setCountry("USA!");
+    movie.setLanguage("English");
+    movie.setDuration(160);
+    movieRepository.save(movie);
+
+    for (int i = 0; i < 5; i++) {
+      movie = new Movie();
+      movie.setTitle("Die HARD" + i);
+      movie.setYear(2004 + i);
+      movie.setCountry("USA!");
+      movie.setLanguage("English");
+      movieRepository.save(movie);
+
+    }
+
+     movie = new Movie();
+    movie.setTitle("Scooby DOO");
+    movie.setYear(1997);
+    movie.setCountry("USA!");
+    movie.setLanguage("Indian English");
     movieRepository.save(movie);
 
     Product product = new Product();
-    product.setProductName("Test product");
+    product.setProductName("Red Wine");
     product.setPrice(1500);
-    product.setItemGroup("vino");
+    product.setItemGroup("Red");
     productRepository.save(product);
+
+
+    product = new Product();
+    product.setProductName("White Wine");
+    product.setPrice(1000);
+    product.setItemGroup("White wine menu");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Ham sandwich ");
+    product.setPrice(30);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Tuna sandwich ");
+    product.setPrice(30);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Salmon sandwich ");
+    product.setPrice(30);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Not Popcorn");
+    product.setPrice(30);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Another white wine");
+    product.setPrice(30);
+    product.setItemGroup("White wine menu");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Latte");
+    product.setPrice(30);
+    product.setItemGroup("Hot Drinks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Machiatto");
+    product.setPrice(30);
+    product.setItemGroup("Hot Drinks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("TEST ERIK");
+    product.setPrice(30);
+    product.setItemGroup("New Drinks MENU");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Black");
+    product.setPrice(30);
+    product.setItemGroup("Hot Drinks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Cola");
+    product.setPrice(30);
+    product.setItemGroup("Cold Drinks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("White Russian");
+    product.setPrice(65);
+    product.setItemGroup("Hard Drinks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Ron B");
+    product.setPrice(300);
+    product.setItemGroup("Hard Drinks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Glenlivet 25y");
+    product.setPrice(3000);
+    product.setItemGroup("Hard Drinks");
+    productRepository.save(product);
+
+
+
 
     Customer customer = new Customer();
     customer.setName("John");
@@ -49,6 +163,7 @@ public class DataMapper implements CommandLineRunner {
 
     seatRepository.save(new Seat());
 
-    kinoHallRepository.save(new KinoHall());
+    //TODO FEJLER!
+    //kinoHallRepository.save(new KinoHall());
   }
 }
