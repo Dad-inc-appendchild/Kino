@@ -35,7 +35,7 @@ public class DataMapper implements CommandLineRunner {
     movie.setDuration(120);
     movieRepository.save(movie);
 
-     movie = new Movie();
+    movie = new Movie();
     movie.setTitle("Die HARD1");
     movie.setYear(2004);
     movie.setCountry("USA!");
@@ -50,10 +50,9 @@ public class DataMapper implements CommandLineRunner {
       movie.setCountry("USA!");
       movie.setLanguage("English");
       movieRepository.save(movie);
-
     }
 
-     movie = new Movie();
+    movie = new Movie();
     movie.setTitle("Scooby DOO");
     movie.setYear(1997);
     movie.setCountry("USA!");
@@ -65,7 +64,6 @@ public class DataMapper implements CommandLineRunner {
     product.setPrice(1500);
     product.setItemGroup("Red");
     productRepository.save(product);
-
 
     product = new Product();
     product.setProductName("White Wine");
@@ -151,9 +149,6 @@ public class DataMapper implements CommandLineRunner {
     product.setItemGroup("Hard Drinks");
     productRepository.save(product);
 
-
-
-
     Customer customer = new Customer();
     customer.setName("John");
     customer.setPhoneNumber("0011223344");
@@ -163,7 +158,7 @@ public class DataMapper implements CommandLineRunner {
 
     seatRepository.save(new Seat());
 
-    //TODO FEJLER!
-    //kinoHallRepository.save(new KinoHall());
+    // TODO FEJLER!
+    // kinoHallRepository.save(new KinoHall());
   }
 }
