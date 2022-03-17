@@ -4,6 +4,8 @@ import com.dia.backend.data.repository.MovieRepository;
 import com.dia.backend.data.repository.ProductRepository;
 import com.dia.backend.domain.model.Movie;
 import com.dia.backend.domain.model.Product;
+import com.dia.backend.data.repository.*;
+import com.dia.backend.domain.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,10 +16,17 @@ public class DataMapper implements CommandLineRunner {
   @Autowired MovieRepository movieRepository;
   @Autowired ProductRepository productRepository;
 
+  @Autowired CustomerRepository customerRepository;
+
+  @Autowired ScreeningRepository screeningRepository;
+
+  @Autowired SeatRepository seatRepository;
+
+  @Autowired KinoHallRepository kinoHallRepository;
+
   @Override
   public void run(String... args) throws Exception {
 
-    // Testdata
     Movie movie = new Movie();
     movie.setTitle("test");
     movie.setYear(2020);
@@ -30,5 +39,16 @@ public class DataMapper implements CommandLineRunner {
     product.setPrice(1500);
     product.setItemGroup("vino");
     productRepository.save(product);
+
+    Customer customer = new Customer();
+    customer.setName("John");
+    customer.setPhoneNumber("0011223344");
+    customerRepository.save(customer);
+
+    screeningRepository.save(new Screening());
+
+    seatRepository.save(new Seat());
+
+    kinoHallRepository.save(new KinoHall());
   }
 }
