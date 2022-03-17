@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("api/products") // prefix for endpoints
 public class ProductController {
   @Autowired ProductRepository productRepository;
-
 
   @GetMapping("")
   public List<Product> displayProducts() {
@@ -29,7 +27,8 @@ public class ProductController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+  public ResponseEntity<Product> updateProduct(
+      @PathVariable Long id, @RequestBody Product product) {
     Optional<Product> existingProduct = productRepository.findById(id);
     if (existingProduct.isPresent()) {
       productRepository.save(product);
