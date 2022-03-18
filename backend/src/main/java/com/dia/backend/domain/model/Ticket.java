@@ -7,20 +7,21 @@ import java.util.UUID;
 public class Ticket {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "ticketId")
   private int ticketId;
 
-  @Column(unique = true)
   private UUID bookingId;
 
-  private int kinoId;
-  private int customerId;
+  @OneToOne
+  @JoinColumn(name = "seatId")
+  private Seat seat;
 
-  public int getKinoId() {
-    return kinoId;
+  public Seat getSeat() {
+    return seat;
   }
 
-  public void setKinoId(int kinoId) {
-    this.kinoId = kinoId;
+  public void setSeat(Seat seat) {
+    this.seat = seat;
   }
 
   public UUID getBookingId() {
@@ -29,14 +30,6 @@ public class Ticket {
 
   public void setBookingId(UUID bookingId) {
     this.bookingId = bookingId;
-  }
-
-  public int getCustomerId() {
-    return customerId;
-  }
-
-  public void setCustomerId(int customerId) {
-    this.customerId = customerId;
   }
 
   public int getTicketId() {
