@@ -28,7 +28,8 @@ public class DataMapper implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     Movie movie = new Movie();
-    movie.setImagesrc("https://m.media-amazon.com/images/M/MV5BMjkwYzU5NWMtNDBmZS00ZGQ4LThjNjMtN2Y4NzViMGM0ODE2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg");
+    movie.setImagesrc(
+        "https://m.media-amazon.com/images/M/MV5BMjkwYzU5NWMtNDBmZS00ZGQ4LThjNjMtN2Y4NzViMGM0ODE2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg");
     movie.setTitle("Belfast");
     movie.setYear(2020);
     movie.setCountry("THIS IS THE COUNTRY OF THE MOVIE");
@@ -37,7 +38,8 @@ public class DataMapper implements CommandLineRunner {
     movieRepository.save(movie);
 
     movie = new Movie();
-    movie.setImagesrc("https://m.media-amazon.com/images/M/MV5BYzE5MGRjMjUtYzQwYy00NGU2LTk2ZjYtMDJhNDM0MmQ3MTc0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg");
+    movie.setImagesrc(
+        "https://m.media-amazon.com/images/M/MV5BYzE5MGRjMjUtYzQwYy00NGU2LTk2ZjYtMDJhNDM0MmQ3MTc0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg");
     movie.setTitle("Another round");
     movie.setYear(1997);
     movie.setCountry("Dansk!");
@@ -46,7 +48,8 @@ public class DataMapper implements CommandLineRunner {
 
     for (int i = 0; i < 7; i++) {
       movie = new Movie();
-      movie.setImagesrc("https://m.media-amazon.com/images/M/MV5BZmYzNTBiZTAtNmJjNi00MTcyLThlZGMtNDA5Y2RkNjM3ODAzXkEyXkFqcGdeQXVyMzg3OTQ5MjU@._V1_.jpg");
+      movie.setImagesrc(
+          "https://m.media-amazon.com/images/M/MV5BZmYzNTBiZTAtNmJjNi00MTcyLThlZGMtNDA5Y2RkNjM3ODAzXkEyXkFqcGdeQXVyMzg3OTQ5MjU@._V1_.jpg");
       movie.setTitle("Test data " + i);
       movie.setYear(2004 + i);
       movie.setCountry("USA!");
@@ -54,7 +57,8 @@ public class DataMapper implements CommandLineRunner {
       movieRepository.save(movie);
 
       movie = new Movie();
-      movie.setImagesrc("https://m.media-amazon.com/images/M/MV5BMzNhOTdlNmUtYzNiYi00MmUxLTg3ZjgtZjk4Y2Y5YTk3ODdiXkEyXkFqcGdeQXVyMTE2MjAzMTU3._V1_.jpg");
+      movie.setImagesrc(
+          "https://m.media-amazon.com/images/M/MV5BMzNhOTdlNmUtYzNiYi00MmUxLTg3ZjgtZjk4Y2Y5YTk3ODdiXkEyXkFqcGdeQXVyMTE2MjAzMTU3._V1_.jpg");
       movie.setTitle("Generisk data " + i);
       movie.setYear(2004);
       movie.setCountry("USA!");
