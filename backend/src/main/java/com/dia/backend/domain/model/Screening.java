@@ -1,9 +1,6 @@
 package com.dia.backend.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Screening {
@@ -11,32 +8,28 @@ public class Screening {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int screeningId;
 
-  private int customerId;
-  private int kinoId;
-  private int movieId;
+  @ManyToOne
+  @JoinColumn(name = "kinoHallId")
+  private KinoHall kinoHall;
 
-  public int getCustomerId() {
-    return customerId;
+  @ManyToOne
+  @JoinColumn(name = "movieId")
+  private Movie movie;
+
+  public Movie getMovie() {
+    return movie;
   }
 
-  public void setCustomerId(int customerId) {
-    this.customerId = customerId;
+  public KinoHall getKinoHall() {
+    return kinoHall;
   }
 
-  public int getKinoId() {
-    return kinoId;
+  public void setKinoHall(KinoHall kinoHall) {
+    this.kinoHall = kinoHall;
   }
 
-  public void setKinoId(int kinoId) {
-    this.kinoId = kinoId;
-  }
-
-  public int getMovieId() {
-    return movieId;
-  }
-
-  public void setMovieId(int movieId) {
-    this.movieId = movieId;
+  public void setMovie(Movie movie) {
+    this.movie = movie;
   }
 
   public int getScreeningId() {

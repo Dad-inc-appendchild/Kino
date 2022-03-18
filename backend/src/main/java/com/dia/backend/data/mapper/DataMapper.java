@@ -153,26 +153,30 @@ public class DataMapper implements CommandLineRunner {
     product.setItemGroup("Hard Drinks");
     productRepository.save(product);
 
-    Ticket ticket = new Ticket();
-    ticket.setKinoHallId(1);
-    //ticket.setCustomer(customer); // Remember to set this otherwise no: (Sets parent/child relationship)
-    ticketRepository.save(ticket);
-
     KinoHall kinoHall = new KinoHall();
-    kinoHall.setSeatRow(1);
-    kinoHall.setSeat(15);
-    kinoHall.setTicket(ticket);
+    kinoHall.setSeatRow(3);
+    kinoHall.setSeat(4);
     kinoHallRepository.save(kinoHall);
+
+    Screening screening = new Screening();
+    screening.setKinoHall(kinoHall);
+    screening.setMovie(movie);
+    screeningRepository.save(screening);
+
+    Seat seat = new Seat();
+    seat.setScreening(screening);
+    seatRepository.save(seat);
+
+    Ticket ticket = new Ticket();
+    //ticket.setCustomer(customer); // Remember to set this otherwise no: (Sets parent/child relationship)
+    ticket.setSeat(seat);
+    ticketRepository.save(ticket);
 
     Customer customer = new Customer();
     customer.setName("John");
     customer.setPhoneNumber("0011223344");
     customer.setTicket(ticket); // Remember to set this otherwise no: (Sets parent/child relationship)
     customerRepository.save(customer);
-
-    screeningRepository.save(new Screening());
-
-    seatRepository.save(new Seat());
 
 
     // TODO FEJLER!

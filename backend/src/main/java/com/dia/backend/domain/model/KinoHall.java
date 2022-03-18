@@ -11,18 +11,6 @@ public class KinoHall {
   private int seatRow; //Cant be named row because its a reserved keyword
   private int seat;
 
-  @OneToOne
-  @JoinColumn(name = "ticketId")
-  private Ticket ticket;
-
-  public Ticket getTicket() {
-    return ticket;
-  }
-
-  public void setTicket(Ticket ticket) {
-    this.ticket = ticket;
-  }
-
   public int getSeatRow() {
     return seatRow;
   }
