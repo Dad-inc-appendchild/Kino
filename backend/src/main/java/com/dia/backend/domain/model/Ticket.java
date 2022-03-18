@@ -7,13 +7,15 @@ import java.util.UUID;
 public class Ticket {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="ticketId")
   private int ticketId;
-
-  @Column(unique = true)
   private UUID bookingId;
-
   private int kinoId;
   private int customerId;
+
+  @ManyToOne
+  @JoinColumn(name = "customerId")
+  private Customer customer;
 
   public int getKinoId() {
     return kinoId;
