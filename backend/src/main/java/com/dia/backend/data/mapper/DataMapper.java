@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
-
 @Component
 public class DataMapper implements CommandLineRunner {
 
@@ -168,18 +166,14 @@ public class DataMapper implements CommandLineRunner {
     seatRepository.save(seat);
 
     Ticket ticket = new Ticket();
-    //ticket.setCustomer(customer); // Remember to set this otherwise no: (Sets parent/child relationship)
     ticket.setSeat(seat);
     ticketRepository.save(ticket);
 
     Customer customer = new Customer();
     customer.setName("John");
     customer.setPhoneNumber("0011223344");
-    customer.setTicket(ticket); // Remember to set this otherwise no: (Sets parent/child relationship)
+    customer.setTicket(ticket); // Remember to set this otherwise it dosn´t set the parent/child relationship.
     customerRepository.save(customer);
 
-
-    // TODO FEJLER!
-    // kinoHallRepository.save(new KinoHall());
   }
 }

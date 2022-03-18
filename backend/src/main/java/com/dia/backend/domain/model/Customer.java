@@ -13,6 +13,7 @@ public class Customer {
 
   @ManyToOne
   @JoinColumn(name = "ticketId")
+  //@JsonBackReference -> this feature closes the stream
   private Ticket ticket;
 
   public Ticket getTicket() {

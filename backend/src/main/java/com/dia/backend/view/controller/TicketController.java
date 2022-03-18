@@ -3,11 +3,9 @@ package com.dia.backend.view.controller;
 import com.dia.backend.data.repository.TicketRepository;
 import com.dia.backend.domain.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -21,13 +19,6 @@ public class TicketController {
   public List<Ticket> displayTicket() {
     return ticketRepository.findAll();
   }
-
-  /*
-  @GetMapping("/findAllTickets")
-  public List<Ticket> displayAllCustomerTickets() {
-    return ticketRepository.findTicketsBy();
-  }
-   */
 
   @GetMapping("/{id}")
   public Ticket findTicketById(@PathVariable int id) {

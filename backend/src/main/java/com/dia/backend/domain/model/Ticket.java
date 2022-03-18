@@ -1,10 +1,6 @@
 package com.dia.backend.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -14,7 +10,6 @@ public class Ticket {
   @Column(name="ticketId")
   private int ticketId;
   private UUID bookingId;
-  //private int customerId; Giver fejl, når vi kompiler med denne attribut.
 
   @OneToOne
   @JoinColumn(name="seatId")

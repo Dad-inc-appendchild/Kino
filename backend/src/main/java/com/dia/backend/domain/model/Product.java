@@ -2,9 +2,6 @@ package com.dia.backend.domain.model;
 
 import javax.persistence.*;
 
-/**
- * @author roed
- */
 @Entity
 public class Product {
   @Id
