@@ -7,12 +7,13 @@ import java.util.UUID;
 public class Ticket {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="ticketId")
+  @Column(name = "ticketId")
   private int ticketId;
+
   private UUID bookingId;
 
   @OneToOne
-  @JoinColumn(name="seatId")
+  @JoinColumn(name = "seatId")
   private Seat seat;
 
   public Seat getSeat() {
@@ -38,5 +39,4 @@ public class Ticket {
   public void setTicketId(int ticketId) {
     this.ticketId = ticketId;
   }
-
 }

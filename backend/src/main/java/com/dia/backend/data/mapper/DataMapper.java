@@ -172,8 +172,8 @@ public class DataMapper implements CommandLineRunner {
     Customer customer = new Customer();
     customer.setName("John");
     customer.setPhoneNumber("0011223344");
-    customer.setTicket(ticket); // Remember to set this otherwise it dosn´t set the parent/child relationship.
+    customer.setTicket(
+        ticket); // Remember to set this otherwise it dosn´t set the parent/child relationship.
     customerRepository.save(customer);
-
   }
 }

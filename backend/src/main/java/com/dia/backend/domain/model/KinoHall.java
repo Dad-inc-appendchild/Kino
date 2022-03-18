@@ -6,9 +6,10 @@ import javax.persistence.*;
 public class KinoHall {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="kinoHallId")
+  @Column(name = "kinoHallId")
   private int kinoHallId;
-  private int seatRow; //Cant be named row because its a reserved keyword
+
+  private int seatRow; // Cant be named row because its a reserved keyword
   private int seat;
 
   public int getSeatRow() {

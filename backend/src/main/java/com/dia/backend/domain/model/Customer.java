@@ -6,14 +6,15 @@ import javax.persistence.*;
 public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="customerId")
+  @Column(name = "customerId")
   private int customerId;
+
   private String name;
   private String phoneNumber;
 
   @ManyToOne
   @JoinColumn(name = "ticketId")
-  //@JsonBackReference -> this feature closes the stream
+  // @JsonBackReference -> this feature closes the stream
   private Ticket ticket;
 
   public Ticket getTicket() {
