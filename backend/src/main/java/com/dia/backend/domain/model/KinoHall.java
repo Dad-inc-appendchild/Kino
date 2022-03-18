@@ -1,20 +1,23 @@
 package com.dia.backend.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class KinoHall {
-  @Id private int kinoHallId;
-  private int row;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "kinoHallId")
+  private int kinoHallId;
+
+  private int seatRow; // Cant be named row because its a reserved keyword
   private int seat;
 
-  public int getRow() {
-    return row;
+  public int getSeatRow() {
+    return seatRow;
   }
 
-  public void setRow(int row) {
-    this.row = row;
+  public void setSeatRow(int row) {
+    this.seatRow = row;
   }
 
   public int getSeat() {
