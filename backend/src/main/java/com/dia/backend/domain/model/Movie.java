@@ -22,6 +22,16 @@ public class Movie {
 
   private int parentalGuide;
 
+  private String imagesrc;
+
+  public String getImagesrc() {
+    return imagesrc;
+  }
+
+  public void setImagesrc(String imagesrc) {
+    this.imagesrc = imagesrc;
+  }
+
   public int getDuration() {
     return duration;
   }
