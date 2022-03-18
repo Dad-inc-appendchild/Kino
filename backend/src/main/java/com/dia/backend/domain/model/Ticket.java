@@ -1,6 +1,10 @@
 package com.dia.backend.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -13,18 +17,24 @@ public class Ticket {
   private int kinoId;
   //private int customerId; Giver fejl, når vi kompiler med denne attribut.
 
+  @OneToMany
+  @JoinColumn(name="ticketId")
+  @JsonBackReference
+  private Set<Customer> tickets = new HashSet<>();
 
+  public Set<Customer> getTickets() {
+    return tickets;
+  }
+
+  public void setTickets(Set<Customer> tickets) {
+    this.tickets = tickets;
+  }
+/*
   @ManyToOne
   @JoinColumn(name = "customerId")
   private Customer customer;
 
-  public Customer getCustomer() {
-    return customer;
-  }
-
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
-  }
+   */
 
   public int getKinoId() {
     return kinoId;

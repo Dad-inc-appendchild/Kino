@@ -15,20 +15,24 @@ public class Customer {
   private String name;
   private String phoneNumber;
 
-
+  /*
   @OneToMany
   @JoinColumn(name="customerId")
   @JsonBackReference
   private Set<Ticket> tickets = new HashSet<>();
+   */
 
-  public Set<Ticket> getTickets() {
-    return tickets;
+  @ManyToOne
+  @JoinColumn(name = "ticketId")
+  private Ticket ticket;
+
+  public Ticket getTicket() {
+    return ticket;
   }
 
-  public void setTickets(Set<Ticket> tickets) {
-    this.tickets = tickets;
+  public void setTicket(Ticket ticket) {
+    this.ticket = ticket;
   }
-
 
   public String getName() {
     return name;
