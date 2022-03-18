@@ -21,6 +21,7 @@ public class CustomerController {
     return customerRepository.findAll();
   }
 
+
   @GetMapping("/{id}")
   public Customer findCustomerById(@PathVariable int id) {
     Optional<Customer> customer = customerRepository.findById(id);

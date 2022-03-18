@@ -11,11 +11,20 @@ public class Ticket {
   private int ticketId;
   private UUID bookingId;
   private int kinoId;
-  private int customerId;
+  //private int customerId; Giver fejl, når vi kompiler med denne attribut.
+
 
   @ManyToOne
   @JoinColumn(name = "customerId")
   private Customer customer;
+
+  public Customer getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
 
   public int getKinoId() {
     return kinoId;
@@ -33,13 +42,6 @@ public class Ticket {
     this.bookingId = bookingId;
   }
 
-  public int getCustomerId() {
-    return customerId;
-  }
-
-  public void setCustomerId(int customerId) {
-    this.customerId = customerId;
-  }
 
   public int getTicketId() {
     return ticketId;

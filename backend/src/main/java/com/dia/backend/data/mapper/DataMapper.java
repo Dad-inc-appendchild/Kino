@@ -24,6 +24,8 @@ public class DataMapper implements CommandLineRunner {
 
   @Autowired KinoHallRepository kinoHallRepository;
 
+  @Autowired TicketRepository ticketRepository;
+
   @Override
   public void run(String... args) throws Exception {
 
@@ -157,6 +159,11 @@ public class DataMapper implements CommandLineRunner {
     screeningRepository.save(new Screening());
 
     seatRepository.save(new Seat());
+
+    Ticket ticket = new Ticket();
+    ticket.setKinoId(1);
+    ticket.setCustomer(customer); // Remember to set this otherwise no: (Sets parent/child relationship)
+    ticketRepository.save(ticket);
 
     // TODO FEJLER!
     // kinoHallRepository.save(new KinoHall());

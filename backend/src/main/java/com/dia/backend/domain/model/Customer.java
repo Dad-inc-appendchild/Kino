@@ -15,6 +15,7 @@ public class Customer {
   private String name;
   private String phoneNumber;
 
+
   @OneToMany
   @JoinColumn(name="customerId")
   @JsonBackReference
@@ -27,6 +28,7 @@ public class Customer {
   public void setTickets(Set<Ticket> tickets) {
     this.tickets = tickets;
   }
+
 
   public String getName() {
     return name;
