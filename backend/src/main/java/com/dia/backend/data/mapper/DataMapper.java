@@ -154,9 +154,15 @@ public class DataMapper implements CommandLineRunner {
     productRepository.save(product);
 
     Ticket ticket = new Ticket();
-    ticket.setKinoId(1);
+    ticket.setKinoHallId(1);
     //ticket.setCustomer(customer); // Remember to set this otherwise no: (Sets parent/child relationship)
     ticketRepository.save(ticket);
+
+    KinoHall kinoHall = new KinoHall();
+    kinoHall.setSeatRow(1);
+    kinoHall.setSeat(15);
+    kinoHall.setTicket(ticket);
+    kinoHallRepository.save(kinoHall);
 
     Customer customer = new Customer();
     customer.setName("John");

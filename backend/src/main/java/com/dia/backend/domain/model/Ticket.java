@@ -14,13 +14,28 @@ public class Ticket {
   @Column(name="ticketId")
   private int ticketId;
   private UUID bookingId;
-  private int kinoId;
+
+
+  private int kinoHallId;
   //private int customerId; Giver fejl, når vi kompiler med denne attribut.
 
   @OneToMany
   @JoinColumn(name="ticketId")
   @JsonBackReference
   private Set<Customer> tickets = new HashSet<>();
+
+  @OneToOne
+  @JoinColumn(name="ticketId")
+  @JsonBackReference
+  private KinoHall kinoHall;
+
+  public KinoHall getKinoHall() {
+    return kinoHall;
+  }
+
+  public void setKinoHall(KinoHall kinoHall) {
+    this.kinoHall = kinoHall;
+  }
 
   public Set<Customer> getTickets() {
     return tickets;
@@ -29,20 +44,7 @@ public class Ticket {
   public void setTickets(Set<Customer> tickets) {
     this.tickets = tickets;
   }
-/*
-  @ManyToOne
-  @JoinColumn(name = "customerId")
-  private Customer customer;
 
-   */
-
-  public int getKinoId() {
-    return kinoId;
-  }
-
-  public void setKinoId(int kinoId) {
-    this.kinoId = kinoId;
-  }
 
   public UUID getBookingId() {
     return bookingId;
@@ -60,4 +62,13 @@ public class Ticket {
   public void setTicketId(int ticketId) {
     this.ticketId = ticketId;
   }
+
+  public int getKinoHallId() {
+    return kinoHallId;
+  }
+
+  public void setKinoHallId(int kinoHallId) {
+    this.kinoHallId = kinoHallId;
+  }
+
 }

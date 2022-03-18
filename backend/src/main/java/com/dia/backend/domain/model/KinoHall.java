@@ -8,15 +8,27 @@ public class KinoHall {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="kinoHallId")
   private int kinoHallId;
-  private int rowX; //Can be named rowm because its a reserved keyword
+  private int seatRow; //Cant be named row because its a reserved keyword
   private int seat;
 
-  public int getRowX() {
-    return rowX;
+  @OneToOne
+  @JoinColumn(name = "ticketId")
+  private Ticket ticket;
+
+  public Ticket getTicket() {
+    return ticket;
   }
 
-  public void setRowX(int row) {
-    this.rowX = row;
+  public void setTicket(Ticket ticket) {
+    this.ticket = ticket;
+  }
+
+  public int getSeatRow() {
+    return seatRow;
+  }
+
+  public void setSeatRow(int row) {
+    this.seatRow = row;
   }
 
   public int getSeat() {

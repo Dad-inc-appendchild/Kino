@@ -1,10 +1,6 @@
 package com.dia.backend.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Customer {
@@ -14,13 +10,6 @@ public class Customer {
   private int customerId;
   private String name;
   private String phoneNumber;
-
-  /*
-  @OneToMany
-  @JoinColumn(name="customerId")
-  @JsonBackReference
-  private Set<Ticket> tickets = new HashSet<>();
-   */
 
   @ManyToOne
   @JoinColumn(name = "ticketId")
