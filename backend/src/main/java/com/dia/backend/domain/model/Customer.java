@@ -10,20 +10,9 @@ public class Customer {
   private int customerId;
 
   private String name;
+
+  @Column(unique = true)
   private String phoneNumber;
-
-  @ManyToOne
-  @JoinColumn(name = "ticketId")
-  // @JsonBackReference -> this feature closes the stream
-  private Ticket ticket;
-
-  public Ticket getTicket() {
-    return ticket;
-  }
-
-  public void setTicket(Ticket ticket) {
-    this.ticket = ticket;
-  }
 
   public String getName() {
     return name;

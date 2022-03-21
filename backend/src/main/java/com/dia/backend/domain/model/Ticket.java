@@ -12,9 +12,29 @@ public class Ticket {
 
   private UUID bookingId;
 
-  @OneToOne
-  @JoinColumn(name = "seatId")
+  @ManyToOne
+  @JoinColumn(name = "seat_id")
   private Seat seat;
+
+  @ManyToOne
+  @JoinColumn(name = "customer_id")
+  private Customer customer;
+
+  public Ticket(Seat seat) {
+    this.seat = seat;
+  }
+
+  public Ticket(){
+
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
+
+  public Customer getCustomer() {
+    return customer;
+  }
 
   public Seat getSeat() {
     return seat;
