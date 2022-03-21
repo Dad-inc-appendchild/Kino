@@ -68,113 +68,183 @@ public class DataMapper implements CommandLineRunner {
       movie.setDuration(160);
       movieRepository.save(movie);
     }
+
+    //--------------------------------------Product  below this line----------------------------------------------------
     Product product = new Product();
-    product.setProductName("Gaja, Sito Moresco 2017");
-    product.setPrice(1500);
+    product.setProductName("El Señorito");
+    product.setPrice(179);
     product.setItemGroup("Rødvin");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Mitolo, 7th Son Grenache Shiraz 2018");
-    product.setPrice(1000);
+    product.setProductName("PN");
+    product.setPrice(279);
     product.setItemGroup("Rødvin");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Weingut Egon Müller, Riesling Spätlese Scharzhofberger 2020");
-    product.setPrice(425);
+    product.setProductName("Camino del Soto");
+    product.setPrice(99);
     product.setItemGroup("Hvidvin");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Mangalica skinke ");
-    product.setPrice(45);
-    product.setItemGroup("Snacks");
-    productRepository.save(product);
-
-    product = new Product();
-    product.setProductName("Røgede andalusiske mandler ");
-    product.setPrice(30);
-    product.setItemGroup("Snacks");
-    productRepository.save(product);
-
-    product = new Product();
-    product.setProductName("Blandede oliven ");
-    product.setPrice(30);
-    product.setItemGroup("Snacks");
-    productRepository.save(product);
-
-    product = new Product();
-    product.setProductName("Summerbird chokolade 5 stk");
-    product.setPrice(50);
-    product.setItemGroup("Snacks");
-    productRepository.save(product);
-
-    product = new Product();
-    product.setProductName("Summerbird flødeboller 2 stk");
-    product.setPrice(45);
-    product.setItemGroup("Snacks");
-    productRepository.save(product);
-
-    product = new Product();
-    product.setProductName("Johan bülow lakridser");
-    product.setPrice(55);
-    product.setItemGroup("Snacks");
-    productRepository.save(product);
-
-    product = new Product();
-    product.setProductName("Mallows saltkaramel og belgisk chokolade");
-    product.setPrice(45);
-    product.setItemGroup("Snacks");
-    productRepository.save(product);
-
-    product = new Product();
-    product.setProductName("Alex Gambal, Batard-Montrachet Grand Cru 2018");
-    product.setPrice(325);
+    product.setProductName("A Coroa");
+    product.setPrice(149);
     product.setItemGroup("Hvidvin");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Latte");
-    product.setPrice(30);
-    product.setItemGroup("Varme drikke");
+    product.setProductName("100% Orange 0% So2, økologisk");
+    product.setPrice(159);
+    product.setItemGroup("Orangevin");
+
+    productRepository.save(product);
+    product = new Product();
+    product.setProductName("Orange Ámfora, økologisk");
+    product.setPrice(269);
+    product.setItemGroup("Orangevin");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Machiatto");
-    product.setPrice(30);
-    product.setItemGroup("Varme drikke");
+    product.setProductName("Braw: Beer me up scotty");
+    product.setPrice(65);
+    product.setItemGroup("Øl");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Braw: Friendship Juice");
+    product.setPrice(65);
+    product.setItemGroup("Øl");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Braw: Jingle my fucking bells");
+    product.setPrice(65);
+    product.setItemGroup("Øl");
+    
+    product = new Product();
+    product.setProductName("Filter kaffe");
+    product.setPrice(20);
+    product.setItemGroup("Kaffe og the");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Cappuccino");
+    product.setPrice(35);
+    product.setItemGroup("Kaffe og the");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Kaffe latte");
+    product.setPrice(35);
+    product.setItemGroup("Kaffe og the");
     productRepository.save(product);
 
     product = new Product();
     product.setProductName("Americano");
+    product.setPrice(25);
+    product.setItemGroup("Kaffe og the");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Naturfrisk: Sports, Lemon, Hindbær, Cola, Blodappelsin juice, Passion orange juice,  Danskvand m citrus");
     product.setPrice(30);
-    product.setItemGroup("Varme drikke");
+    product.setItemGroup("Sodavand og Juice");
+    productRepository.save(product);
+
+    productRepository.save(product);
+    product = new Product();
+    product.setProductName("Rawbar Daddelkonfekt Lakrids Ø Ganefryd");
+    product.setPrice(20);
+    product.setItemGroup("Snacks");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Cola, Fanta, Sprite, Danskvand");
-    product.setPrice(30);
-    product.setItemGroup("Kolde drikke");
+    product.setProductName("Rawbar Daddelkonfekt Kakao Ø Ganefryd");
+    product.setPrice(20);
+    product.setItemGroup("Snacks");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("White Russian");
-    product.setPrice(65);
-    product.setItemGroup("Sprut");
+    product.setProductName("Rawbar Daddelkonfekt Kaffe Ø Ganefryd");
+    product.setPrice(20);
+    product.setItemGroup("Snacks");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Ron B");
-    product.setPrice(300);
-    product.setItemGroup("Sprut");
+    product.setProductName("Rawbar Daddelkonfekt Mynthe Ø Ganefryd");
+    product.setPrice(20);
+    product.setItemGroup("Snacks");
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Glenlivet 25y");
-    product.setPrice(3000);
-    product.setItemGroup("Sprut");
+    product.setProductName("Mallows skumfiduser 3 stk");
+    product.setPrice(45);
+    product.setItemGroup("Snacks");
     productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Mallows med havsalt");
+    product.setPrice(12);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Mallows med lakrids og mørk chokolade");
+    product.setPrice(12);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Mallows saltkaramel og chokolade");
+    product.setPrice(12);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Summerbird Chokoladeboller");
+    product.setPrice(20);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Summerbird Chokoladeboller 2 stk");
+    product.setPrice(35);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Johan bülow Sweet Liquorice");
+    product.setPrice(60);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Johan bülow Salty Liquorice");
+    product.setPrice(60);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Haribo Matador mix");
+    product.setPrice(35);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Haribo Multi mix");
+    product.setPrice(35);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    product = new Product();
+    product.setProductName("Haribo Click mix");
+    product.setPrice(35);
+    product.setItemGroup("Snacks");
+    productRepository.save(product);
+
+    //--------------------------------------------Screening info--------------------------------------------------------
 
     KinoHall kinoHall = new KinoHall();
     kinoHall.setSeatRow(3);

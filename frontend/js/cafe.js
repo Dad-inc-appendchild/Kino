@@ -43,7 +43,7 @@ async function setupMenu() {
 function addItemToElement(item){
   //find liste eller lav hvis mangler?
   let list = findItemGroup(item.itemGroup);
-  list.append(createProduct(item.productName, item.price));
+  list.append(createProduct(item.productName, item.price +" kr"));
 }
 
 function findItemGroup(itemgroup){
