@@ -24,9 +24,7 @@ public class Ticket {
     this.seat = seat;
   }
 
-  public Ticket(){
-
-  }
+  public Ticket() {}
 
   public void setCustomer(Customer customer) {
     this.customer = customer;

@@ -183,7 +183,7 @@ public class DataMapper implements CommandLineRunner {
     seatRepository.saveAll(kinoHall.getSeats());
     kinoHallRepository.save(kinoHall);
 
-    Screening screening = new Screening(movie,kinoHall);
+    Screening screening = new Screening(movie, kinoHall);
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 

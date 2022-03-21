@@ -12,8 +12,7 @@ public class Seat {
 
   private int seatNumber;
 
-  public Seat() {
-  }
+  public Seat() {}
 
   public Seat(int row, int number) {
     setSeatRow(row);
