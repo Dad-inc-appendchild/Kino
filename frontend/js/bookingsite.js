@@ -1,10 +1,12 @@
 let url = "http://127.0.0.1:8080"
 let ticketholder = document.getElementById("tickets");
 let rowCount;
-createList(1)
+let screeningid = 1;
+createList(screeningid)
 
 async function createList(id) {
-  let response = await fetch(url +"/api/screenings/ " + id + "/tickets");
+  ticketholder.innerHTML = '';
+  let response = await fetch(url + "/api/screenings/ " + id + "/tickets");
   let json = await response.json();
 
   console.log(json);
@@ -33,7 +35,6 @@ function ticketBuilder(ticket) {
   input.id = "ticket:" + ticket.ticketId;
   input.type = "checkbox";
   input.data = ticket;
-  console.log(input.data);
 
   let label = document.createElement("label");
   label.htmlFor = "ticket:" + ticket.ticketId;
@@ -59,46 +60,110 @@ function ticketBuilder(ticket) {
 }
 
 const form = document.getElementById("form");
-form.addEventListener('submit',e => {
+form.addEventListener('submit', e => {
   e.preventDefault();
 
-  let values = Array.from(document.querySelectorAll('input[type=checkbox]:checked'))
-    .map(item => item.data)
-    .join(',');
+  let tickets = Array.from(document.querySelectorAll('input[type=checkbox]:checked'))
+    .map(item => item.data);
 
   let phonenumber = document.getElementById("form-phone").value;
 
-  console.log(values);
+  console.log(tickets);
   console.log(phonenumber);
 
-  let customer = lookupCustomer(phonenumber);
-  if (customer == null){
-
-    customer = createNewCustomer(customer);
+  let customer = {
+    customerId: '1',
+    name: 'John',
+    phoneNumber: '0011223344'
   }
-  //confirm customer
 
-  //book ticket
+  //handleCustomer(phonenumber);
+
+  bookAndRefresh(customer, tickets);
 
 });
 
-
-async function lookupCustomer(phoneNumber){
-  let response = await fetch(url +"/api/customers/phonenumber={" + phoneNumber + "}");
-  console.log(response);
-  let json = await response.json();
-
-  return json
+async function bookAndRefresh(customer, tickets){
+  await bookTicket(customer,tickets)
+  await createList(screeningid);
 }
 
-async function createNewCustomer(customer){
-  let response = await fetch(url + "/api/customers/",
+
+let customerForm = document.getElementById("customerForm");
+customerForm.addEventListener('submit', e => {
+  e.preventDefault()
+
+  let myModal = bootstrap.Modal.getInstance((document.getElementById('exampleModal')));
+  let customer = {};
+  customer.name = document.getElementById("customerName").value;
+  customer.phoneNumber = document.getElementById("customerPhone").value;
+  createNewCustomer(customer);
+
+  customerForm.reset();
+  myModal.hide();
+})
+
+async function handleCustomer(phonenumber) {
+  let customer = await lookupCustomer(phonenumber);
+  console.log(customer);
+  if (null === customer) {
+    let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {keyboard: false});
+    myModal.show();
+
+    customer = await customerInput(myModal);
+
+    //TODO customer = createNewCustomer(customer);
+  }
+
+  //TODO confirm customer
+
+  return customer
+}
+
+async function customerInput(modal) {
+
+  // somehow wait for input in modal.
+  // probably something promise and resolve in other event something like that.
+  // modal events on hidden.bs.modal
+}
+
+async function lookupCustomer(phoneNumber) {
+  let response = await fetch(url + "/api/customers/phonenumber={" + phoneNumber + "}");
+  console.log(response);
+  try {
+    let json = await response.json();
+    return json;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function createNewCustomer(customer) {
+  console.log(customer)
+  let response = await fetch(url + "/api/customers",
     {
-      method:'POST',
+      method: 'POST',
+      headers: {
+        'Content-type':'application/json'
+      },
       body: JSON.stringify(customer)
     })
   let json = await response.json();
 
   return json;
+}
+
+async function bookTicket(customer, tickets){
+  let stuff = {}
+  stuff.customer = customer;
+  stuff.tickets = tickets;
+  console.log(stuff);
+  let response = await fetch(url + "/api/tickets/book", {
+    method:"POST",
+    headers:{
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(stuff)
+  })
 }
 
