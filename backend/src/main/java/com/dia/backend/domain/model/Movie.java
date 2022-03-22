@@ -8,7 +8,8 @@ public class Movie {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @Column private String title;
+  @Column
+  private String title;
 
   private int year;
 

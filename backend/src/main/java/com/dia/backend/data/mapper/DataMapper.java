@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class DataMapper implements CommandLineRunner {
 
@@ -184,6 +186,14 @@ public class DataMapper implements CommandLineRunner {
     kinoHallRepository.save(kinoHall);
 
     Screening screening = new Screening(movie, kinoHall);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 15, 0));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 17, 30));
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+     screening = new Screening(movie, kinoHall);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 

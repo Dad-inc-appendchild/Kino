@@ -1,3 +1,5 @@
+'use strict';
+
 //SETUP MENU/HEADER
 async function loadHtmlTemplate(link, elementid) {
   let result = await fetch(link)
@@ -6,13 +8,13 @@ async function loadHtmlTemplate(link, elementid) {
   let domparser = new DOMParser();
   let html = domparser.parseFromString(text, "text/html");
 
+  let f;
   if ((f = html.body.querySelector('div')) !== null) {
     document.getElementById(elementid).append(f);
   }
 }
 
-let menuholder = document.getElementById("menu");
-
+document.getElementById("menu");
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', () => {
     buildPage();
@@ -22,16 +24,14 @@ if (document.readyState === 'loading') {
 }
 
 async function buildPage() {
-  loadHtmlTemplate("./html/navbar.html", "navbar");
-  //setupMenu()
-  //setupCalender()
+  await loadHtmlTemplate("./html/navbar.html", "navbar");
 }
 
-var cal = {
+const cal = {
   // (A) PROPERTIES
   // (A1) COMMON CALENDAR
   sMon: false, // Week start on Monday?
-  mName: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // Month Names
+  mName: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "October", "November", "December"],
 
   // (A2) CALENDAR DATA
   data: null, // Events for the selected period
@@ -100,7 +100,7 @@ var cal = {
       now = new Date(), // current date
       nowMth = now.getMonth(), // current month
       nowYear = parseInt(now.getFullYear()), // current year
-      nowDay = cal.sMth == nowMth && cal.sYear == nowYear ? now.getDate() : null;
+      nowDay = cal.sMth === nowMth && cal.sYear === nowYear ? now.getDate() : null;
 
     // (C2) LOAD DATA FROM LOCALSTORAGE
     cal.data = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
@@ -115,13 +115,13 @@ var cal = {
     // Blank squares before start of month
     let squares = [];
     cal.sMon = true;
-    if (cal.sMon && startDay != 1) {
-      let blanks = startDay == 0 ? 7 : startDay;
+    if (cal.sMon && startDay !== 1) {
+      let blanks = startDay === 0 ? 7 : startDay;
       for (let i = 1; i < blanks; i++) {
         squares.push("b");
       }
     }
-    if (!cal.sMon && startDay != 0) {
+    if (!cal.sMon && startDay !== 0) {
       for (let i = 0; i < startDay; i++) {
         squares.push("b");
       }
@@ -133,14 +133,14 @@ var cal = {
     }
 
     // Blank squares after end of month
-    if (cal.sMon && endDay != 0) {
-      let blanks = endDay == 6 ? 1 : 7 - endDay;
+    if (cal.sMon && endDay !== 0) {
+      let blanks = endDay === 6 ? 1 : 7 - endDay;
       for (let i = 0; i < blanks; i++) {
         squares.push("b");
       }
     }
-    if (!cal.sMon && endDay != 6) {
-      let blanks = endDay == 0 ? 6 : 6 - endDay;
+    if (!cal.sMon && endDay !== 6) {
+      let blanks = endDay === 0 ? 6 : 6 - endDay;
       for (let i = 0; i < blanks; i++) {
         squares.push("b");
       }
@@ -159,7 +159,9 @@ var cal = {
     if (cal.sMon) {
       days.push(days.shift());
     }
-    for (let d of days) {
+
+    let d;
+    for (d of days) {
       let cCell = document.createElement("td");
       cCell.innerHTML = d;
       cRow.appendChild(cCell);
@@ -173,10 +175,10 @@ var cal = {
     cRow.classList.add("day");
     for (let i = 0; i < total; i++) {
       let cCell = document.createElement("td");
-      if (squares[i] == "b") {
+      if (squares[i] === "b") {
         cCell.classList.add("blank");
       } else {
-        if (nowDay == squares[i]) {
+        if (nowDay === squares[i]) {
           cCell.classList.add("today");
         }
         cCell.innerHTML = `<div class="dd">${squares[i]}</div>`;
@@ -210,87 +212,9 @@ var cal = {
 
     cal.hfHead.innerHTML = "Dagens forestillinger";
 
-    async function getAllScreenings() {
-      const url = "http://localhost:8080/api/screenings";
 
-      let response = await fetch(url);
-      let json = await response.json();
-      console.log(json);
-
-      return json;
-
-      // return fetch(url).then(response => response.json());
-
-    }
-
-
-    // let screenings = {};
-    //   const screeningsMap = new Map();
-    async function showAllScreenings() {
-
-      const screenings = await getAllScreenings();
-
-
-      /*   const screenings = [
-           {Tidspunkt: "15:00 - 17:30", Sal: "1", Film: "Film", Event: "Senior Onsdag"},
-           {Tidspunkt: "18:00 - 19:30", Sal: "1", Film: "Film2", Event: "Senior Onsdag"}
-         ];*/
-
-      let table = document.getElementById("screening-table");
-      //let data = Object.keys(screenings[0]);
-
-      let data = Object.keys(screenings[0]);
-
-
-      generateTableHead(table, data);
-      generateTable(table, screenings);
-
-    }
-
-
-    // showKommuneMap();
     showAllScreenings();
 
-    function generateTableHead(table) {
-      let thead = table.createTHead();
-      let row = thead.insertRow();
-
-      let th = document.createElement("th");
-      let text = document.createTextNode("Tidsrum");
-      th.appendChild(text);
-      row.appendChild(th);
-
-      th = document.createElement("th");
-      text = document.createTextNode("Sal");
-      th.appendChild(text);
-      row.appendChild(th);
-
-      th = document.createElement("th");
-      text = document.createTextNode("Film");
-      th.appendChild(text);
-      row.appendChild(th);
-    }
-
-    function generateTable(table, data) {
-      for (let element of data) {
-        let row = table.insertRow();
-        let cell = row.insertCell();
-        let text = document.createTextNode("17:30");
-        cell.appendChild(text);
-
-        cell = row.insertCell();
-        text = document.createTextNode(element.kinoHall.kinoHallId);
-        cell.appendChild(text);
-
-          cell = row.insertCell();
-          text = document.createTextNode(element.movie.title);
-
-          cell.appendChild(text);
-      }
-    }
-
-
-    //cal.hfHead.innerHTML = isEdit ? "EDIT EVENT" : "ADD EVENT" ;
     cal.hfDate.innerHTML = `${cal.sDay} ${cal.mName[cal.sMth]} ${cal.sYear}`;
     if (isEdit) {
       cal.hfDel.classList.remove("ninja");
@@ -298,6 +222,7 @@ var cal = {
       cal.hfDel.classList.add("ninja");
     }
     cal.hForm.classList.remove("ninja");
+
   },
 
   // (E) CLOSE EVENT DOCKET
@@ -308,6 +233,7 @@ var cal = {
   // (F) SAVE EVENT
   save: () => {
     cal.data[cal.sDay] = cal.hfTxt.value;
+
     localStorage.setItem(`cal-${cal.sMth}-${cal.sYear}`, JSON.stringify(cal.data));
     cal.list();
     return false;
@@ -322,90 +248,68 @@ var cal = {
     }
   }
 };
-window.addEventListener("load", cal.init);
 
+async function getAllScreenings() {
 
-//document.createDocumentFragment()
-//Kan måske bruges i stedet for denne løsning.
+  const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (cal.sDay)).slice(-2)}`; // yyyy-mm-dd
 
-//SETUP MENU/HEADER END
-//_____________________________________________________________-
+  const url = "http://localhost:8080/api/screenings/date/" + date;
 
-async function setupMenu() {
-  //fetch goes here
-  const response = await fetch('http://127.0.0.1:8080/api/products');
-  const resJSON = await response.json();
-  console.log(resJSON);
-  resJSON.forEach(addItemToElement)
+  let response = await fetch(url);
+  return await response.json();
 }
 
-function addItemToElement(item) {
-  //find liste eller lav hvis mangler?
-  let list = findItemGroup(item.itemGroup);
-  list.append(createProduct(item.productName, item.price));
-}
+async function showAllScreenings() {
+  const table = document.getElementById("screening-table");
+  const screenings = await getAllScreenings();
 
-function findItemGroup(itemgroup) {
-  if (document.getElementById(itemgroup) !== null) {
-    return document.getElementById(itemgroup);
-  } else {
-    console.log(itemgroup);
-    createItemGroup(itemgroup);
-    return findItemGroup(itemgroup);
+  table.innerHTML = "";
+
+  if (Object.keys(screenings).length !== 0) {
+    let data = Object.keys(screenings[0]);
+
+    generateTableHead(table, data);
+    generateTable(table, screenings);
   }
 }
 
-function createItemGroup(itemgroup) {
-  let container = document.createElement("div");
-  container.classList.add("col")
-  container.classList.add("col-lg-6")
+function generateTableHead(table) {
+  let thead = table.createTHead();
+  let row = thead.insertRow();
 
-  let row = document.createElement("div");
-  row.classList.add("row");
+  let thList = ["Start tid", "Slut tid", "Sal", "Film"];
+  let th;
+  let text;
 
-  let wrapper = document.createElement("div");
-  wrapper.classList.add("menu-wrapper");
-  wrapper.id = itemgroup;
-
-  let title = document.createElement("h4");
-  title.classList.add("menu-title");
-  title.innerText = itemgroup.toUpperCase();
-
-  wrapper.append(title);
-  row.append(wrapper);
-  container.append(row);
-
-  menuholder.append(container);
+  thList.forEach(list => {
+    th = document.createElement("th");
+    text = document.createTextNode(list);
+    th.appendChild(text);
+    row.appendChild(th);
+  });
 }
 
-function createProduct(name, price) {
+function generateTable(table, data) {
+  for (let screening of data) {
+    let row = table.insertRow();
 
-  let menuItem = document.createElement("div");
-  menuItem.classList.add("menu-item");
+    let cell = row.insertCell();
+    let text = document.createTextNode(screening.startTime.slice(11, 16));
+    cell.appendChild(text);
 
-  let menuContent = document.createElement("div");
-  menuContent.classList.add("menu-content");
-  menuContent.classList.add("row");
+    cell = row.insertCell();
+    text = document.createTextNode(screening.endTime.slice(11, 16));
+    cell.appendChild(text);
 
-  let coloumn1 = document.createElement("div");
-  coloumn1.classList.add("col-8");
+    cell = row.insertCell();
+    text = document.createTextNode(screening.kinoHall.kinoHallId);
+    cell.appendChild(text);
 
-  let itemName = document.createElement("p");
-  itemName.innerText = name;
-  coloumn1.append(itemName);
-
-  menuContent.append(coloumn1);
-
-  let coloumn2 = document.createElement("div");
-  coloumn2.classList.add("col-4");
-  coloumn2.classList.add("menu-price");
-
-  let priceText = document.createElement("span");
-  priceText.innerText = price;
-
-  coloumn2.append(priceText);
-  menuContent.append(coloumn2);
-  menuItem.append(menuContent);
-
-  return menuItem;
+    cell = row.insertCell();
+    text = document.createTextNode(screening.movie.title);
+    cell.appendChild(text);
+  }
 }
+
+window.addEventListener("load", cal.init);
+//window.addEventListener("load", showAllScreenings);

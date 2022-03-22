@@ -1,6 +1,7 @@
 package com.dia.backend.domain.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +23,32 @@ public class Screening {
   @JoinColumn(name = "screening_id")
   private List<Ticket> tickets;
 
-  public Screening() {}
+  private LocalDateTime startTime;
+
+  private LocalDateTime endTime;
+
+  public Screening() {
+  }
 
   public Screening(Movie movie, KinoHall kinoHall) {
     setMovie(movie);
     setKinoHall(kinoHall);
+  }
+
+  public LocalDateTime getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(LocalDateTime startTime) {
+    this.startTime = startTime;
+  }
+
+  public LocalDateTime getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(LocalDateTime endTime) {
+    this.endTime = endTime;
   }
 
   public List<Ticket> getTickets() {
@@ -41,16 +63,16 @@ public class Screening {
     return movie;
   }
 
+  public void setMovie(Movie movie) {
+    this.movie = movie;
+  }
+
   public KinoHall getKinoHall() {
     return kinoHall;
   }
 
   public void setKinoHall(KinoHall kinoHall) {
     this.kinoHall = kinoHall;
-  }
-
-  public void setMovie(Movie movie) {
-    this.movie = movie;
   }
 
   public int getScreeningId() {
