@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/customers") // prefix for endpoints
 public class CustomerController {
@@ -55,6 +56,18 @@ public class CustomerController {
       return new ResponseEntity<>("Deleted: " + id, HttpStatus.OK);
     } catch (Exception err) {
       return new ResponseEntity<>("Error deleting: " + id, HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @GetMapping("/phonenumber={phoneNumber}")
+  public Customer findCustomerById(@PathVariable String phoneNumber) {
+    phoneNumber = phoneNumber.replaceAll("[{-}]", "");
+    System.out.println(phoneNumber);
+    Optional<Customer> customer = customerRepository.findByPhoneNumber(phoneNumber);
+    if (customer.isPresent()) {
+      return customer.get();
+    } else {
+      return null;
     }
   }
 }
