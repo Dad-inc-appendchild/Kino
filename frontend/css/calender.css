@@ -1,19 +1,11 @@
-/* (A) ENTIRE PAGE */
-
-#cal-wrap * {
-  font-family: arial, sans-serif;
-}
-
 .ninja {
-  display: none !important;
+  display: none;
 }
 
-/* (B) CONTAINER */
 #cal-wrap {
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
-/* (C) PERIOD SELECTOR */
 #cal-date {
   display: flex;
 }
@@ -25,7 +17,6 @@
   border: 0;
 }
 
-/* (D) CALENDAR */
 #calendar {
   width: 100%;
   border-collapse: collapse;
@@ -47,7 +38,6 @@
   background-color: #fff;
 }
 
-
 #calendar tr {
   background: #ffdede;
 }
@@ -64,13 +54,11 @@
   color: #212529;
 }
 
-/* (E) ADD/EDIT EVENT */
 #cal-event {
   padding: 15px;
   margin-top: 20px;
   background: #f5f5f5;
   border: 1px solid #ddd;
-
 }
 
 #cal-event h1 {
