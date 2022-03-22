@@ -170,8 +170,28 @@ const cal = {
     // Days in Month
     let total = squares.length;
     cRow = document.createElement("tr");
+
     cRow.classList.add("day");
     for (let i = 0; i < total; i++) {
+      // Set week as class name
+
+      // TODO WIP
+      if (i < 7) {
+        cRow.classList.add("week-1");
+
+      }
+      if (i < 14 && i > 7) {
+        cRow.classList.add("week-2");
+      }
+      if (i < 21 && i > 14) {
+        cRow.classList.add("week-3");
+      }
+      if (i < 28 && i > 21) {
+        cRow.classList.add("week-4");
+      }
+      if (i > 28) {
+        cRow.classList.add("week-5");
+      }
 
       let cCell = document.createElement("td");
       if (squares[i] === "b") {
@@ -210,6 +230,7 @@ const cal = {
 
   // (D) SHOW EDIT EVENT DOCKET FOR SELECTED DAY
   show: (el) => {
+
     // (D1) FETCH EXISTING DATA
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
     cal.hfHead.innerHTML = "Dagens forestillinger";
@@ -286,20 +307,14 @@ async function generateTable(table, data) {
     let bookings = 0;
     let seats = 0;
     tickets.forEach(function (el) {
-        seats++
+      seats++
       if (null !== el.customer) {
         bookings++
       }
     });
 
-    const rowList = [
-      screening.startTime.slice(11, 16),
-      screening.endTime.slice(11, 16),
-      screening.kinoHall.kinoHallId,
-      screening.movie.title,
-      screening.event ?? "--",  // ?? = if null
-      bookings + " / " + seats
-    ];
+    const rowList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ?? "--",  // ?? = if null
+      bookings + " / " + seats];
 
     let cell, text;
 
