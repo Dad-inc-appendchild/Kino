@@ -47,14 +47,6 @@
   background-color: #fff;
 }
 
-#calendar tr.day td:hover {
-  background: #0a58ca;
-  cursor: pointer;
-}
-
-#calendar tr td.blank {
-  background: #f5f5f5;
-}
 
 #calendar tr {
   background: #ffdede;
@@ -101,23 +93,16 @@
   background: #1aa179 !important;
 }
 
+#calendar tr.day td:hover {
+  background: #0a58ca !important;
+  cursor: pointer;
+}
 
+#calendar tr td.blank {
+  background: #f5f5f5;
+  cursor: not-allowed !important;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#calendar tr td.blank:hover {
+  background: #f5f5f5 !important;
+}
