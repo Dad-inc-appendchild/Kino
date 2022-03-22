@@ -18,10 +18,8 @@ import java.util.Optional;
 @RequestMapping("/api/screenings") // prefix for endpoints
 public class ScreeningController {
 
-  @Autowired
-  ScreeningRepository screeningRepository;
-  @Autowired
-  TicketRepository ticketRepository;
+  @Autowired ScreeningRepository screeningRepository;
+  @Autowired TicketRepository ticketRepository;
 
   @GetMapping("")
   public List<Screening> displayScreening() {
@@ -40,7 +38,8 @@ public class ScreeningController {
 
   @GetMapping("/date/{date}")
   public List<Screening> findScreeningByDate(@PathVariable String date) {
-    return screeningRepository.findScreeningByStartTimeBetween(LocalDateTime.parse(date + "T00:00"), LocalDateTime.parse(date + "T23:59"));
+    return screeningRepository.findScreeningByStartTimeBetween(
+        LocalDateTime.parse(date + "T00:00"), LocalDateTime.parse(date + "T23:59"));
   }
 
   @PostMapping()
@@ -50,7 +49,8 @@ public class ScreeningController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Screening> updateScreening(@PathVariable int id, @RequestBody Screening screening) {
+  public ResponseEntity<Screening> updateScreening(
+      @PathVariable int id, @RequestBody Screening screening) {
     Optional<Screening> screening1 = screeningRepository.findById(id);
     if (screening1.isPresent()) {
       screeningRepository.save(screening);

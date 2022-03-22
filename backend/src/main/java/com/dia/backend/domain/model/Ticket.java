@@ -24,8 +24,7 @@ public class Ticket {
     this.seat = seat;
   }
 
-  public Ticket() {
-  }
+  public Ticket() {}
 
   public Customer getCustomer() {
     return customer;
