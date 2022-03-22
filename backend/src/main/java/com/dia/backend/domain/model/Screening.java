@@ -30,12 +30,9 @@ public class Screening {
 
   private LocalDateTime endTime;
 
-  @Getter
-  @Setter
-  private String event;
+  @Getter @Setter private String event;
 
-  public Screening() {
-  }
+  public Screening() {}
 
   public Screening(Movie movie, KinoHall kinoHall) {
     setMovie(movie);

@@ -209,7 +209,7 @@ public class DataMapper implements CommandLineRunner {
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
-     screening = new Screening(movie, kinoHall);
+    screening = new Screening(movie, kinoHall);
     screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
     screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
     ticketRepository.saveAll(screening.generateTickets());
