@@ -69,7 +69,8 @@ public class DataMapper implements CommandLineRunner {
       movieRepository.save(movie);
     }
 
-    //--------------------------------------Product  below this line----------------------------------------------------
+    // --------------------------------------Product  below this
+    // line----------------------------------------------------
     Product product = new Product();
     product.setProductName("El Señorito");
     product.setPrice(179);
@@ -122,7 +123,7 @@ public class DataMapper implements CommandLineRunner {
     product.setProductName("Braw: Jingle my fucking bells");
     product.setPrice(65);
     product.setItemGroup("Øl");
-    
+
     product = new Product();
     product.setProductName("Filter kaffe");
     product.setPrice(20);
@@ -148,7 +149,9 @@ public class DataMapper implements CommandLineRunner {
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Naturfrisk: Sports, Lemon, Hindbær, Cola, Blodappelsin juice, Passion orange juice,  Danskvand m citrus");
+    product.setProductName(
+        "Naturfrisk: Sports, Lemon, Hindbær, Cola, Blodappelsin juice, Passion orange juice, "
+            + " Danskvand m citrus");
     product.setPrice(30);
     product.setItemGroup("Sodavand og Juice");
     productRepository.save(product);
@@ -244,7 +247,8 @@ public class DataMapper implements CommandLineRunner {
     product.setItemGroup("Snacks");
     productRepository.save(product);
 
-    //--------------------------------------------Screening info--------------------------------------------------------
+    // --------------------------------------------Screening
+    // info--------------------------------------------------------
 
     KinoHall kinoHall = new KinoHall();
     kinoHall.setSeatRows(3);
