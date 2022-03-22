@@ -24,14 +24,15 @@ public class Ticket {
     this.seat = seat;
   }
 
-  public Ticket() {}
-
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
+  public Ticket() {
   }
 
   public Customer getCustomer() {
     return customer;
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
   }
 
   public Seat getSeat() {

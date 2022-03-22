@@ -49,11 +49,9 @@ const cal = {
     cal.hForm = document.getElementById("cal-event");
     cal.hfHead = document.getElementById("evt-head");
     cal.hfDate = document.getElementById("evt-date");
-    cal.hfTxt = document.getElementById("evt-details");
+    // cal.hfTxt = document.getElementById("evt-details");
     cal.hfDel = document.getElementById("evt-del");
     document.getElementById("evt-close").onclick = cal.close;
-    cal.hfDel.onclick = cal.del;
-    cal.hForm.onsubmit = cal.save;
 
     // (B2) DATE NOW
     let now = new Date(), nowMth = now.getMonth(), nowYear = parseInt(now.getFullYear());
@@ -88,7 +86,7 @@ const cal = {
   },
 
   // (C) DRAW CALENDAR FOR SELECTED MONTH
-  list: () => {
+  list: async () => {
     // (C1) BASIC CALCULATIONS - DAYS IN MONTH, START + END DAY
     // Note - Jan is 0 & Dec is 11
     // Note - Sun is 0 & Sat is 6
@@ -174,14 +172,23 @@ const cal = {
     cRow = document.createElement("tr");
     cRow.classList.add("day");
     for (let i = 0; i < total; i++) {
+
       let cCell = document.createElement("td");
       if (squares[i] === "b") {
         cCell.classList.add("blank");
       } else {
-        if (nowDay === squares[i]) {
-          cCell.classList.add("today");
+
+        const screenings = await getScreenings(squares[i]); // TODO refactor -> only call backend once
+
+        if (Object.keys(screenings).length !== 0) {
+          cCell.classList.add("teal-600");
         }
-        cCell.innerHTML = `<div class="dd">${squares[i]}</div>`;
+
+
+        if (nowDay === squares[i]) {
+          cCell.classList.add("text-grey-600");
+        }
+        cCell.innerHTML = `<div class="dd text-dark text-center fs-4">${squares[i]}</div>`;
         if (cal.data[squares[i]]) {
           cCell.innerHTML += "<div class='evt'>" + cal.data[squares[i]] + "</div>";
         }
@@ -205,22 +212,13 @@ const cal = {
   show: (el) => {
     // (D1) FETCH EXISTING DATA
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
-    let isEdit = cal.data[cal.sDay] !== undefined;
-
-    // (D2) UPDATE EVENT FORM
-    cal.hfTxt.value = isEdit ? cal.data[cal.sDay] : "";
-
     cal.hfHead.innerHTML = "Dagens forestillinger";
 
 
     showAllScreenings();
 
     cal.hfDate.innerHTML = `${cal.sDay} ${cal.mName[cal.sMth]} ${cal.sYear}`;
-    if (isEdit) {
-      cal.hfDel.classList.remove("ninja");
-    } else {
-      cal.hfDel.classList.add("ninja");
-    }
+
     cal.hForm.classList.remove("ninja");
 
   },
@@ -230,28 +228,11 @@ const cal = {
     cal.hForm.classList.add("ninja");
   },
 
-  // (F) SAVE EVENT
-  save: () => {
-    cal.data[cal.sDay] = cal.hfTxt.value;
-
-    localStorage.setItem(`cal-${cal.sMth}-${cal.sYear}`, JSON.stringify(cal.data));
-    cal.list();
-    return false;
-  },
-
-  // (G) DELETE EVENT FOR SELECTED DATE
-  del: () => {
-    if (confirm("Delete event?")) {
-      delete cal.data[cal.sDay];
-      localStorage.setItem(`cal-${cal.sMth}-${cal.sYear}`, JSON.stringify(cal.data));
-      cal.list();
-    }
-  }
 };
 
-async function getAllScreenings() {
+async function getScreenings(day) {
 
-  const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (cal.sDay)).slice(-2)}`; // yyyy-mm-dd
+  const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
 
   const url = "http://localhost:8080/api/screenings/date/" + date;
 
@@ -259,9 +240,16 @@ async function getAllScreenings() {
   return await response.json();
 }
 
+async function getTicketsByScreeningId(screeningId) {
+  const url = "http://localhost:8080/api/tickets/screenings/" + screeningId;
+
+  let response = await fetch(url);
+  return await response.json();
+}
+
 async function showAllScreenings() {
   const table = document.getElementById("screening-table");
-  const screenings = await getAllScreenings();
+  const screenings = await getScreenings(cal.sDay);
 
   table.innerHTML = "";
 
@@ -277,39 +265,50 @@ function generateTableHead(table) {
   let thead = table.createTHead();
   let row = thead.insertRow();
 
-  let thList = ["Start tid", "Slut tid", "Sal", "Film"];
+  let thList = ["Start tid", "Slut tid", "Sal", "Film", "Event", "Bookinger"];
   let th;
   let text;
 
-  thList.forEach(list => {
+  thList.forEach(el => {
     th = document.createElement("th");
-    text = document.createTextNode(list);
+    text = document.createTextNode(el);
     th.appendChild(text);
     row.appendChild(th);
   });
 }
 
-function generateTable(table, data) {
+async function generateTable(table, data) {
   for (let screening of data) {
     let row = table.insertRow();
 
-    let cell = row.insertCell();
-    let text = document.createTextNode(screening.startTime.slice(11, 16));
-    cell.appendChild(text);
+    let tickets = await getTicketsByScreeningId(screening.screeningId);
 
-    cell = row.insertCell();
-    text = document.createTextNode(screening.endTime.slice(11, 16));
-    cell.appendChild(text);
+    let bookings = 0;
+    let seats = 0;
+    tickets.forEach(function (el) {
+        seats++
+      if (null !== el.customer) {
+        bookings++
+      }
+    });
 
-    cell = row.insertCell();
-    text = document.createTextNode(screening.kinoHall.kinoHallId);
-    cell.appendChild(text);
+    const rowList = [
+      screening.startTime.slice(11, 16),
+      screening.endTime.slice(11, 16),
+      screening.kinoHall.kinoHallId,
+      screening.movie.title,
+      screening.event ?? "--",  // ?? = if null
+      bookings + " / " + seats
+    ];
 
-    cell = row.insertCell();
-    text = document.createTextNode(screening.movie.title);
-    cell.appendChild(text);
+    let cell, text;
+
+    rowList.forEach(el => {
+      cell = row.insertCell();
+      text = document.createTextNode(el);
+      cell.appendChild(text);
+    })
   }
 }
 
 window.addEventListener("load", cal.init);
-//window.addEventListener("load", showAllScreenings);

@@ -1,5 +1,8 @@
 package com.dia.backend.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,6 +29,10 @@ public class Screening {
   private LocalDateTime startTime;
 
   private LocalDateTime endTime;
+
+  @Getter
+  @Setter
+  private String event;
 
   public Screening() {
   }

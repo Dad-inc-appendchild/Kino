@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/tickets") // prefix for endpoints
 public class TicketController {
@@ -28,6 +29,11 @@ public class TicketController {
     } else {
       return null;
     }
+  }
+
+  @GetMapping("/screenings/{screeningId}")
+  public List<Ticket> findTicketsByScreeningId(@PathVariable int screeningId) {
+    return ticketRepository.ticketsByScreeningID(screeningId);
   }
 
   @PostMapping()
