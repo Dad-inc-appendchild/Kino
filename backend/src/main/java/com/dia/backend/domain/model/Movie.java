@@ -26,7 +26,6 @@ public class Movie {
 
   private String trailerLink;
 
-
   public String getTrailerLink() {
     return trailerLink;
   }

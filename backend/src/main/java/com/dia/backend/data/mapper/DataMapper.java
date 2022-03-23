@@ -41,7 +41,7 @@ public class DataMapper implements CommandLineRunner {
 
     movie = new Movie();
     movie.setImagesrc(
-            "https://m.media-amazon.com/images/M/MV5BZTYwMjRkZWUtZWFhZC00OWQ0LTlkOGMtZGRmODllZjg1MWJiXkEyXkFqcGdeQXVyNDczMTY0NjM@._V1_FMjpg_UY576_.jpg");
+        "https://m.media-amazon.com/images/M/MV5BZTYwMjRkZWUtZWFhZC00OWQ0LTlkOGMtZGRmODllZjg1MWJiXkEyXkFqcGdeQXVyNDczMTY0NjM@._V1_FMjpg_UY576_.jpg");
     movie.setTitle("Rose");
     movie.setYear(2022);
     movie.setCountry("Danmark");
@@ -62,8 +62,9 @@ public class DataMapper implements CommandLineRunner {
     movieRepository.save(movie);
 
     movie = new Movie();
-    movie.setImagesrc("https://www.paradisbio.dk/data/TempFolderLongTerm//mediacache_4842814fa8fc6f19b5ef97b505a69b19.jpg");
-            //"https://m.media-amazon.com/images/M/MV5BYTdmNzMwNzEtNDQyZi00M2VmLWFiMzktZmQ5MTMxYjMxMjg2XkEyXkFqcGdeQXVyMjQ0NzcxNjM@._V1_.jpg");
+    movie.setImagesrc(
+        "https://www.paradisbio.dk/data/TempFolderLongTerm//mediacache_4842814fa8fc6f19b5ef97b505a69b19.jpg");
+    // "https://m.media-amazon.com/images/M/MV5BYTdmNzMwNzEtNDQyZi00M2VmLWFiMzktZmQ5MTMxYjMxMjg2XkEyXkFqcGdeQXVyMjQ0NzcxNjM@._V1_.jpg");
     movie.setTitle("Sneleoparden");
     movie.setYear(2021);
     movie.setCountry("Frankrig");
@@ -74,7 +75,7 @@ public class DataMapper implements CommandLineRunner {
 
     movie = new Movie();
     movie.setImagesrc(
-            "https://m.media-amazon.com/images/M/MV5BNWI4NDMxZjctYjcxMy00ZWNhLWFlOTctNjhiZTZiMjQ0ZGNjXkEyXkFqcGdeQXVyMzcwNjA5Mzg@._V1_.jpg");
+        "https://m.media-amazon.com/images/M/MV5BNWI4NDMxZjctYjcxMy00ZWNhLWFlOTctNjhiZTZiMjQ0ZGNjXkEyXkFqcGdeQXVyMzcwNjA5Mzg@._V1_.jpg");
     movie.setTitle("Speak no evil");
     movie.setYear(2022);
     movie.setCountry("Dansk");
@@ -82,7 +83,6 @@ public class DataMapper implements CommandLineRunner {
     movie.setDuration(98);
     movie.setTrailerLink("https://www.youtube.com/watch?v=eAEw-8d1HsE");
     movieRepository.save(movie);
-
 
     /*for (int i = 0; i < 7; i++) {     Loop to generate more movies
       movie = new Movie();
@@ -105,7 +105,8 @@ public class DataMapper implements CommandLineRunner {
       movieRepository.save(movie);
     }*/
 
-    //--------------------------------------Product  below this line----------------------------------------------------
+    // --------------------------------------Product  below this
+    // line----------------------------------------------------
     Product product = new Product();
     product.setProductName("El Señorito");
     product.setPrice(179);
@@ -184,7 +185,9 @@ public class DataMapper implements CommandLineRunner {
     productRepository.save(product);
 
     product = new Product();
-    product.setProductName("Naturfrisk: Sports, Lemon, Hindbær, Cola, Blodappelsin juice, Passion orange juice,  Danskvand m citrus");
+    product.setProductName(
+        "Naturfrisk: Sports, Lemon, Hindbær, Cola, Blodappelsin juice, Passion orange juice, "
+            + " Danskvand m citrus");
     product.setPrice(30);
     product.setItemGroup("Sodavand og Juice");
     productRepository.save(product);
@@ -280,7 +283,8 @@ public class DataMapper implements CommandLineRunner {
     product.setItemGroup("Snacks");
     productRepository.save(product);
 
-    //--------------------------------------------Screening info--------------------------------------------------------
+    // --------------------------------------------Screening
+    // info--------------------------------------------------------
 
     KinoHall kinoHall = new KinoHall();
     kinoHall.setSeatRows(3);
