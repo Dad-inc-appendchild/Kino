@@ -1,6 +1,3 @@
-.ninja {
-  display: none;
-}
 
 #cal-wrap {
   max-width: 1200px;
@@ -25,8 +22,8 @@
 #calendar tr.head td {
   font-weight: bold;
   text-transform: uppercase;
-  color: #fff;
-  background: #211e1e;
+  color: #f8f9fa;
+  background: #343a40;
   padding: 5px;
   text-align: center;
 }
@@ -35,7 +32,7 @@
   border: 1px solid #ddd;
   padding: 20px 30px;
   vertical-align: top;
-  background-color: #fff;
+  background-color: #6c757d;
 }
 
 #calendar tr {
@@ -46,28 +43,30 @@
   background: #6c757d !important;
 }
 
+.text-grey-800 {
+  background: #343a40;
+}
+
 #calendar .evt {
   margin-top: 5px;
   font-size: 0.8em;
   font-weight: bold;
   overflow: hidden;
-  color: #212529;
+  color: #343a40;
 }
 
-#cal-event {
+#cal-event, .screening {
   padding: 15px;
-  margin-top: 20px;
-  background: #f5f5f5;
   border: 1px solid #ddd;
 }
 
 #cal-event h1 {
-  color: #333;
+  color: #f8f9fa;
   padding: 0;
   margin: 0;
 }
 
-#cal-event textarea {
+#cal-event textarea, .screening {
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -87,10 +86,43 @@
 }
 
 #calendar tr td.blank {
-  background: #f5f5f5;
+  background: #343a40;
   cursor: not-allowed !important;
 }
 
 #calendar tr td.blank:hover {
-  background: #f5f5f5 !important;
+  background: #343a40 !important;
+}
+
+.ninja {
+  display: none !important;
+}
+
+.text-light {
+  color: #f8f9fa;
+}
+
+.today {
+  background-color: #adb5bd !important;
+}
+
+.theme-container {
+  background: #343a40;
+  color: #f8f9fa;
+}
+
+.table {
+  color: #f8f9fa;
+}
+
+.btn-calender {
+  color: #f8f9fa;
+  float: right;
+}
+
+.line {
+  border-bottom: 5px solid #000;
+  margin-top: 15px;
+  width: 50%;
+  margin-bottom: 30px;
 }

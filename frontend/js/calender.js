@@ -39,6 +39,7 @@ const cal = {
 
   // (A3) COMMON HTML ELEMENTS
   hMth: null, hYear: null, // month/year selector
+
   hForm: null, hfHead: null, hfDate: null, hfTxt: null, hfDel: null, // event form
 
   // (B) INIT CALENDAR
@@ -51,7 +52,6 @@ const cal = {
     cal.hfDate = document.getElementById("evt-date");
     // cal.hfTxt = document.getElementById("evt-details");
     cal.hfDel = document.getElementById("evt-del");
-    document.getElementById("evt-close").onclick = cal.close;
 
     // (B2) DATE NOW
     let now = new Date(), nowMth = now.getMonth(), nowYear = parseInt(now.getFullYear());
@@ -83,6 +83,7 @@ const cal = {
 
     // (B5) START - DRAW CALENDAR
     cal.list();
+
   },
 
   // (C) DRAW CALENDAR FOR SELECTED MONTH
@@ -173,62 +174,8 @@ const cal = {
 
     cRow.classList.add("day");
 
-    // TODO WIP
-    let select = document.getElementById("cal-stat");
-
-    let option = document.createElement("option");
-    let week1 = 8 - startDay;
-    option.text = "1 - " + week1;
-    option.value = "1";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week2 = week1 + 7;
-    option.text = "7 - " + week2;
-    option.value = "2";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week3 = week2 + 7;
-    option.text = "14 - " + week3;
-    option.value = "3";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week4 = week3 + 7;
-    option.text = "21 - " + week4;
-    option.value = "4";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week5 = week4 + 7 - endDay;
-    option.text = "28 - " + (week5 + 1);
-    option.value = "5";
-    select.appendChild(option);
-
-
-    //  alert(week2);
-
-
     for (let i = 0; i < total; i++) {
       // Set week as class name
-
-      if (i < 7) {
-        cRow.classList.add("week-1");
-      }
-      if (i < 14 && i > 7) {
-        cRow.classList.add("week-2");
-      }
-      if (i < 21 && i > 14) {
-        cRow.classList.add("week-3");
-      }
-      if (i < 28 && i > 21) {
-        cRow.classList.add("week-4");
-      }
-      if (i > 28) {
-        cRow.classList.add("week-5");
-      }
-
       let cCell = document.createElement("td");
       if (squares[i] === "b") {
         cCell.classList.add("blank");
@@ -241,12 +188,14 @@ const cal = {
         }
 
         if (nowDay === squares[i]) {
-          cCell.classList.add("text-grey-600");
+          cCell.id = "today";
+          cCell.classList.add("today");
         }
-        cCell.innerHTML = `<div class="dd text-dark text-center fs-4">${squares[i]}</div>`;
+        cCell.innerHTML = `<div class="dd text-light text-center fs-4">${squares[i]}</div>`;
         if (cal.data[squares[i]]) {
           cCell.innerHTML += "<div class='evt'>" + cal.data[squares[i]] + "</div>";
         }
+
         cCell.onclick = () => {
           cal.show(cCell);
         };
@@ -258,13 +207,12 @@ const cal = {
         cRow.classList.add("day");
       }
     }
-
-    // (C5) REMOVE ANY PREVIOUS ADD/EDIT EVENT DOCKET
-    cal.close();
+    document.getElementById("today").click();
   },
 
   // (D) SHOW EDIT EVENT DOCKET FOR SELECTED DAY
   show: (el) => {
+    clearSeatings();
 
     // (D1) FETCH EXISTING DATA
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
@@ -277,11 +225,6 @@ const cal = {
 
     cal.hForm.classList.remove("ninja");
 
-  },
-
-  // (E) CLOSE EVENT DOCKET
-  close: () => {
-    cal.hForm.classList.add("ninja");
   },
 
 };
@@ -322,7 +265,7 @@ function generateTableHead(table) {
   let thead = table.createTHead();
   let row = thead.insertRow();
 
-  let thList = ["Start tid", "Slut tid", "Sal", "Film", "Event", "Bookinger"];
+  let thList = ["Start tid", "Slut tid", "Sal", "Film", "Event", "Bookinger", ""];
   let th;
   let text;
 
@@ -349,17 +292,33 @@ async function generateTable(table, data) {
       }
     });
 
-    const rowList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ?? "--",  // ?? = if null
+    const columnList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ?? "--",  // ?? = if null
       bookings + " / " + seats];
 
     let cell, text;
 
-    rowList.forEach(el => {
+    columnList.forEach(el => {
       cell = row.insertCell();
       text = document.createTextNode(el);
       cell.appendChild(text);
+
     })
+
+    const btn = document.createElement("button");
+    btn.textContent = "Book sæder";
+    btn.id = screening.screeningId;
+    btn.classList.add("btn");
+    btn.classList.add("btn-outline-secondary");
+    btn.classList.add("btn-calender");
+
+    btn.onclick = () => {
+      createList(btn.id);
+    }
+
+    cell = row.insertCell();
+    cell.appendChild(btn);
   }
 }
 
 window.addEventListener("load", cal.init);
+

@@ -12,7 +12,6 @@
    ========================================================================== */
 
 html {
-  color: #222;
   font-size: 1em;
   line-height: 1.4;
 }
@@ -215,9 +214,11 @@ textarea {
   abbr[title]::after {
     content: " (" attr(title) ")";
   }
-  .movie-link{
+
+  .movie-link {
     padding: 16px;
   }
+
   /*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
@@ -273,8 +274,6 @@ body {
   background-color: black;
   height: 100%;
   font-family: 'Numans', sans-serif;
-  color: #cccccc;
-
 }
 
 .carusel-picture {
@@ -335,7 +334,6 @@ body {
   text-overflow: ellipsis;
   white-space: normal;
   -webkit-line-clamp: 2;
-  display: -webkit-box;
 }
 
 .menu-wrapper {
@@ -386,8 +384,8 @@ body {
 url(img/Pavilion logocrop.jpg);
   height: 40px;
   width: 40px;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
 .list-group-item {
@@ -404,63 +402,76 @@ url(img/Pavilion logocrop.jpg);
   white-space: nowrap;
 }
 
-.movie-link{
+.movie-link {
   padding-left: 16px;
 }
 
-.seats{
+.seats {
   border-radius: 1rem 1rem 0 0;
   height: 50px;
   width: 50px;
 }
 
-.seats-container{
+.seats:hover {
+  background-color: #0a58ca;
+  cursor: pointer;
+}
+
+.seats-container {
   display: flex;
 }
 
-.seats-row{
+.seats-row {
   display: block;
 }
 
-.seats-container input[type=checkbox]{
+.seats-container input[type=checkbox] {
   display: none;
 }
 
-.seats-container input, .seats-container .check{
+.seats-container input, .seats-container .check {
   visibility: hidden;
 }
 
-.seats-container label{
-  display:block;
-  border:solid 1px white;
-  line-height:40px;
-  height:50px;
+.seats-container label {
+  display: block;
+  border: solid 1px #000;
+  line-height: 40px;
+  height: 50px;
   width: 50px;
-  border-radius:25px 25px 0 0;
+  border-radius: 25px 25px 0 0;
   -webkit-font-smoothing: antialiased;
-  margin-top:10px;
-  font-family:Arial,Helvetica,sans-serif;
-  color:gray;
-  text-align:center;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: gray;
+  text-align: center;
 }
 
-.seats-container input:checked + label{
-  background-color: green;
+.seats-container input:checked + label {
+  background-color: #1aa179;
 }
 
-.seats-disabled{
-  background-color: red;
+.seats-disabled {
+  background-color: #b02a37 !important;
 }
 
-.seats-container input:checked + label:before{
+.seats-disabled:hover {
+  cursor: not-allowed;
+}
+
+.seats-container input:checked + label:before {
 
 }
 
-.seats-container input.checkbox:checked + label:before{
+.seats-container input.checkbox:checked + label:before {
   content: "";
 }
 
 
-.seats-container input:checked + label .check{
+.seats-container input:checked + label .check {
   visibility: visible;
+}
+
+.row {
+
 }
