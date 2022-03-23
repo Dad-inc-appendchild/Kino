@@ -374,6 +374,14 @@ height: 120px;
   width: 50px;
 }
 
+.seats-container{
+  display: flex;
+}
+
+.seats-row{
+  display: block;
+}
+
 .seats-container input[type=checkbox]{
   display: none;
 }
@@ -382,22 +390,9 @@ height: 120px;
   visibility: hidden;
 }
 
-.seats-container input:checked + label{
-  border: solid 1px red;
-  color: white;
-}
-
-.seats-container input:checked + label:before{
-  content: "\2713 ";
-}
-
-.seats-container input.checkbox:checked + label:before{
-  content: "";
-}
-
 .seats-container label{
   display:block;
-  border:solid 1px gray;
+  border:solid 1px white;
   line-height:40px;
   height:50px;
   width: 50px;
@@ -408,6 +403,24 @@ height: 120px;
   color:gray;
   text-align:center;
 }
+
+.seats-container input:checked + label{
+  background-color: green;
+}
+
+.seats-disabled{
+  background-color: red;
+}
+
+.seats-container input:checked + label:before{
+
+}
+
+.seats-container input.checkbox:checked + label:before{
+  content: "";
+}
+
+
 .seats-container input:checked + label .check{
   visibility: visible;
 }

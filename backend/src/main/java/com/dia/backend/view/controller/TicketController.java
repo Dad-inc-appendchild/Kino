@@ -1,11 +1,15 @@
 package com.dia.backend.view.controller;
 
+import com.dia.backend.data.repository.CustomerRepository;
 import com.dia.backend.data.repository.TicketRepository;
+import com.dia.backend.domain.model.Customer;
+import com.dia.backend.domain.model.CustomerAndTIckersWrappper;
 import com.dia.backend.domain.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,7 @@ import java.util.Optional;
 @RequestMapping("/api/tickets") // prefix for endpoints
 public class TicketController {
 
+  @Autowired CustomerRepository customerRepository;
   @Autowired TicketRepository ticketRepository;
 
   @GetMapping("")
@@ -31,15 +36,29 @@ public class TicketController {
     }
   }
 
+  @PostMapping("/book")
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  public void postTicket(@RequestBody CustomerAndTIckersWrappper customerAndTickets) {
+    Optional<Customer> optionalCustomer =
+        customerRepository.findById(customerAndTickets.getCustomer().getCustomerId());
+    if (optionalCustomer.isPresent()) {
+      Customer presentCustomer = optionalCustomer.get();
+      System.out.println(presentCustomer.getCustomerId());
+      for (Ticket ticket : customerAndTickets.getTickets()) {
+        Optional<Ticket> optionalTicket = ticketRepository.findById(ticket.getTicketId());
+        if (optionalTicket.isPresent()) {
+          Ticket presentTicket = optionalTicket.get();
+          System.out.println(presentTicket.getTicketId());
+          presentTicket.setCustomer(presentCustomer);
+          ticketRepository.save(presentTicket);
+        }
+      }
+    }
+  }
+
   @GetMapping("/screenings/{screeningId}")
   public List<Ticket> findTicketsByScreeningId(@PathVariable int screeningId) {
     return ticketRepository.ticketsByScreeningID(screeningId);
-  }
-
-  @PostMapping()
-  @ResponseStatus(HttpStatus.CREATED)
-  public void postTicket(@RequestBody Ticket ticket) {
-    ticketRepository.save(ticket);
   }
 
   @PutMapping("/{id}")

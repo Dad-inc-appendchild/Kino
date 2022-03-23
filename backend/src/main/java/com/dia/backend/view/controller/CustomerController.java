@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -31,10 +32,11 @@ public class CustomerController {
     }
   }
 
-  @PostMapping()
+  @PostMapping("")
   @ResponseStatus(HttpStatus.CREATED)
-  public void postCustomer(@RequestBody Customer customer) {
-    customerRepository.save(customer);
+  public Customer postCustomer(@RequestBody Customer customer) {
+    System.out.println(customer.getName() + customer.getPhoneNumber());
+    return customerRepository.save(customer);
   }
 
   @PutMapping("/{id}")
@@ -56,6 +58,18 @@ public class CustomerController {
       return new ResponseEntity<>("Deleted: " + id, HttpStatus.OK);
     } catch (Exception err) {
       return new ResponseEntity<>("Error deleting: " + id, HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @GetMapping("/phonenumber={phoneNumber}")
+  public Customer findCustomerById(@PathVariable String phoneNumber) {
+    phoneNumber = phoneNumber.replaceAll("[{-}]", "");
+    System.out.println(phoneNumber);
+    Optional<Customer> customer = customerRepository.findByPhoneNumber(phoneNumber);
+    if (customer.isPresent()) {
+      return customer.get();
+    } else {
+      return null;
     }
   }
 }
