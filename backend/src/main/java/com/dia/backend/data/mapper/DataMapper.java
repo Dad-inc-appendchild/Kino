@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class DataMapper implements CommandLineRunner {
 
@@ -183,7 +185,33 @@ public class DataMapper implements CommandLineRunner {
     seatRepository.saveAll(kinoHall.getSeats());
     kinoHallRepository.save(kinoHall);
 
+    movie = new Movie();
+    movie.setImagesrc(
+        "https://m.media-amazon.com/images/M/MV5BZmYzNTBiZTAtNmJjNi00MTcyLThlZGMtNDA5Y2RkNjM3ODAzXkEyXkFqcGdeQXVyMzg3OTQ5MjU@._V1_.jpg");
+    movie.setTitle("Borte med blæsten");
+    movie.setYear(2004);
+    movie.setCountry("USA");
+    movie.setLanguage("Dansk");
+    movieRepository.save(movie);
+
     Screening screening = new Screening(movie, kinoHall);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 15, 0));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 17, 30));
+    screening.setEvent("Senior Onsdag");
+    screening.setMovie(movie);
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(movie, kinoHall);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 9, 15, 0));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 9, 17, 30));
+    screening.setEvent("Senior Onsdag");
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(movie, kinoHall);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
