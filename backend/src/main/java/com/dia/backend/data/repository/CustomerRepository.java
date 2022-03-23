@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    @Query(value = "SELECT * FROM customer c WHERE c.phone_number = ?1", nativeQuery = true)
-    Optional<Customer> findByPhoneNumber(String phoneNumber);
+  @Query(value = "SELECT * FROM customer c WHERE c.phone_number = ?1", nativeQuery = true)
+  Optional<Customer> findByPhoneNumber(String phoneNumber);
 }
