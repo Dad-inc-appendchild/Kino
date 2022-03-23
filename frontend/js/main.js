@@ -5,27 +5,27 @@ async function loadHtmlTemplate(link, elementid) {
   let domparser = new DOMParser();
   let html = domparser.parseFromString(text, "text/html");
 
-  if((f = html.body.querySelector('div')) !== null) {
+  if ((f = html.body.querySelector('div')) !== null) {
     document.getElementById(elementid).append(f);
   }
 }
 
-if(document.readyState === 'loading'){
+if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', () => {
     buildPage();
   });
-}else{
+} else {
   buildPage();
 }
 
-async function buildPage(){
+async function buildPage() {
   loadHtmlTemplate("./html/navbar.html", 'navbar');
   loadHtmlTemplate("./html/carusel.html", 'carusel');
   await loadHtmlTemplate("./html/movieContainer.html", 'moviecontainer');
   makeMovieList();
 }
 
-function buildMovie(movie){
+function buildMovie(movie) {
   console.log(movie.id)
   let movieContainer = document.createElement("div");
   movieContainer.classList.add("col");
@@ -42,7 +42,7 @@ function buildMovie(movie){
   image.src = imagesrc;
   image.classList.add("card-img-top");
   image.classList.add("card-img-maxSize");
-  image.alt="img/FrenchFriday.png";
+  image.alt = "img/FrenchFriday.png";
   movieElement.append(image);
 
   let cardBody = document.createElement("div");
@@ -54,7 +54,7 @@ function buildMovie(movie){
   cardBody.append(cardHeader);
 
   let cardtext = document.createElement("p");
-  cardtext.innerHTML = "Udgivelsesår: " + movie.year + "<br>" +"Spilletid: "+ Math.round(movie.duration)+" Minutter"; //INSERT MORE DATA
+  cardtext.innerHTML = "Udgivelsesår: " + movie.year + "<br>" + "Spilletid: " + Math.round(movie.duration) + " Minutter"; //INSERT MORE DATA
   cardtext.classList.add("card-text");
   cardtext.classList.add("movie-text");
   cardBody.append(cardtext);
@@ -64,7 +64,7 @@ function buildMovie(movie){
   cardList.classList.add("list-group");
   cardList.classList.add("list-group-flush");
 
-  for(let i = 0; i < 3; i++){ //change to for each screening?
+  for (let i = 0; i < 3; i++) { //change to for each screening?
     let cardElement = document.createElement("li");
     cardElement.classList.add("list-group-item");
     cardElement.innerText = "Screening " + i;
@@ -87,16 +87,16 @@ function buildMovie(movie){
   return movieContainer;
 }
 
-function makeMovieList(){
+function makeMovieList() {
   fetchMovies();
 }
 
-function appendToList(movie){
+function appendToList(movie) {
   let movieContainer = document.getElementById("movies");
   movieContainer.append(buildMovie(movie));
 }
 
-async function fetchMovies(){
+async function fetchMovies() {
   const response = await fetch('http://127.0.0.1:8080/api/movies');
   const resJSON = await response.json();
   console.log(resJSON);
