@@ -36,17 +36,7 @@ function buildMovie(movie){
   movieElement.classList.add("movie-width");
 
   //image source goes here
-  //let imagesrc = "https://m.media-amazon.com/images/M/MV5BNTBjZTBlN2YtOWQzZC00YTAzLWFiOWUtYzRiZWRmNjA5YWFmXkEyXkFqcGdeQXVyMTA0NTIyOTQ@._V1_.jpg";
   let imagesrc = movie.imagesrc;
-  //"https://m.media-amazon.com/images/M/MV5BMzNhOTdlNmUtYzNiYi00MmUxLTg3ZjgtZjk4Y2Y5YTk3ODdiXkEyXkFqcGdeQXVyMTE2MjAzMTU3._V1_.jpg";
-  // img links
-  //https://m.media-amazon.com/images/M/MV5BMjkwYzU5NWMtNDBmZS00ZGQ4LThjNjMtN2Y4NzViMGM0ODE2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg
-  //https://m.media-amazon.com/images/M/MV5BOTY0MjM3NTQyOF5BMl5BanBnXkFtZTgwMzcwNjUxNzE@._V1_FMjpg_UY720_.jpg
-  //https://m.media-amazon.com/images/M/MV5BZmI2ZjUxYTAtOTIwNS00OTdiLTg2N2ItMjU0YzY3NmRhYjIxXkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_.jpg
-  //https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg
-  //https://m.media-amazon.com/images/M/MV5BZmYzNTBiZTAtNmJjNi00MTcyLThlZGMtNDA5Y2RkNjM3ODAzXkEyXkFqcGdeQXVyMzg3OTQ5MjU@._V1_.jpg
-  //https://m.media-amazon.com/images/M/MV5BYzE5MGRjMjUtYzQwYy00NGU2LTk2ZjYtMDJhNDM0MmQ3MTc0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg
-  //https://m.media-amazon.com/images/M/MV5BMmIwYzA4YTAtYTMwYy00NzA3LWFmZGQtYWY3MTNlMGM3NDc5XkEyXkFqcGdeQXVyMTE5MTg5NDIw._V1_FMjpg_UX1037_.jpg
 
   let image = document.createElement("img");
   image.src = imagesrc;
@@ -64,7 +54,7 @@ function buildMovie(movie){
   cardBody.append(cardHeader);
 
   let cardtext = document.createElement("p");
-  cardtext.innerText = movie.year + ", " + movie.duration; //INSERT MORE DATA
+  cardtext.innerHTML = "Udgivelsesår: " + movie.year + "<br>" +"Spilletid: "+ Math.round(movie.duration)+" Minutter"; //INSERT MORE DATA
   cardtext.classList.add("card-text");
   cardtext.classList.add("movie-text");
   cardBody.append(cardtext);
@@ -80,12 +70,15 @@ function buildMovie(movie){
     cardElement.innerText = "Screening " + i;
     cardList.append(cardElement);
   }
-  movieElement.append(cardList);
 
+  let trailerLink = movie.trailerLink;
+  movieElement.append(cardList);
   cardBody = document.createElement("div");
   let link = document.createElement("a");
-  link.href="#";
-  link.innerText = "Card Link"; //link to something??
+  link.href = trailerLink;
+  //link.href="#";
+  link.classList.add("movie-link")
+  link.innerText = "Trailer link"; //link to something??
   cardBody.append(link);
 
   movieElement.append(cardBody);

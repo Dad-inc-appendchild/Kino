@@ -24,6 +24,16 @@ public class Movie {
 
   private String imagesrc;
 
+  private String trailerLink;
+
+  public String getTrailerLink() {
+    return trailerLink;
+  }
+
+  public void setTrailerLink(String trailerLink) {
+    this.trailerLink = trailerLink;
+  }
+
   public String getImagesrc() {
     return imagesrc;
   }

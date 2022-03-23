@@ -180,9 +180,9 @@ textarea {
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 
@@ -215,7 +215,9 @@ textarea {
   abbr[title]::after {
     content: " (" attr(title) ")";
   }
-
+  .movie-link{
+    padding: 16px;
+  }
   /*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
@@ -261,9 +263,9 @@ textarea {
   }
 }
 
-body{
+body {
   background-image: linear-gradient(to bottom,
-  rgba(255,153,153,0) 0%,rgba(255,153,153,0) 75%, rgb(0, 0, 0) 100%),
+  rgba(255, 153, 153, 0) 0%, rgba(255, 153, 153, 0) 75%, rgb(0, 0, 0) 100%),
   url("img/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -277,26 +279,36 @@ body{
 
 .carusel-picture {
   height: 300px;
+
 }
 
-.carousel-caption{
+.carousel-caption {
   color: white;
   font-size: 2rem;
   text-shadow: 0 0 4px black;
 }
 
-.movie-width{
+.movie-width {
+  background-color: #212527;
   max-width: 240px;
   margin-top: 30px;
 }
 
-.movie-body{
-height: 120px;
-  color: black;
+.movie-body {
+  height: 120px;
+  background-color: #212527;
+  color: white;
   overflow: hidden;
 }
 
-.movie-title{
+.card-body.movie-body {
+  height: 120px;
+  background-color: #212527;
+  color: white;
+  overflow: hidden;
+}
+
+.movie-title {
   font-size: 1.4rem;
   line-height: 2rem;
   font-weight: 500;
@@ -311,7 +323,7 @@ height: 120px;
 }
 
 
-.movie-text{
+.movie-text {
   font-size: 1rem;
   line-height: 2rem;
   font-weight: 500;
@@ -326,46 +338,74 @@ height: 120px;
   display: -webkit-box;
 }
 
-.menu-wrapper{
+.menu-wrapper {
   margin-top: 1.5em;
 }
 
-.menu-img{
+.menu-img {
   max-width: 40px;
   max-height: 40px;
 }
 
-.menu-price{
+.menu-price {
   text-align: right;
 }
 
-.menu-title{
+.menu-title {
   font-style: italic;
-  font-size: xx-large;
+  font-size: x-large;
 }
 
-.menu-content{
+.menu-content {
   font-size: large;
 }
-.menu-ingredients{
+
+.menu-ingredients {
   font-size: medium;
   color: gray;
 }
 
-.menu-item{
+.menu-item {
   border-bottom: dotted 2px wheat
 }
 
-.menu-item:hover{
+.menu-item:hover {
   color: greenyellow;
 }
 
-.card-img-maxSize{
+.card-img-maxSize {
   max-width: 240px;
   max-height: 336px;
 }
-.navbar-box{
+
+.navbar-box {
   padding-bottom: 70px;
+}
+
+.logo {
+url(img/Pavilion logocrop.jpg);
+  height: 40px;
+  width: 40px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.list-group-item {
+  background-color: #212527;
+  color: white;
+}
+
+.navbar-brand {
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.movie-link{
+  padding-left: 16px;
 }
 
 .seats{
