@@ -1,3 +1,4 @@
+'use strict';
 let url = "http://127.0.0.1:8080"
 let ticketholder = document.getElementById("tickets");
 let rowCount;
@@ -68,63 +69,55 @@ form.addEventListener('submit', e => {
 
   let phonenumber = document.getElementById("form-phone").value;
 
-  console.log(tickets);
-  console.log(phonenumber);
-
-  let customer = {
-    customerId: '1',
-    name: 'John',
-    phoneNumber: '0011223344'
-  }
-
-  //handleCustomer(phonenumber);
-
-  bookAndRefresh(customer, tickets);
+  initBooking(phonenumber, tickets);
 
 });
 
-async function bookAndRefresh(customer, tickets){
-  await bookTicket(customer,tickets)
-  await createList(screeningid);
+async function initBooking(phonenumber, tickets) {
+  let customer = await handleCustomer(phonenumber);
+  if (undefined !== customer) {
+    await bookTicket(customer, tickets)
+    await createList(screeningid);
+  }
 }
 
-
 let customerForm = document.getElementById("customerForm");
-customerForm.addEventListener('submit', e => {
+customerForm.addEventListener('submit', async e => {
   e.preventDefault()
 
-  let myModal = bootstrap.Modal.getInstance((document.getElementById('exampleModal')));
+  let modal = document.getElementById('exampleModal');
+
+  let bootstrapModal = bootstrap.Modal.getInstance(modal);
   let customer = {};
   customer.name = document.getElementById("customerName").value;
   customer.phoneNumber = document.getElementById("customerPhone").value;
-  createNewCustomer(customer);
+  modal.data = await createNewCustomer(customer);
 
   customerForm.reset();
-  myModal.hide();
+  bootstrapModal.hide();
 })
 
 async function handleCustomer(phonenumber) {
   let customer = await lookupCustomer(phonenumber);
   console.log(customer);
   if (null === customer) {
-    let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {keyboard: false});
-    myModal.show();
+    let modal = document.getElementById('exampleModal');
+    let boostrapModal = new bootstrap.Modal(modal, {keyboard: false});
+    boostrapModal.show();
 
-    customer = await customerInput(myModal);
-
-    //TODO customer = createNewCustomer(customer);
+    customer = await customerInput(modal);
   }
-
   //TODO confirm customer
-
   return customer
 }
 
-async function customerInput(modal) {
-
-  // somehow wait for input in modal.
-  // probably something promise and resolve in other event something like that.
-  // modal events on hidden.bs.modal
+function customerInput(modal) {
+  return new Promise((resolve) => {
+    modal.addEventListener('hidden.bs.modal', async function (e) {
+      let test = await modal.data;
+      resolve(test);
+    }, {once: true})
+  })
 }
 
 async function lookupCustomer(phoneNumber) {
@@ -140,30 +133,25 @@ async function lookupCustomer(phoneNumber) {
 
 async function createNewCustomer(customer) {
   console.log(customer)
-  let response = await fetch(url + "/api/customers",
-    {
-      method: 'POST',
-      headers: {
-        'Content-type':'application/json'
-      },
-      body: JSON.stringify(customer)
-    })
+  let response = await fetch(url + "/api/customers", {
+    method: 'POST', headers: {
+      'Content-type': 'application/json'
+    }, body: JSON.stringify(customer)
+  })
   let json = await response.json();
 
   return json;
 }
 
-async function bookTicket(customer, tickets){
+async function bookTicket(customer, tickets) {
   let stuff = {}
   stuff.customer = customer;
   stuff.tickets = tickets;
   console.log(stuff);
   let response = await fetch(url + "/api/tickets/book", {
-    method:"POST",
-    headers:{
+    method: "POST", headers: {
       'Content-type': 'application/json'
-    },
-    body: JSON.stringify(stuff)
+    }, body: JSON.stringify(stuff)
   })
 }
 

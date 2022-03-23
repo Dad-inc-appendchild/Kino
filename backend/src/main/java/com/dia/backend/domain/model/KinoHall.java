@@ -1,5 +1,8 @@
 package com.dia.backend.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,10 @@ public class KinoHall {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "kinoHallId")
   private int kinoHallId;
+
+  @Setter
+  @Getter
+  private String name;
 
   @OneToMany
   @JoinColumn(name = "kinohall_id")
