@@ -4,8 +4,6 @@ let ticketholder = document.getElementById("tickets");
 let rowCount;
 let screeningid = 1;
 
-//createList(screeningid)
-
 function clearSeatings() {
   document.getElementById("seats-event").classList.add("ninja");
   ticketholder.innerHTML = '';

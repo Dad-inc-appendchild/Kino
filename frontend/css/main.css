@@ -422,13 +422,14 @@ url("img/Pavilion logocrop.jpg");
   border: solid 1px #000;
   line-height: 40px;
   height: 50px;
-  width: 50px;
-  border-radius: 25px 25px 0 0;
+  width: 55px;
+  border-radius: 20px 20px 0 0;
   -webkit-font-smoothing: antialiased;
   margin-top: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  color: gray;
   text-align: center;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 .seats-container input:checked + label {
@@ -450,7 +451,6 @@ url("img/Pavilion logocrop.jpg");
 .seats-container input.checkbox:checked + label:before {
   content: "";
 }
-
 
 .seats-container input:checked + label .check {
   visibility: visible;
