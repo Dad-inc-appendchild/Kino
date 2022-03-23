@@ -1,6 +1,6 @@
 'use strict';
 
-//SETUP MENU/HEADER
+// Seup header
 async function loadHtmlTemplate(link, elementid) {
   let result = await fetch(link)
   let text = await result.text();
@@ -9,14 +9,14 @@ async function loadHtmlTemplate(link, elementid) {
   let html = domparser.parseFromString(text, "text/html");
 
   let f;
-  if ((f = html.body.querySelector('div')) !== null) {
+  if ((f = html.body.querySelector("div")) !== null) {
     document.getElementById(elementid).append(f);
   }
 }
 
 document.getElementById("menu");
-if (document.readyState === 'loading') {
-  window.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", () => {
     buildPage();
   });
 } else {
@@ -28,36 +28,30 @@ async function buildPage() {
 }
 
 const cal = {
-  // (A) PROPERTIES
-  // (A1) COMMON CALENDAR
   sMon: false, // Week start on Monday?
   mName: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "October", "November", "December"],
 
-  // (A2) CALENDAR DATA
   data: null, // Events for the selected period
   sDay: 0, sMth: 0, sYear: 0, // Current selected day, month, year
 
-  // (A3) COMMON HTML ELEMENTS
   hMth: null, hYear: null, // month/year selector
 
   hForm: null, hfHead: null, hfDate: null, hfTxt: null, hfDel: null, // event form
 
-  // (B) INIT CALENDAR
+  // Init calendar
   init: () => {
-    // (B1) GET + SET COMMON HTML ELEMENTS
     cal.hMth = document.getElementById("cal-mth");
     cal.hYear = document.getElementById("cal-yr");
     cal.hForm = document.getElementById("cal-event");
     cal.hfHead = document.getElementById("evt-head");
     cal.hfDate = document.getElementById("evt-date");
-    // cal.hfTxt = document.getElementById("evt-details");
-    cal.hfDel = document.getElementById("evt-del");
 
-    // (B2) DATE NOW
+    // Date now
     let now = new Date(), nowMth = now.getMonth(), nowYear = parseInt(now.getFullYear());
 
-    // (B3) APPEND MONTHS SELECTOR
-    for (let i = 0; i < 12; i++) {
+    // Append month selector
+    let i;
+    for (i = 0; i < 12; i++) {
       let opt = document.createElement("option");
       opt.value = i;
       opt.innerHTML = cal.mName[i];
@@ -68,29 +62,24 @@ const cal = {
     }
     cal.hMth.onchange = cal.list;
 
-    // (B4) APPEND YEARS SELECTOR
-    // Set to 10 years range. Change this as you like.
-    for (let i = nowYear - 1; i <= nowYear + 3; i++) {
+    let j;
+    for (j = nowYear - 1; j <= nowYear + 3; j++) {
       let opt = document.createElement("option");
-      opt.value = i;
-      opt.innerHTML = i;
-      if (i === nowYear) {
+      opt.value = j;
+      opt.innerHTML = j;
+      if (j === nowYear) {
         opt.selected = true;
       }
       cal.hYear.appendChild(opt);
     }
     cal.hYear.onchange = cal.list;
 
-    // (B5) START - DRAW CALENDAR
+    // Draw calendar
     cal.list();
-
   },
 
-  // (C) DRAW CALENDAR FOR SELECTED MONTH
+  // Draw calendar for selected month
   list: async () => {
-    // (C1) BASIC CALCULATIONS - DAYS IN MONTH, START + END DAY
-    // Note - Jan is 0 & Dec is 11
-    // Note - Sun is 0 & Sat is 6
     cal.sMth = parseInt(cal.hMth.value); // selected month
     cal.sYear = parseInt(cal.hYear.value); // selected year
     let daysInMth = new Date(cal.sYear, cal.sMth + 1, 0).getDate(), // number of days in selected month
@@ -145,14 +134,13 @@ const cal = {
       }
     }
 
-    // (C4) DRAW HTML CALENDAR
-    // Get container
+    // Draw calender
     let container = document.getElementById("cal-container"), cTable = document.createElement("table");
     cTable.id = "calendar";
     container.innerHTML = "";
     container.appendChild(cTable);
 
-    // First row - Day names
+    // Create head row of day names
     let cRow = document.createElement("tr"),
       days = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"];
     if (cal.sMon) {
@@ -174,13 +162,12 @@ const cal = {
 
     cRow.classList.add("day");
 
-    for (let i = 0; i < total; i++) {
-      // Set week as class name
+    let i;
+    for (i = 0; i < total; i++) {
       let cCell = document.createElement("td");
       if (squares[i] === "b") {
         cCell.classList.add("blank");
       } else {
-
         const screenings = await getScreenings(squares[i]); // TODO refactor -> only call backend once
 
         if (Object.keys(screenings).length !== 0) {
@@ -210,40 +197,31 @@ const cal = {
     document.getElementById("today").click();
   },
 
-  // (D) SHOW EDIT EVENT DOCKET FOR SELECTED DAY
+  // Show event for selected day
   show: (el) => {
     clearSeatings();
-
-    // (D1) FETCH EXISTING DATA
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
     cal.hfHead.innerHTML = "Dagens forestillinger";
-
-
     showAllScreenings();
-
     cal.hfDate.innerHTML = `${cal.sDay} ${cal.mName[cal.sMth]} ${cal.sYear}`;
-
     cal.hForm.classList.remove("ninja");
-
   },
-
 };
 
 async function getScreenings(day) {
-
   const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
 
   const url = "http://localhost:8080/api/screenings/date/" + date;
 
   let response = await fetch(url);
-  return await response.json();
+  return response.json();
 }
 
 async function getTicketsByScreeningId(screeningId) {
   const url = "http://localhost:8080/api/tickets/screenings/" + screeningId;
 
   let response = await fetch(url);
-  return await response.json();
+  return response.json();
 }
 
 async function showAllScreenings() {
@@ -253,12 +231,9 @@ async function showAllScreenings() {
   table.innerHTML = "";
 
   if (Object.keys(screenings).length !== 0) {
-    let data = Object.keys(screenings[0]);
-
-    generateTableHead(table, data);
+    generateTableHead(table);
     generateTable(table, screenings);
   }
-
 }
 
 function generateTableHead(table) {
@@ -283,8 +258,7 @@ async function generateTable(table, data) {
 
     let tickets = await getTicketsByScreeningId(screening.screeningId);
 
-    let bookings = 0;
-    let seats = 0;
+    let bookings = 0, seats = 0;
     tickets.forEach(function (el) {
       seats++
       if (null !== el.customer) {
@@ -292,8 +266,7 @@ async function generateTable(table, data) {
       }
     });
 
-    const columnList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ?? "--",  // ?? = if null
-      bookings + " / " + seats];
+    const columnList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ? screening.event : "--", bookings + " / " + seats];
 
     let cell, text;
 
@@ -301,8 +274,7 @@ async function generateTable(table, data) {
       cell = row.insertCell();
       text = document.createTextNode(el);
       cell.appendChild(text);
-
-    })
+    });
 
     const btn = document.createElement("button");
     btn.textContent = "Book sæder";
@@ -321,4 +293,3 @@ async function generateTable(table, data) {
 }
 
 window.addEventListener("load", cal.init);
-
