@@ -61,7 +61,6 @@ public class TicketController {
     return ticketRepository.ticketsByScreeningID(screeningId);
   }
 
-
   @PutMapping("/{id}")
   public ResponseEntity<Ticket> updateTicket(@PathVariable int id, @RequestBody Ticket ticket) {
     Optional<Ticket> ticket1 = ticketRepository.findById(id);
