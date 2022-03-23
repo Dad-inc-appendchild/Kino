@@ -290,7 +290,14 @@ public class DataMapper implements CommandLineRunner {
 
     KinoHall kinoHall = new KinoHall();
     kinoHall.setSeatRows(3);
-    kinoHall.setSeatNumbers(4);
+    kinoHall.setSeatNumbers(5);
+    kinoHall.generateSeats();
+    seatRepository.saveAll(kinoHall.getSeats());
+    kinoHallRepository.save(kinoHall);
+
+    kinoHall = new KinoHall();
+    kinoHall.setSeatRows(5);
+    kinoHall.setSeatNumbers(15);
     kinoHall.generateSeats();
     seatRepository.saveAll(kinoHall.getSeats());
     kinoHallRepository.save(kinoHall);
