@@ -8,16 +8,31 @@ public class Seat {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int seatId;
 
-  @ManyToOne
-  @JoinColumn(name = "screeningId")
-  private Screening screening;
+  private int seatRow;
 
-  public Screening getScreening() {
-    return screening;
+  private int seatNumber;
+
+  public Seat() {}
+
+  public Seat(int row, int number) {
+    setSeatRow(row);
+    setSeatNumber(number);
   }
 
-  public void setScreening(Screening screening) {
-    this.screening = screening;
+  public int getSeatRow() {
+    return seatRow;
+  }
+
+  public void setSeatRow(int seatRow) {
+    this.seatRow = seatRow;
+  }
+
+  public int getSeatNumber() {
+    return seatNumber;
+  }
+
+  public void setSeatNumber(int seatNumber) {
+    this.seatNumber = seatNumber;
   }
 
   public int getSeatId() {

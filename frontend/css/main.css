@@ -407,3 +407,47 @@ url(img/Pavilion logocrop.jpg);
 .movie-link{
   padding-left: 16px;
 }
+
+.seats{
+  border-radius: 1rem 1rem 0 0;
+  height: 50px;
+  width: 50px;
+}
+
+.seats-container input[type=checkbox]{
+  display: none;
+}
+
+.seats-container input, .seats-container .check{
+  visibility: hidden;
+}
+
+.seats-container input:checked + label{
+  border: solid 1px red;
+  color: white;
+}
+
+.seats-container input:checked + label:before{
+  content: "\2713 ";
+}
+
+.seats-container input.checkbox:checked + label:before{
+  content: "";
+}
+
+.seats-container label{
+  display:block;
+  border:solid 1px gray;
+  line-height:40px;
+  height:50px;
+  width: 50px;
+  border-radius:25px 25px 0 0;
+  -webkit-font-smoothing: antialiased;
+  margin-top:10px;
+  font-family:Arial,Helvetica,sans-serif;
+  color:gray;
+  text-align:center;
+}
+.seats-container input:checked + label .check{
+  visibility: visible;
+}
