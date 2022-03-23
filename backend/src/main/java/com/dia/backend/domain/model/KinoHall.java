@@ -14,9 +14,7 @@ public class KinoHall {
   @Column(name = "kinoHallId")
   private int kinoHallId;
 
-  @Setter
-  @Getter
-  private String name;
+  @Setter @Getter private String name;
 
   @OneToMany
   @JoinColumn(name = "kinohall_id")
