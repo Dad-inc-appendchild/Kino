@@ -122,7 +122,7 @@ async function handleCustomer(phonenumber) {
 
 function customerInput(modal) {
   return new Promise((resolve) => {
-    modal.addEventListener('hidden.bs.modal', async function (e) {
+    modal.addEventListener('hidden.bs.modal', async function () {
       let test = await modal.data;
       resolve(test);
     }, {once: true})
@@ -133,8 +133,7 @@ async function lookupCustomer(phoneNumber) {
   let response = await fetch(url + "/api/customers/phonenumber={" + phoneNumber + "}");
   console.log(response);
   try {
-    let json = await response.json();
-    return json;
+    return await response.json();
   } catch (e) {
     return null;
   }
@@ -147,9 +146,7 @@ async function createNewCustomer(customer) {
       'Content-type': 'application/json'
     }, body: JSON.stringify(customer)
   })
-  let json = await response.json();
-
-  return json;
+  return response.json();
 }
 
 async function bookTicket(customer, tickets) {

@@ -111,6 +111,11 @@
   color: #f8f9fa;
 }
 
+.input-theme {
+  background: #343a40;
+  color: #f8f9fa;
+}
+
 .table {
   color: #f8f9fa;
 }
@@ -126,3 +131,4 @@
   width: 50%;
   margin-bottom: 30px;
 }
+

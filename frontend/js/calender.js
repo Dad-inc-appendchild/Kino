@@ -1,6 +1,6 @@
 'use strict';
 
-// Seup header
+// Setup header
 async function loadHtmlTemplate(link, elementid) {
   let result = await fetch(link)
   let text = await result.text();
@@ -40,6 +40,7 @@ const cal = {
 
   // Init calendar
   init: () => {
+    initLoader.show();
     cal.hMth = document.getElementById("cal-mth");
     cal.hYear = document.getElementById("cal-yr");
     cal.hForm = document.getElementById("cal-event");
@@ -74,12 +75,16 @@ const cal = {
     }
     cal.hYear.onchange = cal.list;
 
+
     // Draw calendar
+
     cal.list();
+
   },
 
   // Draw calendar for selected month
   list: async () => {
+
     cal.sMth = parseInt(cal.hMth.value); // selected month
     cal.sYear = parseInt(cal.hYear.value); // selected year
     let daysInMth = new Date(cal.sYear, cal.sMth + 1, 0).getDate(), // number of days in selected month
@@ -195,6 +200,7 @@ const cal = {
       }
     }
     document.getElementById("today").click();
+    initLoader.hide();
   },
 
   // Show event for selected day
@@ -234,6 +240,7 @@ async function showAllScreenings() {
     generateTableHead(table);
     generateTable(table, screenings);
   }
+
 }
 
 function generateTableHead(table) {

@@ -76,7 +76,7 @@ function buildMovie(movie){
   cardBody = document.createElement("div");
   let link = document.createElement("a");
   link.href = trailerLink;
-  //link.href="#";
+
   link.classList.add("movie-link")
   link.innerText = "Trailer link"; //link to something??
   cardBody.append(link);
