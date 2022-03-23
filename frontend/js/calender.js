@@ -172,13 +172,49 @@ const cal = {
     cRow = document.createElement("tr");
 
     cRow.classList.add("day");
+
+    // TODO WIP
+    let select = document.getElementById("cal-stat");
+
+    let option = document.createElement("option");
+    let week1 = 8 - startDay;
+    option.text = "1 - " + week1;
+    option.value = "1";
+    select.appendChild(option);
+
+    option = document.createElement("option");
+    let week2 = week1 + 7;
+    option.text = "7 - " + week2;
+    option.value = "2";
+    select.appendChild(option);
+
+    option = document.createElement("option");
+    let week3 = week2 + 7;
+    option.text = "14 - " + week3;
+    option.value = "3";
+    select.appendChild(option);
+
+    option = document.createElement("option");
+    let week4 = week3 + 7;
+    option.text = "21 - " + week4;
+    option.value = "4";
+    select.appendChild(option);
+
+    option = document.createElement("option");
+    let week5 = week4 + 7 - endDay;
+    option.text = "28 - " + (week5 + 1);
+    option.value = "5";
+    select.appendChild(option);
+
+
+    //  alert(week2);
+
+
     for (let i = 0; i < total; i++) {
       // Set week as class name
 
-      // TODO WIP
       if (i < 7) {
         cRow.classList.add("week-1");
-
       }
       if (i < 14 && i > 7) {
         cRow.classList.add("week-2");
@@ -203,7 +239,6 @@ const cal = {
         if (Object.keys(screenings).length !== 0) {
           cCell.classList.add("teal-600");
         }
-
 
         if (nowDay === squares[i]) {
           cCell.classList.add("text-grey-600");
@@ -280,6 +315,7 @@ async function showAllScreenings() {
     generateTableHead(table, data);
     generateTable(table, screenings);
   }
+
 }
 
 function generateTableHead(table) {
