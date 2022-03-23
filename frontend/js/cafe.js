@@ -6,22 +6,22 @@ async function loadHtmlTemplate(link, elementid) {
   let domparser = new DOMParser();
   let html = domparser.parseFromString(text, "text/html");
 
-  if((f = html.body.querySelector('div')) !== null) {
+  if ((f = html.body.querySelector('div')) !== null) {
     document.getElementById(elementid).append(f);
   }
 }
 
 let menuholder = document.getElementById("menu");
 
-if(document.readyState === 'loading'){
+if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', () => {
     buildPage();
   });
-}else{
+} else {
   buildPage();
 }
 
-async function buildPage(){
+async function buildPage() {
   loadHtmlTemplate("./html/navbar.html", "navbar");
   setupMenu()
 }
@@ -40,23 +40,23 @@ async function setupMenu() {
   resJSON.forEach(addItemToElement)
 }
 
-function addItemToElement(item){
+function addItemToElement(item) {
   //find liste eller lav hvis mangler?
   let list = findItemGroup(item.itemGroup);
-  list.append(createProduct(item.productName, item.price +" kr"));
+  list.append(createProduct(item.productName, item.price + " kr"));
 }
 
-function findItemGroup(itemgroup){
-  if( document.getElementById(itemgroup) !== null){
+function findItemGroup(itemgroup) {
+  if (document.getElementById(itemgroup) !== null) {
     return document.getElementById(itemgroup);
-  }else{
+  } else {
     console.log(itemgroup);
     createItemGroup(itemgroup);
     return findItemGroup(itemgroup);
   }
 }
 
-function createItemGroup(itemgroup){
+function createItemGroup(itemgroup) {
   let container = document.createElement("div");
   container.classList.add("col")
   container.classList.add("col-lg-6")
@@ -79,36 +79,36 @@ function createItemGroup(itemgroup){
   menuholder.append(container);
 }
 
-function createProduct(name, price){
+function createProduct(name, price) {
 
-let menuItem = document.createElement("div");
-menuItem.classList.add("menu-item");
+  let menuItem = document.createElement("div");
+  menuItem.classList.add("menu-item");
 
-let menuContent = document.createElement("div");
-menuContent.classList.add("menu-content");
-menuContent.classList.add("row");
+  let menuContent = document.createElement("div");
+  menuContent.classList.add("menu-content");
+  menuContent.classList.add("row");
 
-let coloumn1 = document.createElement("div");
-coloumn1.classList.add("col-8");
+  let coloumn1 = document.createElement("div");
+  coloumn1.classList.add("col-8");
 
-let itemName = document.createElement("p");
-itemName.innerText = name;
-coloumn1.append(itemName);
+  let itemName = document.createElement("p");
+  itemName.innerText = name;
+  coloumn1.append(itemName);
 
-menuContent.append(coloumn1);
+  menuContent.append(coloumn1);
 
-let coloumn2 = document.createElement("div");
-coloumn2.classList.add("col-4");
-coloumn2.classList.add("menu-price");
+  let coloumn2 = document.createElement("div");
+  coloumn2.classList.add("col-4");
+  coloumn2.classList.add("menu-price");
 
-let priceText = document.createElement("span");
-priceText.innerText = price;
+  let priceText = document.createElement("span");
+  priceText.innerText = price;
 
-coloumn2.append(priceText);
-menuContent.append(coloumn2);
-menuItem.append(menuContent);
+  coloumn2.append(priceText);
+  menuContent.append(coloumn2);
+  menuItem.append(menuContent);
 
-return menuItem;
+  return menuItem;
 }
 
 

@@ -1,20 +1,15 @@
-/*! HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */
+html, body {
+  height: 100%;
+}
 
-/* main.css 2.1.0 | MIT License | https://github.com/h5bp/main.css#readme */
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-
-html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
+body {
+  background-color: black;
+  background-image: linear-gradient(to bottom,
+  rgba(255, 153, 153, 0) 0%, rgba(255, 153, 153, 0) 75%, rgb(0, 0, 0) 100%),
+  url("img/bg.jpg");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
 }
 
 /*
@@ -215,9 +210,11 @@ textarea {
   abbr[title]::after {
     content: " (" attr(title) ")";
   }
-  .movie-link{
+
+  .movie-link {
     padding: 16px;
   }
+
   /*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
@@ -261,20 +258,6 @@ textarea {
   h3 {
     page-break-after: avoid;
   }
-}
-
-body {
-  background-image: linear-gradient(to bottom,
-  rgba(255, 153, 153, 0) 0%, rgba(255, 153, 153, 0) 75%, rgb(0, 0, 0) 100%),
-  url("img/bg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: black;
-  height: 100%;
-  font-family: 'Numans', sans-serif;
-  color: #cccccc;
-
 }
 
 .carusel-picture {
@@ -335,7 +318,6 @@ body {
   text-overflow: ellipsis;
   white-space: normal;
   -webkit-line-clamp: 2;
-  display: -webkit-box;
 }
 
 .menu-wrapper {
@@ -383,11 +365,11 @@ body {
 }
 
 .logo {
-url(img/Pavilion logocrop.jpg);
+url("img/Pavilion logocrop.jpg");
   height: 40px;
   width: 40px;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
 .list-group-item {
@@ -404,63 +386,72 @@ url(img/Pavilion logocrop.jpg);
   white-space: nowrap;
 }
 
-.movie-link{
+.movie-link {
   padding-left: 16px;
 }
 
-.seats{
+.seats {
   border-radius: 1rem 1rem 0 0;
   height: 50px;
   width: 50px;
 }
 
-.seats-container{
+.seats:hover {
+  background-color: #0a58ca;
+  cursor: pointer;
+}
+
+.seats-container {
   display: flex;
 }
 
-.seats-row{
+.seats-row {
   display: block;
 }
 
-.seats-container input[type=checkbox]{
+.seats-container input[type=checkbox] {
   display: none;
 }
 
-.seats-container input, .seats-container .check{
+.seats-container input, .seats-container .check {
   visibility: hidden;
 }
 
-.seats-container label{
-  display:block;
-  border:solid 1px white;
-  line-height:40px;
-  height:50px;
-  width: 50px;
-  border-radius:25px 25px 0 0;
+.seats-container label {
+  display: block;
+  border: solid 1px #000;
+  line-height: 40px;
+  height: 50px;
+  width: 55px;
+  border-radius: 20px 20px 0 0;
   -webkit-font-smoothing: antialiased;
-  margin-top:10px;
-  font-family:Arial,Helvetica,sans-serif;
-  color:gray;
-  text-align:center;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
-.seats-container input:checked + label{
-  background-color: green;
+.seats-container input:checked + label {
+  background-color: #1aa179;
 }
 
-.seats-disabled{
-  background-color: red;
+.seats-disabled {
+  background-color: #b02a37 !important;
 }
 
-.seats-container input:checked + label:before{
+.seats-disabled:hover {
+  cursor: not-allowed;
+}
+
+.seats-container input:checked + label:before {
 
 }
 
-.seats-container input.checkbox:checked + label:before{
+.seats-container input.checkbox:checked + label:before {
   content: "";
 }
 
-
-.seats-container input:checked + label .check{
+.seats-container input:checked + label .check {
   visibility: visible;
 }

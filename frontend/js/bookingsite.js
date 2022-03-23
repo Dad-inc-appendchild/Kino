@@ -3,10 +3,16 @@ let url = "http://127.0.0.1:8080"
 let ticketholder = document.getElementById("tickets");
 let rowCount;
 let screeningid = 1;
-createList(screeningid)
+
+function clearSeatings() {
+  document.getElementById("seats-event").classList.add("ninja");
+  ticketholder.innerHTML = '';
+}
 
 async function createList(id) {
-  ticketholder.innerHTML = '';
+  clearSeatings();
+  document.getElementById("seats-event").classList.remove("ninja");
+
   let response = await fetch(url + "/api/screenings/ " + id + "/tickets");
   let json = await response.json();
 
@@ -23,6 +29,7 @@ function ticketBuilder(ticket) {
   if (document.getElementById("row:" + ticket.seat.seatNumber) === null) {
     let newRow = document.createElement("div");
     newRow.classList.add("row");
+    newRow.classList.add("row-booking");
     newRow.classList.add("seats-row");
     newRow.id = "row:" + ticket.seat.seatNumber;
     ticketholder.append(newRow);
@@ -113,7 +120,7 @@ async function handleCustomer(phonenumber) {
 
 function customerInput(modal) {
   return new Promise((resolve) => {
-    modal.addEventListener('hidden.bs.modal', async function (e) {
+    modal.addEventListener('hidden.bs.modal', async function () {
       let test = await modal.data;
       resolve(test);
     }, {once: true})
@@ -124,8 +131,7 @@ async function lookupCustomer(phoneNumber) {
   let response = await fetch(url + "/api/customers/phonenumber={" + phoneNumber + "}");
   console.log(response);
   try {
-    let json = await response.json();
-    return json;
+    return await response.json();
   } catch (e) {
     return null;
   }
@@ -138,9 +144,7 @@ async function createNewCustomer(customer) {
       'Content-type': 'application/json'
     }, body: JSON.stringify(customer)
   })
-  let json = await response.json();
-
-  return json;
+  return response.json();
 }
 
 async function bookTicket(customer, tickets) {

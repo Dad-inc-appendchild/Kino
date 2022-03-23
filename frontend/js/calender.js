@@ -1,6 +1,6 @@
 'use strict';
 
-//SETUP MENU/HEADER
+// Setup header
 async function loadHtmlTemplate(link, elementid) {
   let result = await fetch(link)
   let text = await result.text();
@@ -9,14 +9,14 @@ async function loadHtmlTemplate(link, elementid) {
   let html = domparser.parseFromString(text, "text/html");
 
   let f;
-  if ((f = html.body.querySelector('div')) !== null) {
+  if ((f = html.body.querySelector("div")) !== null) {
     document.getElementById(elementid).append(f);
   }
 }
 
 document.getElementById("menu");
-if (document.readyState === 'loading') {
-  window.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", () => {
     buildPage();
   });
 } else {
@@ -28,36 +28,31 @@ async function buildPage() {
 }
 
 const cal = {
-  // (A) PROPERTIES
-  // (A1) COMMON CALENDAR
   sMon: false, // Week start on Monday?
   mName: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "October", "November", "December"],
 
-  // (A2) CALENDAR DATA
   data: null, // Events for the selected period
   sDay: 0, sMth: 0, sYear: 0, // Current selected day, month, year
 
-  // (A3) COMMON HTML ELEMENTS
   hMth: null, hYear: null, // month/year selector
+
   hForm: null, hfHead: null, hfDate: null, hfTxt: null, hfDel: null, // event form
 
-  // (B) INIT CALENDAR
+  // Init calendar
   init: () => {
-    // (B1) GET + SET COMMON HTML ELEMENTS
+    initLoader.show();
     cal.hMth = document.getElementById("cal-mth");
     cal.hYear = document.getElementById("cal-yr");
     cal.hForm = document.getElementById("cal-event");
     cal.hfHead = document.getElementById("evt-head");
     cal.hfDate = document.getElementById("evt-date");
-    // cal.hfTxt = document.getElementById("evt-details");
-    cal.hfDel = document.getElementById("evt-del");
-    document.getElementById("evt-close").onclick = cal.close;
 
-    // (B2) DATE NOW
+    // Date now
     let now = new Date(), nowMth = now.getMonth(), nowYear = parseInt(now.getFullYear());
 
-    // (B3) APPEND MONTHS SELECTOR
-    for (let i = 0; i < 12; i++) {
+    // Append month selector
+    let i;
+    for (i = 0; i < 12; i++) {
       let opt = document.createElement("option");
       opt.value = i;
       opt.innerHTML = cal.mName[i];
@@ -68,28 +63,28 @@ const cal = {
     }
     cal.hMth.onchange = cal.list;
 
-    // (B4) APPEND YEARS SELECTOR
-    // Set to 10 years range. Change this as you like.
-    for (let i = nowYear - 1; i <= nowYear + 3; i++) {
+    let j;
+    for (j = nowYear - 1; j <= nowYear + 3; j++) {
       let opt = document.createElement("option");
-      opt.value = i;
-      opt.innerHTML = i;
-      if (i === nowYear) {
+      opt.value = j;
+      opt.innerHTML = j;
+      if (j === nowYear) {
         opt.selected = true;
       }
       cal.hYear.appendChild(opt);
     }
     cal.hYear.onchange = cal.list;
 
-    // (B5) START - DRAW CALENDAR
+
+    // Draw calendar
+
     cal.list();
+
   },
 
-  // (C) DRAW CALENDAR FOR SELECTED MONTH
+  // Draw calendar for selected month
   list: async () => {
-    // (C1) BASIC CALCULATIONS - DAYS IN MONTH, START + END DAY
-    // Note - Jan is 0 & Dec is 11
-    // Note - Sun is 0 & Sat is 6
+
     cal.sMth = parseInt(cal.hMth.value); // selected month
     cal.sYear = parseInt(cal.hYear.value); // selected year
     let daysInMth = new Date(cal.sYear, cal.sMth + 1, 0).getDate(), // number of days in selected month
@@ -144,14 +139,13 @@ const cal = {
       }
     }
 
-    // (C4) DRAW HTML CALENDAR
-    // Get container
+    // Draw calender
     let container = document.getElementById("cal-container"), cTable = document.createElement("table");
     cTable.id = "calendar";
     container.innerHTML = "";
     container.appendChild(cTable);
 
-    // First row - Day names
+    // Create head row of day names
     let cRow = document.createElement("tr"),
       days = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"];
     if (cal.sMon) {
@@ -173,67 +167,12 @@ const cal = {
 
     cRow.classList.add("day");
 
-    // TODO WIP
-    let select = document.getElementById("cal-stat");
-
-    let option = document.createElement("option");
-    let week1 = 8 - startDay;
-    option.text = "1 - " + week1;
-    option.value = "1";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week2 = week1 + 7;
-    option.text = "7 - " + week2;
-    option.value = "2";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week3 = week2 + 7;
-    option.text = "14 - " + week3;
-    option.value = "3";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week4 = week3 + 7;
-    option.text = "21 - " + week4;
-    option.value = "4";
-    select.appendChild(option);
-
-    option = document.createElement("option");
-    let week5 = week4 + 7 - endDay;
-    option.text = "28 - " + (week5 + 1);
-    option.value = "5";
-    select.appendChild(option);
-
-
-    //  alert(week2);
-
-
-    for (let i = 0; i < total; i++) {
-      // Set week as class name
-
-      if (i < 7) {
-        cRow.classList.add("week-1");
-      }
-      if (i < 14 && i > 7) {
-        cRow.classList.add("week-2");
-      }
-      if (i < 21 && i > 14) {
-        cRow.classList.add("week-3");
-      }
-      if (i < 28 && i > 21) {
-        cRow.classList.add("week-4");
-      }
-      if (i > 28) {
-        cRow.classList.add("week-5");
-      }
-
+    let i;
+    for (i = 0; i < total; i++) {
       let cCell = document.createElement("td");
       if (squares[i] === "b") {
         cCell.classList.add("blank");
       } else {
-
         const screenings = await getScreenings(squares[i]); // TODO refactor -> only call backend once
 
         if (Object.keys(screenings).length !== 0) {
@@ -241,12 +180,14 @@ const cal = {
         }
 
         if (nowDay === squares[i]) {
-          cCell.classList.add("text-grey-600");
+          cCell.id = "today";
+          cCell.classList.add("today");
         }
-        cCell.innerHTML = `<div class="dd text-dark text-center fs-4">${squares[i]}</div>`;
+        cCell.innerHTML = `<div class="dd text-light text-center fs-4">${squares[i]}</div>`;
         if (cal.data[squares[i]]) {
           cCell.innerHTML += "<div class='evt'>" + cal.data[squares[i]] + "</div>";
         }
+
         cCell.onclick = () => {
           cal.show(cCell);
         };
@@ -258,49 +199,35 @@ const cal = {
         cRow.classList.add("day");
       }
     }
-
-    // (C5) REMOVE ANY PREVIOUS ADD/EDIT EVENT DOCKET
-    cal.close();
+    document.getElementById("today").click();
+    initLoader.hide();
   },
 
-  // (D) SHOW EDIT EVENT DOCKET FOR SELECTED DAY
+  // Show event for selected day
   show: (el) => {
-
-    // (D1) FETCH EXISTING DATA
+    clearSeatings();
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
     cal.hfHead.innerHTML = "Dagens forestillinger";
-
-
     showAllScreenings();
-
     cal.hfDate.innerHTML = `${cal.sDay} ${cal.mName[cal.sMth]} ${cal.sYear}`;
-
     cal.hForm.classList.remove("ninja");
-
   },
-
-  // (E) CLOSE EVENT DOCKET
-  close: () => {
-    cal.hForm.classList.add("ninja");
-  },
-
 };
 
 async function getScreenings(day) {
-
   const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
 
   const url = "http://localhost:8080/api/screenings/date/" + date;
 
   let response = await fetch(url);
-  return await response.json();
+  return response.json();
 }
 
 async function getTicketsByScreeningId(screeningId) {
   const url = "http://localhost:8080/api/tickets/screenings/" + screeningId;
 
   let response = await fetch(url);
-  return await response.json();
+  return response.json();
 }
 
 async function showAllScreenings() {
@@ -310,9 +237,7 @@ async function showAllScreenings() {
   table.innerHTML = "";
 
   if (Object.keys(screenings).length !== 0) {
-    let data = Object.keys(screenings[0]);
-
-    generateTableHead(table, data);
+    generateTableHead(table);
     generateTable(table, screenings);
   }
 
@@ -322,7 +247,7 @@ function generateTableHead(table) {
   let thead = table.createTHead();
   let row = thead.insertRow();
 
-  let thList = ["Start tid", "Slut tid", "Sal", "Film", "Event", "Bookinger"];
+  let thList = ["Start tid", "Slut tid", "Sal", "Film", "Event", "Bookinger", ""];
   let th;
   let text;
 
@@ -340,8 +265,7 @@ async function generateTable(table, data) {
 
     let tickets = await getTicketsByScreeningId(screening.screeningId);
 
-    let bookings = 0;
-    let seats = 0;
+    let bookings = 0, seats = 0;
     tickets.forEach(function (el) {
       seats++
       if (null !== el.customer) {
@@ -349,16 +273,29 @@ async function generateTable(table, data) {
       }
     });
 
-    const rowList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ?? "--",  // ?? = if null
-      bookings + " / " + seats];
+    const columnList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ? screening.event : "--", bookings + " / " + seats];
 
     let cell, text;
 
-    rowList.forEach(el => {
+    columnList.forEach(el => {
       cell = row.insertCell();
       text = document.createTextNode(el);
       cell.appendChild(text);
-    })
+    });
+
+    const btn = document.createElement("button");
+    btn.textContent = "Book sæder";
+    btn.id = screening.screeningId;
+    btn.classList.add("btn");
+    btn.classList.add("btn-outline-secondary");
+    btn.classList.add("btn-calender");
+
+    btn.onclick = () => {
+      createList(btn.id);
+    }
+
+    cell = row.insertCell();
+    cell.appendChild(btn);
   }
 }
 
