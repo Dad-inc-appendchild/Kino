@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,12 @@ public class ScreeningController {
     } else {
       return null;
     }
+  }
+
+  @GetMapping("/date/{date}")
+  public List<Screening> findScreeningByDate(@PathVariable String date) {
+    return screeningRepository.findScreeningByStartTimeBetween(
+        LocalDateTime.parse(date + "T00:00"), LocalDateTime.parse(date + "T23:59"));
   }
 
   @PostMapping()
