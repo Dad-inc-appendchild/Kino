@@ -1,6 +1,7 @@
 
 #cal-wrap {
   max-width: 1200px;
+
 }
 
 #cal-date {
@@ -127,8 +128,6 @@
 
 .line {
   border-bottom: 5px solid #000;
-  margin-top: 15px;
-  width: 50%;
-  margin-bottom: 30px;
+  width: 70%;
+  margin: 15px auto 30px auto;
 }
-
