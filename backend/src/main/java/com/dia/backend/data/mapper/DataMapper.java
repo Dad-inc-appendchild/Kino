@@ -30,25 +30,61 @@ public class DataMapper implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     Movie movie = new Movie();
-    movie.setImagesrc(
+    /*movie.setImagesrc(
         "https://m.media-amazon.com/images/M/MV5BMjkwYzU5NWMtNDBmZS00ZGQ4LThjNjMtN2Y4NzViMGM0ODE2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg");
     movie.setTitle("Belfast");
     movie.setYear(2020);
     movie.setCountry("THIS IS THE COUNTRY OF THE MOVIE");
     movie.setLanguage("THIS LANGUAGE IS VERY VERY VERY LONG");
     movie.setDuration(120);
+    movieRepository.save(movie);*/
+
+    movie = new Movie();
+    movie.setImagesrc(
+            "https://m.media-amazon.com/images/M/MV5BZTYwMjRkZWUtZWFhZC00OWQ0LTlkOGMtZGRmODllZjg1MWJiXkEyXkFqcGdeQXVyNDczMTY0NjM@._V1_FMjpg_UY576_.jpg");
+    movie.setTitle("Rose");
+    movie.setYear(2022);
+    movie.setCountry("Danmark");
+    movie.setLanguage("Dansk");
+    movie.setDuration(106);
+    movie.setTrailerLink("https://youtu.be/QJUzZ0uIwts");
     movieRepository.save(movie);
 
     movie = new Movie();
     movie.setImagesrc(
-        "https://m.media-amazon.com/images/M/MV5BYzE5MGRjMjUtYzQwYy00NGU2LTk2ZjYtMDJhNDM0MmQ3MTc0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg");
-    movie.setTitle("Another round");
-    movie.setYear(1997);
-    movie.setCountry("Dansk!");
-    movie.setLanguage("Dansk");
+        "https://m.media-amazon.com/images/M/MV5BMTdkZDc4YmQtYzA3My00NzliLThjN2YtMDIwMDkxY2Y4ODdmXkEyXkFqcGdeQXVyMTA2MDU0NjM5._V1_.jpg");
+    movie.setTitle("Spence");
+    movie.setYear(2021);
+    movie.setCountry("Amerikansk");
+    movie.setLanguage("Engelsk");
+    movie.setDuration(117);
+    movie.setTrailerLink("https://www.youtube.com/watch?v=WllZh9aekDg");
     movieRepository.save(movie);
 
-    for (int i = 0; i < 7; i++) {
+    movie = new Movie();
+    movie.setImagesrc("https://www.paradisbio.dk/data/TempFolderLongTerm//mediacache_4842814fa8fc6f19b5ef97b505a69b19.jpg");
+            //"https://m.media-amazon.com/images/M/MV5BYTdmNzMwNzEtNDQyZi00M2VmLWFiMzktZmQ5MTMxYjMxMjg2XkEyXkFqcGdeQXVyMjQ0NzcxNjM@._V1_.jpg");
+    movie.setTitle("Sneleoparden");
+    movie.setYear(2021);
+    movie.setCountry("Frankrig");
+    movie.setLanguage("Engelsk");
+    movie.setDuration(92);
+    movie.setTrailerLink("https://www.youtube.com/watch?v=DzGAUO5WiCE");
+    movieRepository.save(movie);
+
+    movie = new Movie();
+    movie.setImagesrc(
+            "https://m.media-amazon.com/images/M/MV5BNWI4NDMxZjctYjcxMy00ZWNhLWFlOTctNjhiZTZiMjQ0ZGNjXkEyXkFqcGdeQXVyMzcwNjA5Mzg@._V1_.jpg");
+    movie.setTitle("Speak no evil");
+    movie.setYear(2022);
+    movie.setCountry("Dansk");
+    movie.setLanguage("Dansk/Engelsk");
+    movie.setDuration(98);
+    movie.setTrailerLink("https://www.youtube.com/watch?v=eAEw-8d1HsE");
+    movieRepository.save(movie);
+
+
+    /*for (int i = 0; i < 7; i++) {     Loop to generate more movies
       movie = new Movie();
       movie.setImagesrc(
           "https://m.media-amazon.com/images/M/MV5BZmYzNTBiZTAtNmJjNi00MTcyLThlZGMtNDA5Y2RkNjM3ODAzXkEyXkFqcGdeQXVyMzg3OTQ5MjU@._V1_.jpg");
@@ -67,7 +103,7 @@ public class DataMapper implements CommandLineRunner {
       movie.setLanguage("English");
       movie.setDuration(160);
       movieRepository.save(movie);
-    }
+    }*/
 
     //--------------------------------------Product  below this line----------------------------------------------------
     Product product = new Product();
@@ -122,7 +158,7 @@ public class DataMapper implements CommandLineRunner {
     product.setProductName("Braw: Jingle my fucking bells");
     product.setPrice(65);
     product.setItemGroup("Øl");
-    
+
     product = new Product();
     product.setProductName("Filter kaffe");
     product.setPrice(20);

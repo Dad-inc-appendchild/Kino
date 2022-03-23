@@ -54,7 +54,7 @@ function buildMovie(movie){
   cardBody.append(cardHeader);
 
   let cardtext = document.createElement("p");
-  cardtext.innerText = movie.year + ", " + movie.duration; //INSERT MORE DATA
+  cardtext.innerHTML = "Udgivelsesår: " + movie.year + "<br>" +"Spilletid: "+ Math.round(movie.duration)+" Minutter"; //INSERT MORE DATA
   cardtext.classList.add("card-text");
   cardtext.classList.add("movie-text");
   cardBody.append(cardtext);
@@ -70,12 +70,15 @@ function buildMovie(movie){
     cardElement.innerText = "Screening " + i;
     cardList.append(cardElement);
   }
-  movieElement.append(cardList);
 
+  let trailerLink = movie.trailerLink;
+  movieElement.append(cardList);
   cardBody = document.createElement("div");
   let link = document.createElement("a");
-  link.href="#";
-  link.innerText = "Card Link"; //link to something??
+  link.href = trailerLink;
+  //link.href="#";
+  link.classList.add("movie-link")
+  link.innerText = "Trailer link"; //link to something??
   cardBody.append(link);
 
   movieElement.append(cardBody);

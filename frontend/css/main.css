@@ -202,9 +202,6 @@ textarea {
     box-shadow: none !important;
     text-shadow: none !important;
   }
-  a{
-    padding-left: 16px;
-  }
 
   a,
   a:visited {
@@ -218,7 +215,9 @@ textarea {
   abbr[title]::after {
     content: " (" attr(title) ")";
   }
-
+  .movie-link{
+    padding: 16px;
+  }
   /*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
@@ -280,6 +279,7 @@ body {
 
 .carusel-picture {
   height: 300px;
+
 }
 
 .carousel-caption {
@@ -289,21 +289,21 @@ body {
 }
 
 .movie-width {
-  background-color: #202021;
+  background-color: #212527;
   max-width: 240px;
   margin-top: 30px;
 }
 
 .movie-body {
   height: 120px;
-  background-color: #202021;
+  background-color: #212527;
   color: white;
   overflow: hidden;
 }
 
 .card-body.movie-body {
   height: 120px;
-  background-color: #202021;
+  background-color: #212527;
   color: white;
   overflow: hidden;
 }
@@ -391,7 +391,7 @@ url(img/Pavilion logocrop.jpg);
 }
 
 .list-group-item {
-  background-color: #202021;
+  background-color: #212527;
   color: white;
 }
 
@@ -404,3 +404,6 @@ url(img/Pavilion logocrop.jpg);
   white-space: nowrap;
 }
 
+.movie-link{
+  padding-left: 16px;
+}
