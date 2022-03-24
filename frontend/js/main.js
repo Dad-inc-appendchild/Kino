@@ -45,53 +45,47 @@ function buildMovie(movie) {
 
   let cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
-  //cardBody.classList.add("movie-body");
   let cardHeader = document.createElement("h5");
-  cardHeader.innerText = movie.title; //title goes here;
+  cardHeader.textContent = movie.title; //title goes here;
   cardHeader.classList.add("movie-title");
   cardBody.append(cardHeader);
 
   let cardParagraph = document.createElement("p");
-  cardParagraph.innerText = "INSERT MOVIE ATTRIBUT DESCRIPTION HERE";
+  cardParagraph.textContent = "INSERT MOVIE ATTRIBUT DESCRIPTION HERE";
   cardParagraph.classList.add("card-text");
   cardBody.append(cardParagraph);
 
   const cardButton = document.createElement("a");
-  cardButton.innerText = "Læs mere";
-  cardButton.href = "#";
+  cardButton.textContent = "Læs mere";
+  cardButton.href = "film?id=" + movie.id;
   cardButton.classList.add("btn");
   cardButton.classList.add("btn-outline-primary");
   cardBody.append(cardButton);
-  cardButton.addEventListener("click", showCardModal );
+  cardButton.addEventListener("click", showCardModal);
 
   const cardButtonLink = document.createElement("button");
-  cardButtonLink.innerText = "Se trailer";
+  cardButtonLink.textContent = "Se trailer";
   cardButtonLink.classList.add("btn");
   cardButtonLink.classList.add("btn-outline-secondary");
   cardButtonLink.classList.add("mx-2");
   cardButtonLink.setAttribute("data-bs-toggle", "modal");
   cardButtonLink.setAttribute("data-bs-target", "#modalYoutube");
+
   cardBody.append(cardButtonLink);
-  cardButtonLink.addEventListener("click", showYoutubeLink);
+
+  initModalBox();
 
   movieElement.append(cardBody);
 
-  let cardList = document.createElement("ul"); //screenings?
-  cardList.classList.add("list-group");
-  cardList.classList.add("list-group-flush");
-
-  function showCardModal(){
-
-
+  function showCardModal() {
   }
 
-  function showYoutubeLink(){
-    //const modalDivMain = document.createElement("");
+  function initModalBox() {
     const modalDiv = document.createElement("div");
     modalDiv.id = "modalYoutube";
     modalDiv.classList.add("modal");
     modalDiv.classList.add("fade");
-    modalDiv.setAttribute("aria-labelledby","modalYoutube" );
+    modalDiv.setAttribute("aria-labelledby", "modalYoutube");
     document.body.append(modalDiv);
 
     const modalDialog = document.createElement("div");
@@ -103,7 +97,6 @@ function buildMovie(movie) {
     const modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
     modalDialog.append(modalContent);
-    console.log("Vi er i modal div");
 
     const modalHeader = document.createElement("div");
     modalHeader.classList.add("modal-header");
@@ -111,40 +104,30 @@ function buildMovie(movie) {
 
     const modalTitle = document.createElement("h5");
     modalTitle.classList.add("modal-title");
-    modalTitle.innerText = "Test";
+    modalTitle.textContent = "Test";
     modalHeader.append(modalTitle);
 
     const modalBody = document.createElement("div");
+    modalBody.classList.add("modal-body");
     modalContent.append(modalBody);
+
+    const youtubeIframe = document.createElement("iframe");
+    youtubeIframe.setAttribute("src", "https://www.youtube.com/embed/tgbNymZ7vqY");
+    youtubeIframe.setAttribute("width", "100%");
+    youtubeIframe.setAttribute("height", "400px");
+
+    modalBody.append(youtubeIframe);
 
     const modalCloseButton = document.createElement("button");
     modalCloseButton.classList.add("btn-close");
     modalCloseButton.setAttribute("data-bs-dismiss", "modal");
     modalHeader.append(modalCloseButton);
-
-
   }
-
-
-
-  /*for (let i = 0; i < 3; i++) { //change to for each screening?
-    let cardElement = document.createElement("li");
-    cardElement.classList.add("list-group-item");
-    cardElement.innerText = "Screening " + i;
-    cardList.append(cardElement);
-  }
-
-   */
-
-
 
   movieElement.append(cardBody);
 
   movieContainer.append(movieElement);
   return movieContainer;
-
-
-
 }
 
 function makeMovieList() {
