@@ -2,7 +2,7 @@
 let url = "http://127.0.0.1:8080"
 let ticketholder = document.getElementById("tickets");
 let rowCount;
-let screeningid = 1;
+let screeningid;
 
 function clearSeatings() {
   document.getElementById("seats-event").classList.add("ninja");
@@ -12,6 +12,7 @@ function clearSeatings() {
 async function createList(id) {
   clearSeatings();
   document.getElementById("seats-event").classList.remove("ninja");
+  ticketholder.screeningId = id;
 
   let response = await fetch(url + "/api/screenings/ " + id + "/tickets");
   let json = await response.json();
@@ -80,11 +81,12 @@ form.addEventListener('submit', e => {
 
 });
 
-async function initBooking(phonenumber, tickets) {
+async function initBooking(phonenumber, tickets, ) {
   let customer = await handleCustomer(phonenumber);
   if (undefined !== customer) {
     await bookTicket(customer, tickets)
-    await createList(screeningid);
+    await createList(ticketholder.screeningId);
+    await showAllScreenings();
   }
 }
 
