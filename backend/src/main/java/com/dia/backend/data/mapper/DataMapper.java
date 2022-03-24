@@ -53,6 +53,20 @@ public class DataMapper implements CommandLineRunner {
         movie.setTrailerLink("https://www.youtube.com/watch?v=ofnXPwUPENo");
         movieRepository.save(movie);
 
+        Movie licorice = new Movie();
+        licorice.setImagesrc("/img/moviecovers/licorice.jpg");
+        // "https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
+        licorice.setTitle("Licorice Pizza");
+        licorice.setYear(2021);
+        licorice.setCountry("United States");
+        licorice.setLanguage("Engelsk");
+        licorice.setDuration(133);
+        licorice.setDirector("Paul Thomas Anderson");
+        licorice.setParentalGuide(7);
+        licorice.setTrailerLink("https://www.youtube.com/watch?v=ofnXPwUPENo");
+        movieRepository.save(licorice);
+
+
         Movie houseOfGucci= new Movie();
         houseOfGucci.setImagesrc("/img/moviecovers/gucci.jpg");
                 //"https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
@@ -79,21 +93,18 @@ public class DataMapper implements CommandLineRunner {
         france.setTrailerLink("https://www.youtube.com/watch?v=v6UvXtC0uw4");
         movieRepository.save(france);
 
-        movie = new Movie();
+        Movie flugt = new Movie();
         movie.setImagesrc("/img/moviecovers/flugt.jpg");
-                //"https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
-        movie.setTitle("Flugt");
-        movie.setYear(2021);
-        movie.setCountry("Danmark");
-        movie.setLanguage("Dansk");
-        movie.setDuration(89);
-        movie.setDirector("Jonas Poher Rasmussen");
-        movie.setParentalGuide(14);
-        movie.setTrailerLink("https://www.youtube.com/watch?v=XcQV_hC9rMw");
-        movieRepository.save(movie);
-
-
-
+        //"https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
+        flugt.setTitle("Flugt");
+        flugt.setYear(2021);
+        flugt.setCountry("Danmark");
+        flugt.setLanguage("Dansk");
+        flugt.setDuration(89);
+        flugt.setDirector("Jonas Poher Rasmussen");
+        flugt.setParentalGuide(14);
+        flugt.setTrailerLink("https://www.youtube.com/watch?v=XcQV_hC9rMw");
+        movieRepository.save(flugt);
 
         // --------------------------------------Product  below this line----------------------------------------------------
         Product product = new Product();
@@ -272,13 +283,13 @@ public class DataMapper implements CommandLineRunner {
         product.setItemGroup("Snacks");
         productRepository.save(product);
 
-        // --------------------------------------------Screening
-        // info--------------------------------------------------------
+        // --------------------------------------------Screening info---------------------------------------------------
 
         KinoHall salA = new KinoHall();
         salA.setSeatRows(3);
         salA.setSeatNumbers(5);
         salA.generateSeats();
+        salA.setTitle("A");
         seatRepository.saveAll(salA.getSeats());
         kinoHallRepository.save(salA);
 
@@ -286,41 +297,54 @@ public class DataMapper implements CommandLineRunner {
         salB.setSeatRows(5);
         salB.setSeatNumbers(15);
         salB.generateSeats();
+        salB.setTitle("B");
         seatRepository.saveAll(salB.getSeats());
         kinoHallRepository.save(salB);
 
+//----------------------------------------------------Screening info----------------------------------------------------
 
-        Screening screening = new Screening(movie, salA);
+        Screening screening = new Screening(france, salA);
         screening.setStartTime(LocalDateTime.of(2022, 3, 21, 15, 0));
         screening.setEndTime(LocalDateTime.of(2022, 3, 21, 17, 30));
         screening.setMovie(movie);
         ticketRepository.saveAll(screening.generateTickets());
         screeningRepository.save(screening);
 
-        screening = new Screening(movie, salB);
-        screening.setStartTime(LocalDateTime.of(2022, 3, 9, 15, 0));
-        screening.setEndTime(LocalDateTime.of(2022, 3, 9, 17, 30));
-        screening.setEvent("Senior Onsdag");
+        screening = new Screening(houseOfGucci, salB);
+        screening.setStartTime(LocalDateTime.of(2022, 3, 21, 15, 0));
+        screening.setEndTime(LocalDateTime.of(2022, 3, 21, 17, 30));
         ticketRepository.saveAll(screening.generateTickets());
         screeningRepository.save(screening);
-
-        Movie flugt = new Movie();
-        movie.setImagesrc("/img/moviecovers/flugt.jpg");
-        //"https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
-        flugt.setTitle("Flugt");
-        flugt.setYear(2021);
-        flugt.setCountry("Danmark");
-        flugt.setLanguage("Dansk");
-        flugt.setDuration(89);
-        flugt.setDirector("Jonas Poher Rasmussen");
-        flugt.setParentalGuide(14);
-        flugt.setTrailerLink("https://www.youtube.com/watch?v=XcQV_hC9rMw");
-        movieRepository.save(flugt);
-
 
         screening = new Screening(flugt, salA);
         screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
         screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
+        ticketRepository.saveAll(screening.generateTickets());
+        screeningRepository.save(screening);
+
+        screening = new Screening(houseOfGucci, salB);
+        screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
+        screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
+        ticketRepository.saveAll(screening.generateTickets());
+        screeningRepository.save(screening);
+
+        screening = new Screening(france, salA);
+        screening.setStartTime(LocalDateTime.of(2022, 3, 21, 21, 0));
+        screening.setEndTime(LocalDateTime.of(2022, 3, 21, 23, 0));
+        ticketRepository.saveAll(screening.generateTickets());
+        screeningRepository.save(screening);
+
+        screening = new Screening(licorice, salB);
+        screening.setStartTime(LocalDateTime.of(2022, 3, 21, 21, 0));
+        screening.setEndTime(LocalDateTime.of(2022, 3, 21, 23, 0));
+        ticketRepository.saveAll(screening.generateTickets());
+        screeningRepository.save(screening);
+
+
+        screening = new Screening(movie, salB);
+        screening.setStartTime(LocalDateTime.of(2022, 3, 9, 15, 0));
+        screening.setEndTime(LocalDateTime.of(2022, 3, 9, 17, 30));
+        screening.setEvent("Senior Onsdag");
         ticketRepository.saveAll(screening.generateTickets());
         screeningRepository.save(screening);
 
@@ -337,7 +361,7 @@ public class DataMapper implements CommandLineRunner {
         ticketRepository.saveAll(screening.generateTickets());
         screeningRepository.save(screening);
 
-
+//---------------------------------------------- Customer info---------------------------------------------------------
         Customer customer = new Customer();
         customer.setName("John");
         customer.setPhoneNumber("0011223344");

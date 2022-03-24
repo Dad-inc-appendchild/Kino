@@ -14,6 +14,10 @@ public class KinoHall {
   @Column(name = "kinoHallId")
   private int kinoHallId;
 
+  @Setter
+  @Getter
+  private String title;
+
   @Setter @Getter private String name;
 
   @OneToMany
