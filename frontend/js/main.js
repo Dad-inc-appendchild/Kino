@@ -33,7 +33,6 @@ function buildMovie(movie) {
   let movieElement = document.createElement("div");
   movieElement.id = movie.id;
   movieElement.classList.add("card");
-  movieElement.classList.add("movie-width");
 
   //image source goes here
   let imagesrc = movie.imagesrc;
@@ -41,7 +40,7 @@ function buildMovie(movie) {
   let image = document.createElement("img");
   image.src = imagesrc;
   image.classList.add("card-img-top");
-  image.classList.add("card-img-maxSize");
+  image.classList.add("card");
   image.alt = "img/FrenchFriday.png";
   movieElement.append(image);
 

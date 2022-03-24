@@ -355,6 +355,11 @@ textarea {
   color: greenyellow;
 }
 
+.container-main{
+  max-width: 1280px;
+}
+
+
 .card-img-maxSize {
   max-width: 240px;
   max-height: 336px;
