@@ -273,6 +273,7 @@ async function generateTable(table, data) {
       }
     });
 
+
     const columnList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ? screening.event : "--", bookings + " / " + seats];
 
     let cell, text;

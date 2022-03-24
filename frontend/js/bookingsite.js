@@ -2,7 +2,7 @@
 let url = "http://127.0.0.1:8080"
 let ticketholder = document.getElementById("tickets");
 let rowCount;
-let screeningid = 1;
+let screeningid;
 
 function clearSeatings() {
   document.getElementById("seats-event").classList.add("ninja");
@@ -12,6 +12,7 @@ function clearSeatings() {
 async function createList(id) {
   clearSeatings();
   document.getElementById("seats-event").classList.remove("ninja");
+  ticketholder.screeningId = id;
 
   let response = await fetch(url + "/api/screenings/ " + id + "/tickets");
   let json = await response.json();
@@ -84,7 +85,8 @@ async function initBooking(phonenumber, tickets) {
   let customer = await handleCustomer(phonenumber);
   if (undefined !== customer) {
     await bookTicket(customer, tickets)
-    await createList(screeningid);
+    await createList(ticketholder.screeningId);
+    await showAllScreenings();
   }
 }
 
@@ -111,6 +113,8 @@ async function handleCustomer(phonenumber) {
     let modal = document.getElementById('exampleModal');
     let boostrapModal = new bootstrap.Modal(modal, {keyboard: false});
     boostrapModal.show();
+    document.getElementById("customerPhone").value = phonenumber;
+
 
     customer = await customerInput(modal);
   }
