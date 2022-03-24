@@ -1,4 +1,5 @@
 'use strict';
+const url = "http://127.0.0.1:8080/api/"
 
 // Setup header
 async function loadHtmlTemplate(link, elementid) {
@@ -167,8 +168,7 @@ const cal = {
 
     cRow.classList.add("day");
 
-    const screenings = await getScreeningsByMonth(nowDay); // TODO refactor -> only call backend once
-    console.log(screenings)
+    const screenings = await getScreeningsByMonth(nowDay); //TODO Parse nowMth change logic.
 
     let i;
     for (i = 0; i < total; i++) {
@@ -227,30 +227,27 @@ function hasScreenings(screenings, square) {
   return false;
 }
 
-async function getScreenings(day) {
+async function getScreeningsByDay(day) {
   const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
 
-  const url = "http://localhost:8080/api/screenings/date/" + date;
-
-  let response = await fetch(url + "api/screenings/date" + date);
+  let response = await fetch(url + "screenings/date/" + date);
   return response.json();
 }
 
 async function getScreeningsByMonth(day){
   const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
-  const url = "http://localhost:8080/api/screenings/month/" + date;
-  let response = await fetch(url);
+  let response = await fetch(url + "screenings/month/" + date);
   return response.json();
 }
 
 async function getTicketsByScreeningId(screeningId) {
-  let response = await fetch(url + "/api/screenings/ " + screeningId + "/tickets");
+  let response = await fetch(url + "screenings/" + screeningId + "/tickets");
   return response.json();
 }
 
 async function showAllScreenings() {
   const table = document.getElementById("screening-table");
-  const screenings = await getScreenings(cal.sDay);
+  const screenings = await getScreeningsByDay(cal.sDay);
 
   table.innerHTML = "";
 
