@@ -18,7 +18,7 @@ public class Movie {
 
   private int duration;
 
-  private int director;
+  private String director;
 
   private int parentalGuide;
 
@@ -50,11 +50,11 @@ public class Movie {
     this.duration = duration;
   }
 
-  public int getDirector() {
+  public String getDirector() {
     return director;
   }
 
-  public void setDirector(int director) {
+  public void setDirector(String director) {
     this.director = director;
   }
 
