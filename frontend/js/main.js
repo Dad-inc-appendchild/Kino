@@ -115,6 +115,10 @@ function buildMovie(movie) {
     youtubeIframe.setAttribute("src", "https://www.youtube.com/embed/tgbNymZ7vqY");
     youtubeIframe.setAttribute("width", "100%");
     youtubeIframe.setAttribute("height", "400px");
+    youtubeIframe.setAttribute("title", movie.title);
+    youtubeIframe.setAttribute("frameborder", "0");
+    youtubeIframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+    youtubeIframe.setAttribute("allowfullscreen", "");
 
     modalBody.append(youtubeIframe);
 
