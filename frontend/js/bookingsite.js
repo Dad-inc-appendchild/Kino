@@ -111,6 +111,8 @@ async function handleCustomer(phonenumber) {
     let modal = document.getElementById('exampleModal');
     let boostrapModal = new bootstrap.Modal(modal, {keyboard: false});
     boostrapModal.show();
+    document.getElementById("customerPhone").value = phonenumber;
+
 
     customer = await customerInput(modal);
   }
