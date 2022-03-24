@@ -81,7 +81,7 @@ form.addEventListener('submit', e => {
 
 });
 
-async function initBooking(phonenumber, tickets, ) {
+async function initBooking(phonenumber, tickets) {
   let customer = await handleCustomer(phonenumber);
   if (undefined !== customer) {
     await bookTicket(customer, tickets)
