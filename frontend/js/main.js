@@ -87,18 +87,28 @@ function buildMovie(movie) {
 
   function showYoutubeLink(){
     //const modalDivMain = document.createElement("");
-    console.log("Vi er i modal div");
     const modalDiv = document.createElement("div");
+    modalDiv.id = "modalYoutube";
     modalDiv.classList.add("modal-dialog");
     modalDiv.classList.add("modal-dialog-centered");
+    modalDiv.classList.add("modal-lg")
+    cardBody.append(modalDiv);
+    const modalContent = document.createElement("div");
+    modalContent.classList.add("modal-content")
+    modelContent.href("#")
+    modalDiv.append(modalContent);
+    const modalTitle = document.createElement("div");
+    modalTitle.classList.add("modal-title");
+    modalTitle.innerText = "Test";
+    modalDiv.append(modalTitle);
+
+    console.log("Vi er i modal div");
     modalDiv.id=movie.id;
 
-    modalDiv.
 
 
 
 
-    cardBody.append(modalDiv);
     //modalDiv.id= movie.id;
 
 
