@@ -27,16 +27,6 @@ async function buildPage() {
   await loadHtmlTemplate("./html/navbar.html", "navbar");
 }
 
-function hasScreenings(screenings, square) {
-  for (let i = 0; i < screenings.length; i++) {
-    const date =  new Date (screenings[i].startTime);
-    if (date.getDate() === square){
-      return true;
-    }
-  }
-  return false;
-}
-
 const cal = {
   sMon: false, // Week start on Monday?
   mName: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "October", "November", "December"],
@@ -226,12 +216,23 @@ const cal = {
   },
 };
 
+
+function hasScreenings(screenings, square) {
+  for (let i = 0; i < screenings.length; i++) {
+    const date =  new Date (screenings[i].startTime);
+    if (date.getDate() === square){
+      return true;
+    }
+  }
+  return false;
+}
+
 async function getScreenings(day) {
   const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
 
   const url = "http://localhost:8080/api/screenings/date/" + date;
 
-  let response = await fetch(url);
+  let response = await fetch(url + "api/screenings/date" + date);
   return response.json();
 }
 
@@ -243,9 +244,7 @@ async function getScreeningsByMonth(day){
 }
 
 async function getTicketsByScreeningId(screeningId) {
-  const url = "http://localhost:8080/api/tickets/screenings/" + screeningId;
-
-  let response = await fetch(url);
+  let response = await fetch(url + "/api/screenings/ " + screeningId + "/tickets");
   return response.json();
 }
 
