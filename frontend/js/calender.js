@@ -205,7 +205,7 @@ const cal = {
 
   // Show event for selected day
   show: (el) => {
-    clearSeatings();
+    clearSeats();
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
     cal.hfHead.innerHTML = "Dagens forestillinger";
     showAllScreenings();
@@ -273,6 +273,7 @@ async function generateTable(table, data) {
       }
     });
 
+
     const columnList = [screening.startTime.slice(11, 16), screening.endTime.slice(11, 16), screening.kinoHall.kinoHallId, screening.movie.title, screening.event ? screening.event : "--", bookings + " / " + seats];
 
     let cell, text;
@@ -291,7 +292,7 @@ async function generateTable(table, data) {
     btn.classList.add("btn-calender");
 
     btn.onclick = () => {
-      createList(btn.id);
+      drawSeats(btn.id);
     }
 
     cell = row.insertCell();
