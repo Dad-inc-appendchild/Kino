@@ -1,44 +1,62 @@
 'use strict';
-let url = "http://127.0.0.1:8080"
-let ticketholder = document.getElementById("tickets");
-let rowCount;
-let screeningid;
+const url = "http://127.0.0.1:8080"
+const ticketHolder = document.getElementById("tickets");
 
-function clearSeatings() {
+const bookingForm = document.getElementById("bookingForm");
+bookingForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  let seats = Array.from(bookingForm.querySelectorAll('input[type=checkbox]:checked'))
+    .map(item => item.data); //creates array with selected seats.
+
+  let phoneNumber = document.getElementById("form-phone").value;
+
+  initBooking(phoneNumber, seats);
+});
+
+const createCustomerForm = document.getElementById("customerForm");
+createCustomerForm.addEventListener('submit', async e => {
+  e.preventDefault() //prevents page refresh when modal closes.
+
+  let modal = document.getElementById('exampleModal');
+  let bootstrapModal = bootstrap.Modal.getInstance(modal);
+
+  let customer = {
+    name: document.getElementById("customerName").value,
+    phoneNumber: document.getElementById("customerPhone").value
+  };
+
+  modal.data = await postNewCustomer(customer);
+  createCustomerForm.reset();
+  bootstrapModal.hide();
+});
+
+
+//Draw seat logic
+function clearSeats() {
   document.getElementById("seats-event").classList.add("ninja");
-  ticketholder.innerHTML = '';
+  ticketHolder.innerHTML = '';
 }
 
-async function createList(id) {
-  clearSeatings();
+async function drawSeats(id) {
+  clearSeats();
   document.getElementById("seats-event").classList.remove("ninja");
-  ticketholder.screeningId = id;
+  ticketHolder.screeningId = id;
 
   let response = await fetch(url + "/api/screenings/ " + id + "/tickets");
   let json = await response.json();
 
   console.log(json);
-  json.forEach(appendTiList)
+  json.forEach(seatBuilder)
 }
 
-
-function appendTiList(ticket) {
-  ticketholder.append(ticketBuilder(ticket));
-}
-
-function ticketBuilder(ticket) {
+function seatBuilder(ticket) {
   if (document.getElementById("row:" + ticket.seat.seatNumber) === null) {
-    let newRow = document.createElement("div");
-    newRow.classList.add("row");
-    newRow.classList.add("row-booking");
-    newRow.classList.add("seats-row");
-    newRow.id = "row:" + ticket.seat.seatNumber;
-    ticketholder.append(newRow);
+    createSeatRow(ticket.seat.seatNumber);
   }
   let row = document.getElementById("row:" + ticket.seat.seatNumber);
-
-  let inputbox = document.createElement("div");
-  inputbox.classList.add("col");
+  let inputWrapper = document.createElement("div");
+  inputWrapper.classList.add("col");
 
   let input = document.createElement("input");
   input.id = "ticket:" + ticket.ticketId;
@@ -56,84 +74,64 @@ function ticketBuilder(ticket) {
   } else {
     label.classList.add("seats-available");
   }
-  rowCount = ticket.seat.seatRow;
   let span = document.createElement("span");
   span.classList.add("check");
   label.append(span);
 
-  inputbox.append(input);
-  inputbox.append(label);
-  row.append(inputbox);
+  inputWrapper.append(input);
+  inputWrapper.append(label);
+  row.append(inputWrapper);
 
   return row;
 }
 
-const form = document.getElementById("form");
-form.addEventListener('submit', e => {
-  e.preventDefault();
+function createSeatRow(rowId){
+  let newRow = document.createElement("div");
+  newRow.classList.add("row");
+  newRow.classList.add("row-booking");
+  newRow.classList.add("seats-row");
+  newRow.id = "row:" + rowId;
+  ticketHolder.append(newRow);
+}
 
-  let tickets = Array.from(document.querySelectorAll('input[type=checkbox]:checked'))
-    .map(item => item.data);
 
-  let phonenumber = document.getElementById("form-phone").value;
-
-  initBooking(phonenumber, tickets);
-
-});
-
+//Booking logic
 async function initBooking(phonenumber, tickets) {
   let customer = await handleCustomer(phonenumber);
   if (undefined !== customer) {
-    await bookTicket(customer, tickets)
-    await createList(ticketholder.screeningId);
+    await bookTicket(customer, tickets) //Possibility: Response for toast box confirming booking.
+    await drawSeats(ticketHolder.screeningId);
     await showAllScreenings();
   }
 }
 
-let customerForm = document.getElementById("customerForm");
-customerForm.addEventListener('submit', async e => {
-  e.preventDefault()
-
-  let modal = document.getElementById('exampleModal');
-
-  let bootstrapModal = bootstrap.Modal.getInstance(modal);
-  let customer = {};
-  customer.name = document.getElementById("customerName").value;
-  customer.phoneNumber = document.getElementById("customerPhone").value;
-  modal.data = await createNewCustomer(customer);
-
-  customerForm.reset();
-  bootstrapModal.hide();
-})
-
-async function handleCustomer(phonenumber) {
-  let customer = await lookupCustomer(phonenumber);
-  console.log(customer);
-  if (null === customer) {
-    let modal = document.getElementById('exampleModal');
-    let boostrapModal = new bootstrap.Modal(modal, {keyboard: false});
-    boostrapModal.show();
-    document.getElementById("customerPhone").value = phonenumber;
-
-
-    customer = await customerInput(modal);
+async function bookTicket(customer, tickets) {
+  let customerTicketsWrapper = {
+  customer: customer,
+  tickets: tickets
   }
-  //TODO confirm customer
-  return customer
+
+  await fetch(url + "/api/tickets/book", {
+    method: "POST", headers: {
+      'Content-type': 'application/json'
+    }, body: JSON.stringify(customerTicketsWrapper)
+  })
 }
 
-function customerInput(modal) {
-  return new Promise((resolve) => {
-    modal.addEventListener('hidden.bs.modal', async function () {
-      let test = await modal.data;
-      resolve(test);
-    }, {once: true})
-  })
+
+//Customer logic
+async function handleCustomer(phonenumber) {
+  let customer = await lookupCustomer(phonenumber);
+
+  if (null === customer) {
+    customer = await createCustomerInput(phonenumber);
+  }
+  //Possibility: Confirmation of customer can be added here.
+  return customer
 }
 
 async function lookupCustomer(phoneNumber) {
   let response = await fetch(url + "/api/customers/phonenumber={" + phoneNumber + "}");
-  console.log(response);
   try {
     return await response.json();
   } catch (e) {
@@ -141,8 +139,21 @@ async function lookupCustomer(phoneNumber) {
   }
 }
 
-async function createNewCustomer(customer) {
-  console.log(customer)
+function createCustomerInput(phonenumber) {
+  let modal = document.getElementById('exampleModal');
+  let boostrapModal = new bootstrap.Modal(modal, {keyboard: false});
+  document.getElementById("customerPhone").value = phonenumber;
+  boostrapModal.show();
+
+  return new Promise((resolve) => {
+    modal.addEventListener('hidden.bs.modal', async function () {
+      let customer = await modal.data;
+      resolve(customer);
+    }, {once: true})
+  })
+}
+
+async function postNewCustomer(customer) {
   let response = await fetch(url + "/api/customers", {
     method: 'POST', headers: {
       'Content-type': 'application/json'
@@ -150,16 +161,3 @@ async function createNewCustomer(customer) {
   })
   return response.json();
 }
-
-async function bookTicket(customer, tickets) {
-  let stuff = {}
-  stuff.customer = customer;
-  stuff.tickets = tickets;
-  console.log(stuff);
-  let response = await fetch(url + "/api/tickets/book", {
-    method: "POST", headers: {
-      'Content-type': 'application/json'
-    }, body: JSON.stringify(stuff)
-  })
-}
-
