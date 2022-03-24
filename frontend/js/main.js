@@ -52,29 +52,59 @@ function buildMovie(movie) {
   cardBody.append(cardHeader);
 
   let cardParagraph = document.createElement("p");
-  cardParagraph.innerHTML = "INSERT MOVIE ATTRIBUT DESCRIPTION HERE";
+  cardParagraph.innerText = "INSERT MOVIE ATTRIBUT DESCRIPTION HERE";
   cardParagraph.classList.add("card-text");
   cardBody.append(cardParagraph);
 
   const cardButton = document.createElement("a");
-  cardButton.innerHTML = "Læs mere";
+  cardButton.innerText = "Læs mere";
   cardButton.href = "#";
   cardButton.classList.add("btn");
   cardButton.classList.add("btn-outline-primary");
   cardBody.append(cardButton);
+  cardButton.addEventListener("click", showCardModal );
 
-  const cardButtonLink = document.createElement("a");
-  cardButtonLink.innerHTML = "Se trailer";
-  cardButtonLink.href = "#";
+  const cardButtonLink = document.createElement("button");
+  cardButtonLink.innerText = "Se trailer";
   cardButtonLink.classList.add("btn");
   cardButtonLink.classList.add("btn-outline-secondary");
+  cardButtonLink.classList.add("mx-2");
+  cardButtonLink.setAttribute("data-bs-toggle", "modal");
+  cardButtonLink.setAttribute("data-bs-target", "#exampleModal");
   cardBody.append(cardButtonLink);
+  cardButtonLink.addEventListener("click", showYoutubeLink);
 
   movieElement.append(cardBody);
 
   let cardList = document.createElement("ul"); //screenings?
   cardList.classList.add("list-group");
   cardList.classList.add("list-group-flush");
+
+  function showCardModal(){
+
+
+  }
+
+  function showYoutubeLink(){
+    //const modalDivMain = document.createElement("");
+    console.log("Vi er i modal div");
+    const modalDiv = document.createElement("div");
+    modalDiv.classList.add("modal-dialog");
+    modalDiv.classList.add("modal-dialog-centered");
+    modalDiv.id=movie.id;
+
+    modalDiv.
+
+
+
+
+    cardBody.append(modalDiv);
+    //modalDiv.id= movie.id;
+
+
+  }
+
+
 
   /*for (let i = 0; i < 3; i++) { //change to for each screening?
     let cardElement = document.createElement("li");
