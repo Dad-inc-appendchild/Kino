@@ -359,6 +359,10 @@ textarea {
   max-width: 1280px;
 }
 
+.btn-outline-secondary{
+  margin-left: 5px;
+}
+
 
 .card-img-maxSize {
   max-width: 240px;
