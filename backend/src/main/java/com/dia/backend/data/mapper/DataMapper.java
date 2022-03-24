@@ -345,6 +345,12 @@ public class DataMapper implements CommandLineRunner {
         ticketRepository.saveAll(screening.generateTickets());
         screeningRepository.save(screening);
 
+        screening = new Screening(flugt, salB);
+        screening.setStartTime(LocalDateTime.of(2022, 3, 28, 18, 30));
+        screening.setEndTime(LocalDateTime.of(2022, 3, 28, 20, 0));
+        ticketRepository.saveAll(screening.generateTickets());
+        screeningRepository.save(screening);
+
 //---------------------------------------------- Customer info---------------------------------------------------------
         Customer customer = new Customer();
         customer.setName("John");
