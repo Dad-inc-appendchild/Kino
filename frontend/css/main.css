@@ -324,6 +324,7 @@ textarea {
   margin-top: 1.5em;
 }
 
+
 .menu-img {
   max-width: 40px;
   max-height: 40px;
@@ -336,23 +337,20 @@ textarea {
 .menu-title {
   font-style: italic;
   font-size: x-large;
+  color: #f8f9fa;
+}
+
+.section-title{
+  color: #f8f9fa;
 }
 
 .menu-content {
   font-size: large;
-}
-
-.menu-ingredients {
-  font-size: medium;
-  color: gray;
+  color: #f8f9fa;
 }
 
 .menu-item {
-  border-bottom: dotted 2px wheat
-}
-
-.menu-item:hover {
-  color: greenyellow;
+  border-bottom: dotted 2px #f8f9fa;
 }
 
 .card-img-maxSize {
