@@ -27,6 +27,16 @@ async function buildPage() {
   await loadHtmlTemplate("./html/navbar.html", "navbar");
 }
 
+function hasScreenings(screenings, square) {
+  for (let i = 0; i < screenings.length; i++) {
+    const date =  new Date (screenings[i].startTime);
+    if (date.getDate() === square){
+      return true;
+    }
+  }
+  return false;
+}
+
 const cal = {
   sMon: false, // Week start on Monday?
   mName: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "October", "November", "December"],
@@ -167,15 +177,17 @@ const cal = {
 
     cRow.classList.add("day");
 
+    const screenings = await getScreeningsByMonth(nowDay); // TODO refactor -> only call backend once
+    console.log(screenings)
+
     let i;
     for (i = 0; i < total; i++) {
       let cCell = document.createElement("td");
       if (squares[i] === "b") {
         cCell.classList.add("blank");
       } else {
-        const screenings = await getScreenings(squares[i]); // TODO refactor -> only call backend once
 
-        if (Object.keys(screenings).length !== 0) {
+        if (hasScreenings(screenings, squares[i]) === true) {
           cCell.classList.add("teal-600");
         }
 
@@ -219,6 +231,13 @@ async function getScreenings(day) {
 
   const url = "http://localhost:8080/api/screenings/date/" + date;
 
+  let response = await fetch(url);
+  return response.json();
+}
+
+async function getScreeningsByMonth(day){
+  const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
+  const url = "http://localhost:8080/api/screenings/month/" + date;
   let response = await fetch(url);
   return response.json();
 }
