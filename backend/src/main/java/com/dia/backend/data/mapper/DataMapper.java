@@ -39,8 +39,6 @@ public class DataMapper implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Movie movie = new Movie();
-
-        movie = new Movie();
         movie.setImagesrc("/img/moviecovers/licorice.jpg");
                // "https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
         movie.setTitle("Licorice Pizza");
@@ -52,20 +50,6 @@ public class DataMapper implements CommandLineRunner {
         movie.setParentalGuide(7);
         movie.setTrailerLink("https://www.youtube.com/watch?v=ofnXPwUPENo");
         movieRepository.save(movie);
-
-        Movie licorice = new Movie();
-        licorice.setImagesrc("/img/moviecovers/licorice.jpg");
-        // "https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
-        licorice.setTitle("Licorice Pizza");
-        licorice.setYear(2021);
-        licorice.setCountry("United States");
-        licorice.setLanguage("Engelsk");
-        licorice.setDuration(133);
-        licorice.setDirector("Paul Thomas Anderson");
-        licorice.setParentalGuide(7);
-        licorice.setTrailerLink("https://www.youtube.com/watch?v=ofnXPwUPENo");
-        movieRepository.save(licorice);
-
 
         Movie houseOfGucci= new Movie();
         houseOfGucci.setImagesrc("/img/moviecovers/gucci.jpg");
@@ -94,7 +78,7 @@ public class DataMapper implements CommandLineRunner {
         movieRepository.save(france);
 
         Movie flugt = new Movie();
-        movie.setImagesrc("/img/moviecovers/flugt.jpg");
+        flugt.setImagesrc("/img/moviecovers/flugt.jpg");
         //"https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
         flugt.setTitle("Flugt");
         flugt.setYear(2021);
@@ -334,7 +318,7 @@ public class DataMapper implements CommandLineRunner {
         ticketRepository.saveAll(screening.generateTickets());
         screeningRepository.save(screening);
 
-        screening = new Screening(licorice, salB);
+        screening = new Screening(movie, salB);
         screening.setStartTime(LocalDateTime.of(2022, 3, 21, 21, 0));
         screening.setEndTime(LocalDateTime.of(2022, 3, 21, 23, 0));
         ticketRepository.saveAll(screening.generateTickets());
