@@ -32,80 +32,58 @@ public class DataMapper implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     Movie movie = new Movie();
-    /*movie.setImagesrc(
-        "https://m.media-amazon.com/images/M/MV5BMjkwYzU5NWMtNDBmZS00ZGQ4LThjNjMtN2Y4NzViMGM0ODE2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg");
-    movie.setTitle("Belfast");
-    movie.setYear(2020);
-    movie.setCountry("THIS IS THE COUNTRY OF THE MOVIE");
-    movie.setLanguage("THIS LANGUAGE IS VERY VERY VERY LONG");
-    movie.setDuration(120);
-    movieRepository.save(movie);*/
 
     movie = new Movie();
-    movie.setImagesrc(
-        "https://m.media-amazon.com/images/M/MV5BZTYwMjRkZWUtZWFhZC00OWQ0LTlkOGMtZGRmODllZjg1MWJiXkEyXkFqcGdeQXVyNDczMTY0NjM@._V1_FMjpg_UY576_.jpg");
-    movie.setTitle("Rose");
-    movie.setYear(2022);
+    movie.setImagesrc("/img/moviecovers/licorice.jpg");
+    // "https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
+    movie.setTitle("Licorice Pizza");
+    movie.setYear(2021);
+    movie.setCountry("United States");
+    movie.setLanguage("Engelsk");
+    movie.setDuration(133);
+    movie.setDirector("Paul Thomas Anderson");
+    movie.setParentalGuide(7);
+    movie.setTrailerLink("https://www.youtube.com/watch?v=ofnXPwUPENo");
+    movieRepository.save(movie);
+
+    Movie houseOfGucci = new Movie();
+    houseOfGucci.setImagesrc("/img/moviecovers/gucci.jpg");
+    // "https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
+    houseOfGucci.setTitle("House of Gucci");
+    houseOfGucci.setYear(2021);
+    houseOfGucci.setCountry("United States");
+    houseOfGucci.setLanguage("Engelsk");
+    houseOfGucci.setDuration(158);
+    houseOfGucci.setDirector("Ridley Scott");
+    houseOfGucci.setParentalGuide(12);
+    houseOfGucci.setTrailerLink("https://www.youtube.com/watch?v=pGi3Bgn7U5U");
+    movieRepository.save(houseOfGucci);
+
+    Movie france = new Movie();
+    france.setImagesrc("/img/moviecovers/france.jpg");
+    // "https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
+    france.setTitle("France");
+    france.setYear(2021);
+    france.setCountry("France");
+    france.setLanguage("Fransk");
+    france.setDuration(133);
+    france.setDirector("Bruno Dumont");
+    france.setParentalGuide(15);
+    france.setTrailerLink("https://www.youtube.com/watch?v=v6UvXtC0uw4");
+    movieRepository.save(france);
+
+    movie = new Movie();
+    movie.setImagesrc("/img/moviecovers/flugt.jpg");
+    // "https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
+    movie.setTitle("Flugt");
+    movie.setYear(2021);
     movie.setCountry("Danmark");
     movie.setLanguage("Dansk");
-    movie.setDuration(106);
-    movie.setTrailerLink("https://youtu.be/QJUzZ0uIwts");
+    movie.setDuration(89);
+    movie.setDirector("Jonas Poher Rasmussen");
+    movie.setParentalGuide(14);
+    movie.setTrailerLink("https://www.youtube.com/watch?v=XcQV_hC9rMw");
     movieRepository.save(movie);
-
-    movie = new Movie();
-    movie.setImagesrc(
-        "https://m.media-amazon.com/images/M/MV5BMTdkZDc4YmQtYzA3My00NzliLThjN2YtMDIwMDkxY2Y4ODdmXkEyXkFqcGdeQXVyMTA2MDU0NjM5._V1_.jpg");
-    movie.setTitle("Spence");
-    movie.setYear(2021);
-    movie.setCountry("Amerikansk");
-    movie.setLanguage("Engelsk");
-    movie.setDuration(117);
-    movie.setTrailerLink("https://www.youtube.com/watch?v=WllZh9aekDg");
-    movieRepository.save(movie);
-
-    movie = new Movie();
-    movie.setImagesrc(
-        "https://www.paradisbio.dk/data/TempFolderLongTerm//mediacache_4842814fa8fc6f19b5ef97b505a69b19.jpg");
-    // "https://m.media-amazon.com/images/M/MV5BYTdmNzMwNzEtNDQyZi00M2VmLWFiMzktZmQ5MTMxYjMxMjg2XkEyXkFqcGdeQXVyMjQ0NzcxNjM@._V1_.jpg");
-    movie.setTitle("Sneleoparden");
-    movie.setYear(2021);
-    movie.setCountry("Frankrig");
-    movie.setLanguage("Engelsk");
-    movie.setDuration(92);
-    movie.setTrailerLink("https://www.youtube.com/watch?v=DzGAUO5WiCE");
-    movieRepository.save(movie);
-
-    movie = new Movie();
-    movie.setImagesrc(
-        "https://m.media-amazon.com/images/M/MV5BNWI4NDMxZjctYjcxMy00ZWNhLWFlOTctNjhiZTZiMjQ0ZGNjXkEyXkFqcGdeQXVyMzcwNjA5Mzg@._V1_.jpg");
-    movie.setTitle("Speak no evil");
-    movie.setYear(2022);
-    movie.setCountry("Dansk");
-    movie.setLanguage("Dansk/Engelsk");
-    movie.setDuration(98);
-    movie.setTrailerLink("https://www.youtube.com/watch?v=eAEw-8d1HsE");
-    movieRepository.save(movie);
-
-    /*for (int i = 0; i < 7; i++) {     Loop to generate more movies
-      movie = new Movie();
-      movie.setImagesrc(
-          "https://m.media-amazon.com/images/M/MV5BZmYzNTBiZTAtNmJjNi00MTcyLThlZGMtNDA5Y2RkNjM3ODAzXkEyXkFqcGdeQXVyMzg3OTQ5MjU@._V1_.jpg");
-      movie.setTitle("Test data " + i);
-      movie.setYear(2004 + i);
-      movie.setCountry("USA!");
-      movie.setLanguage("English");
-      movieRepository.save(movie);
-
-      movie = new Movie();
-      movie.setImagesrc(
-          "https://m.media-amazon.com/images/M/MV5BMzNhOTdlNmUtYzNiYi00MmUxLTg3ZjgtZjk4Y2Y5YTk3ODdiXkEyXkFqcGdeQXVyMTE2MjAzMTU3._V1_.jpg");
-      movie.setTitle("Generisk data " + i);
-      movie.setYear(2004);
-      movie.setCountry("USA!");
-      movie.setLanguage("English");
-      movie.setDuration(160);
-      movieRepository.save(movie);
-    }*/
 
     // --------------------------------------Product  below this
     // line----------------------------------------------------
@@ -288,47 +266,63 @@ public class DataMapper implements CommandLineRunner {
     // --------------------------------------------Screening
     // info--------------------------------------------------------
 
-    KinoHall kinoHall = new KinoHall();
-    kinoHall.setSeatRows(3);
-    kinoHall.setSeatNumbers(5);
-    kinoHall.generateSeats();
-    seatRepository.saveAll(kinoHall.getSeats());
-    kinoHallRepository.save(kinoHall);
+    KinoHall salA = new KinoHall();
+    salA.setSeatRows(3);
+    salA.setSeatNumbers(5);
+    salA.generateSeats();
+    seatRepository.saveAll(salA.getSeats());
+    kinoHallRepository.save(salA);
 
-    kinoHall = new KinoHall();
-    kinoHall.setSeatRows(5);
-    kinoHall.setSeatNumbers(15);
-    kinoHall.generateSeats();
-    seatRepository.saveAll(kinoHall.getSeats());
-    kinoHallRepository.save(kinoHall);
+    KinoHall salB = new KinoHall();
+    salB.setSeatRows(5);
+    salB.setSeatNumbers(15);
+    salB.generateSeats();
+    seatRepository.saveAll(salB.getSeats());
+    kinoHallRepository.save(salB);
 
-    movie = new Movie();
-    movie.setImagesrc(
-        "https://m.media-amazon.com/images/M/MV5BZmYzNTBiZTAtNmJjNi00MTcyLThlZGMtNDA5Y2RkNjM3ODAzXkEyXkFqcGdeQXVyMzg3OTQ5MjU@._V1_.jpg");
-    movie.setTitle("Borte med blæsten");
-    movie.setYear(2004);
-    movie.setCountry("USA");
-    movie.setLanguage("Dansk");
-    movieRepository.save(movie);
-
-    Screening screening = new Screening(movie, kinoHall);
+    Screening screening = new Screening(movie, salA);
     screening.setStartTime(LocalDateTime.of(2022, 3, 21, 15, 0));
     screening.setEndTime(LocalDateTime.of(2022, 3, 21, 17, 30));
-    screening.setEvent("Senior Onsdag");
     screening.setMovie(movie);
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
-    screening = new Screening(movie, kinoHall);
+    screening = new Screening(movie, salB);
     screening.setStartTime(LocalDateTime.of(2022, 3, 9, 15, 0));
     screening.setEndTime(LocalDateTime.of(2022, 3, 9, 17, 30));
     screening.setEvent("Senior Onsdag");
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
-    screening = new Screening(movie, kinoHall);
+    Movie flugt = new Movie();
+    movie.setImagesrc("/img/moviecovers/flugt.jpg");
+    // "https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
+    flugt.setTitle("Flugt");
+    flugt.setYear(2021);
+    flugt.setCountry("Danmark");
+    flugt.setLanguage("Dansk");
+    flugt.setDuration(89);
+    flugt.setDirector("Jonas Poher Rasmussen");
+    flugt.setParentalGuide(14);
+    flugt.setTrailerLink("https://www.youtube.com/watch?v=XcQV_hC9rMw");
+    movieRepository.save(flugt);
+
+    screening = new Screening(flugt, salA);
     screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
     screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(france, salB);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 25, 18, 30));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 25, 20, 0));
+    screening.setEvent("Fransk fredag");
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(houseOfGucci, salA);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 28, 18, 30));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 28, 20, 0));
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
