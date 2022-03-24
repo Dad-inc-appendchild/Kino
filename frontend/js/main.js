@@ -70,7 +70,7 @@ function buildMovie(movie) {
   cardButtonLink.classList.add("btn-outline-secondary");
   cardButtonLink.classList.add("mx-2");
   cardButtonLink.setAttribute("data-bs-toggle", "modal");
-  cardButtonLink.setAttribute("data-bs-target", "#exampleModal");
+  cardButtonLink.setAttribute("data-bs-target", "#modalYoutube");
   cardBody.append(cardButtonLink);
   cardButtonLink.addEventListener("click", showYoutubeLink);
 
@@ -89,27 +89,38 @@ function buildMovie(movie) {
     //const modalDivMain = document.createElement("");
     const modalDiv = document.createElement("div");
     modalDiv.id = "modalYoutube";
-    modalDiv.classList.add("modal-dialog");
-    modalDiv.classList.add("modal-dialog-centered");
-    modalDiv.classList.add("modal-lg")
-    cardBody.append(modalDiv);
+    modalDiv.classList.add("modal");
+    modalDiv.classList.add("fade");
+    modalDiv.setAttribute("aria-labelledby","modalYoutube" );
+    document.body.append(modalDiv);
+
+    const modalDialog = document.createElement("div");
+    modalDialog.classList.add("modal-dialog");
+    modalDialog.classList.add("modal-dialog-centered");
+    modalDialog.classList.add("modal-lg");
+    modalDiv.append(modalDialog);
+
     const modalContent = document.createElement("div");
-    modalContent.classList.add("modal-content")
-    modelContent.href("#")
-    modalDiv.append(modalContent);
-    const modalTitle = document.createElement("div");
+    modalContent.classList.add("modal-content");
+    modalDialog.append(modalContent);
+    console.log("Vi er i modal div");
+
+    const modalHeader = document.createElement("div");
+    modalHeader.classList.add("modal-header");
+    modalContent.append(modalHeader);
+
+    const modalTitle = document.createElement("h5");
     modalTitle.classList.add("modal-title");
     modalTitle.innerText = "Test";
-    modalDiv.append(modalTitle);
+    modalHeader.append(modalTitle);
 
-    console.log("Vi er i modal div");
-    modalDiv.id=movie.id;
+    const modalBody = document.createElement("div");
+    modalContent.append(modalBody);
 
-
-
-
-
-    //modalDiv.id= movie.id;
+    const modalCloseButton = document.createElement("button");
+    modalCloseButton.classList.add("btn-close");
+    modalCloseButton.setAttribute("data-bs-dismiss", "modal");
+    modalHeader.append(modalCloseButton);
 
 
   }
