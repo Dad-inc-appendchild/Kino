@@ -43,7 +43,7 @@ public class DataMapper implements CommandLineRunner {
     movie.setDuration(133);
     movie.setDirector("Paul Thomas Anderson");
     movie.setParentalGuide(7);
-    movie.setTrailerLink("https://www.youtube.com/watch?v=ofnXPwUPENo");
+    movie.setTrailerLink("https://www.youtube.com/embed/ofnXPwUPENo");
     movieRepository.save(movie);
 
     Movie houseOfGucci = new Movie();
@@ -56,7 +56,7 @@ public class DataMapper implements CommandLineRunner {
     houseOfGucci.setDuration(158);
     houseOfGucci.setDirector("Ridley Scott");
     houseOfGucci.setParentalGuide(12);
-    houseOfGucci.setTrailerLink("https://www.youtube.com/watch?v=pGi3Bgn7U5U");
+    houseOfGucci.setTrailerLink("https://www.youtube.com/embed/pGi3Bgn7U5U");
     movieRepository.save(houseOfGucci);
 
     Movie france = new Movie();
@@ -69,7 +69,7 @@ public class DataMapper implements CommandLineRunner {
     france.setDuration(133);
     france.setDirector("Bruno Dumont");
     france.setParentalGuide(15);
-    france.setTrailerLink("https://www.youtube.com/watch?v=v6UvXtC0uw4");
+    france.setTrailerLink("https://www.youtube.com/embed/v6UvXtC0uw4");
     movieRepository.save(france);
 
     movie = new Movie();
@@ -82,7 +82,7 @@ public class DataMapper implements CommandLineRunner {
     movie.setDuration(89);
     movie.setDirector("Jonas Poher Rasmussen");
     movie.setParentalGuide(14);
-    movie.setTrailerLink("https://www.youtube.com/watch?v=XcQV_hC9rMw");
+    movie.setTrailerLink("https://www.youtube.com/embed/XcQV_hC9rMw");
     movieRepository.save(movie);
 
     // --------------------------------------Product  below this
@@ -294,20 +294,7 @@ public class DataMapper implements CommandLineRunner {
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
-    Movie flugt = new Movie();
-    movie.setImagesrc("/img/moviecovers/flugt.jpg");
-    // "https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
-    flugt.setTitle("Flugt");
-    flugt.setYear(2021);
-    flugt.setCountry("Danmark");
-    flugt.setLanguage("Dansk");
-    flugt.setDuration(89);
-    flugt.setDirector("Jonas Poher Rasmussen");
-    flugt.setParentalGuide(14);
-    flugt.setTrailerLink("https://www.youtube.com/watch?v=XcQV_hC9rMw");
-    movieRepository.save(flugt);
-
-    screening = new Screening(flugt, salA);
+    screening = new Screening(movie, salA);
     screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
     screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
     ticketRepository.saveAll(screening.generateTickets());
