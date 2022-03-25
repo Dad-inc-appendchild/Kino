@@ -1,4 +1,5 @@
 'use strict';
+const url = "http://127.0.0.1:8080/api/"
 
 // Setup header
 async function loadHtmlTemplate(link, elementid) {
@@ -167,15 +168,16 @@ const cal = {
 
     cRow.classList.add("day");
 
+    const screenings = await getScreeningsByMonth(nowDay); //TODO Parse nowMth change logic.
+
     let i;
     for (i = 0; i < total; i++) {
       let cCell = document.createElement("td");
       if (squares[i] === "b") {
         cCell.classList.add("blank");
       } else {
-        const screenings = await getScreenings(squares[i]); // TODO refactor -> only call backend once
 
-        if (Object.keys(screenings).length !== 0) {
+        if (hasScreenings(screenings, squares[i])) {
           cCell.classList.add("teal-600");
         }
 
@@ -214,25 +216,38 @@ const cal = {
   },
 };
 
-async function getScreenings(day) {
+
+function hasScreenings(screenings, square) {
+  for (let i = 0; i < screenings.length; i++) {
+    const date =  new Date (screenings[i].startTime);
+    if (date.getDate() === square){
+      return true;
+    }
+  }
+  return false;
+}
+
+async function getScreeningsByDay(day) {
   const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
 
-  const url = "http://localhost:8080/api/screenings/date/" + date;
+  let response = await fetch(url + "screenings/date/" + date);
+  return response.json();
+}
 
-  let response = await fetch(url);
+async function getScreeningsByMonth(day){
+  const date = `${cal.sYear}-${("0" + (cal.sMth + 1)).slice(-2)}-${("0" + (day)).slice(-2)}`; // yyyy-mm-dd
+  let response = await fetch(url + "screenings/month/" + date);
   return response.json();
 }
 
 async function getTicketsByScreeningId(screeningId) {
-  const url = "http://localhost:8080/api/tickets/screenings/" + screeningId;
-
-  let response = await fetch(url);
+  let response = await fetch(url + "screenings/" + screeningId + "/tickets");
   return response.json();
 }
 
 async function showAllScreenings() {
   const table = document.getElementById("screening-table");
-  const screenings = await getScreenings(cal.sDay);
+  const screenings = await getScreeningsByDay(cal.sDay);
 
   table.innerHTML = "";
 

@@ -1,5 +1,4 @@
 'use strict';
-const url = "http://127.0.0.1:8080"
 const ticketHolder = document.getElementById("tickets");
 
 const bookingForm = document.getElementById("bookingForm");
@@ -43,7 +42,7 @@ async function drawSeats(id) {
   document.getElementById("seats-event").classList.remove("ninja");
   ticketHolder.screeningId = id;
 
-  let response = await fetch(url + "/api/screenings/ " + id + "/tickets");
+  let response = await fetch(url + "screenings/" + id + "/tickets");
   let json = await response.json();
 
   console.log(json);
@@ -111,7 +110,7 @@ async function bookTicket(customer, tickets) {
   tickets: tickets
   }
 
-  await fetch(url + "/api/tickets/book", {
+  await fetch(url + "tickets/book", {
     method: "POST", headers: {
       'Content-type': 'application/json'
     }, body: JSON.stringify(customerTicketsWrapper)
@@ -131,7 +130,7 @@ async function handleCustomer(phonenumber) {
 }
 
 async function lookupCustomer(phoneNumber) {
-  let response = await fetch(url + "/api/customers/phonenumber={" + phoneNumber + "}");
+  let response = await fetch(url + "customers/phonenumber={" + phoneNumber + "}");
   try {
     return await response.json();
   } catch (e) {
@@ -154,7 +153,7 @@ function createCustomerInput(phonenumber) {
 }
 
 async function postNewCustomer(customer) {
-  let response = await fetch(url + "/api/customers", {
+  let response = await fetch(url + "customers", {
     method: 'POST', headers: {
       'Content-type': 'application/json'
     }, body: JSON.stringify(customer)
