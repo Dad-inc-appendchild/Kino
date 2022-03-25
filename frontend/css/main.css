@@ -468,3 +468,6 @@ url("img/Pavilion logocrop.jpg");
   transition: 0.3s;
 }
 
+.modal-body table {
+  color: #f8f9fa !important;
+}
