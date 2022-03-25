@@ -141,9 +141,10 @@ function buildMovie(movie) {
   </tr>
   <tr>
     <td>Parental Guide</td>
-    <td>${movie.parentalGuide}</td>
+    <td>${movie.parentalGuide}+</td>
   </tr>
 `;
+
     modalBody.append(contentTable);
 
 
