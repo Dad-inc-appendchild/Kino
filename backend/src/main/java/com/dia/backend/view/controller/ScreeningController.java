@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +38,18 @@ public class ScreeningController {
   }
 
   @GetMapping("/date/{date}")
-  public List<Screening> findScreeningByDate(@PathVariable String date) {
+  public List<Screening> findScreeningsByDate(@PathVariable String date) {
     return screeningRepository.findScreeningByStartTimeBetween(
         LocalDateTime.parse(date + "T00:00"), LocalDateTime.parse(date + "T23:59"));
+  }
+
+  @GetMapping("/month/{month}")
+  public List<Screening> findScreeningsByMonth(@PathVariable String month) {
+    LocalDateTime localDateTime = LocalDateTime.parse(month + "T00:00");
+    LocalDateTime startTime = localDateTime.with(TemporalAdjusters.firstDayOfMonth());
+    LocalDateTime endTime =
+        localDateTime.with(TemporalAdjusters.lastDayOfMonth()).plusHours(23).plusMinutes(59);
+    return screeningRepository.findScreeningByStartTimeBetween(startTime, endTime);
   }
 
   @PostMapping()

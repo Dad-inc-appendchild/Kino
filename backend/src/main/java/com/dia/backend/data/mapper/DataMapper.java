@@ -32,8 +32,6 @@ public class DataMapper implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     Movie movie = new Movie();
-
-    movie = new Movie();
     movie.setImagesrc("/img/moviecovers/licorice.jpg");
     // "https://m.media-amazon.com/images/M/MV5BYjkwMzIxYzMtOTVkMS00NDQxLThkMjItNzgxN2RiNjdlNTliXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg");
     movie.setTitle("Licorice Pizza");
@@ -72,9 +70,10 @@ public class DataMapper implements CommandLineRunner {
     france.setTrailerLink("https://www.youtube.com/embed/v6UvXtC0uw4");
     movieRepository.save(france);
 
-    movie = new Movie();
-    movie.setImagesrc("/img/moviecovers/flugt.jpg");
+    Movie flugt = new Movie();
+    flugt.setImagesrc("/img/moviecovers/flugt.jpg");
     // "https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
+
     movie.setTitle("Flugt");
     movie.setYear(2021);
     movie.setCountry("Danmark");
@@ -84,7 +83,6 @@ public class DataMapper implements CommandLineRunner {
     movie.setParentalGuide(14);
     movie.setTrailerLink("https://www.youtube.com/embed/XcQV_hC9rMw");
     movieRepository.save(movie);
-
     // --------------------------------------Product  below this
     // line----------------------------------------------------
     Product product = new Product();
@@ -264,12 +262,13 @@ public class DataMapper implements CommandLineRunner {
     productRepository.save(product);
 
     // --------------------------------------------Screening
-    // info--------------------------------------------------------
+    // info---------------------------------------------------
 
     KinoHall salA = new KinoHall();
     salA.setSeatRows(3);
     salA.setSeatNumbers(5);
     salA.generateSeats();
+    salA.setTitle("A");
     seatRepository.saveAll(salA.getSeats());
     kinoHallRepository.save(salA);
 
@@ -277,13 +276,48 @@ public class DataMapper implements CommandLineRunner {
     salB.setSeatRows(5);
     salB.setSeatNumbers(15);
     salB.generateSeats();
+    salB.setTitle("B");
     seatRepository.saveAll(salB.getSeats());
     kinoHallRepository.save(salB);
 
-    Screening screening = new Screening(movie, salA);
+    // ----------------------------------------------------Screening
+    // info----------------------------------------------------
+
+    Screening screening = new Screening(france, salA);
     screening.setStartTime(LocalDateTime.of(2022, 3, 21, 15, 0));
     screening.setEndTime(LocalDateTime.of(2022, 3, 21, 17, 30));
     screening.setMovie(movie);
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(houseOfGucci, salB);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 15, 0));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 17, 30));
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(flugt, salA);
+
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(houseOfGucci, salB);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(france, salA);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 21, 0));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 23, 0));
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    screening = new Screening(movie, salB);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 21, 0));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 23, 0));
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
@@ -291,12 +325,6 @@ public class DataMapper implements CommandLineRunner {
     screening.setStartTime(LocalDateTime.of(2022, 3, 9, 15, 0));
     screening.setEndTime(LocalDateTime.of(2022, 3, 9, 17, 30));
     screening.setEvent("Senior Onsdag");
-    ticketRepository.saveAll(screening.generateTickets());
-    screeningRepository.save(screening);
-
-    screening = new Screening(movie, salA);
-    screening.setStartTime(LocalDateTime.of(2022, 3, 21, 18, 30));
-    screening.setEndTime(LocalDateTime.of(2022, 3, 21, 20, 0));
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
@@ -313,6 +341,14 @@ public class DataMapper implements CommandLineRunner {
     ticketRepository.saveAll(screening.generateTickets());
     screeningRepository.save(screening);
 
+    screening = new Screening(flugt, salB);
+    screening.setStartTime(LocalDateTime.of(2022, 3, 28, 18, 30));
+    screening.setEndTime(LocalDateTime.of(2022, 3, 28, 20, 0));
+    ticketRepository.saveAll(screening.generateTickets());
+    screeningRepository.save(screening);
+
+    // ---------------------------------------------- Customer
+    // info---------------------------------------------------------
     Customer customer = new Customer();
     customer.setName("John");
     customer.setPhoneNumber("0011223344");
