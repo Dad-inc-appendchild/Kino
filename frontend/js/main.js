@@ -33,7 +33,6 @@ function buildMovie(movie) {
   let movieElement = document.createElement("div");
   movieElement.id = movie.id;
   movieElement.classList.add("card");
-  movieElement.classList.add("movie-width");
 
   //image source goes here
   let imagesrc = movie.imagesrc;
@@ -41,45 +40,93 @@ function buildMovie(movie) {
   let image = document.createElement("img");
   image.src = imagesrc;
   image.classList.add("card-img-top");
-  image.classList.add("card-img-maxSize");
   image.alt = "img/FrenchFriday.png";
   movieElement.append(image);
 
   let cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
-  cardBody.classList.add("movie-body");
   let cardHeader = document.createElement("h5");
-  cardHeader.innerText = movie.title; //title goes here;
+  cardHeader.textContent = movie.title; //title goes here;
   cardHeader.classList.add("movie-title");
   cardBody.append(cardHeader);
 
-  let cardtext = document.createElement("p");
-  cardtext.innerHTML = "Udgivelsesår: " + movie.year + "<br>" + "Spilletid: " + Math.round(movie.duration) + " Minutter"; //INSERT MORE DATA
-  cardtext.classList.add("card-text");
-  cardtext.classList.add("movie-text");
-  cardBody.append(cardtext);
+  let cardParagraph = document.createElement("p");
+  cardParagraph.textContent = "INSERT MOVIE ATTRIBUT DESCRIPTION HERE";
+  cardParagraph.classList.add("card-text");
+  cardBody.append(cardParagraph);
+
+  const cardButton = document.createElement("a");
+  cardButton.textContent = "Læs mere";
+  cardButton.href = "film?id=" + movie.id;
+  cardButton.classList.add("btn");
+  cardButton.classList.add("btn-outline-primary");
+  cardBody.append(cardButton);
+  cardButton.addEventListener("click", showCardModal);
+
+  const cardButtonLink = document.createElement("button");
+  cardButtonLink.textContent = "Se trailer";
+  cardButtonLink.classList.add("btn");
+  cardButtonLink.classList.add("btn-outline-secondary");
+  cardButtonLink.classList.add("mx-2");
+  cardButtonLink.setAttribute("data-bs-toggle", "modal");
+  cardButtonLink.setAttribute("data-bs-target", "#modalYoutube");
+
+  cardBody.append(cardButtonLink);
+
+  initModalBox();
+
   movieElement.append(cardBody);
 
-  let cardList = document.createElement("ul"); //screenings?
-  cardList.classList.add("list-group");
-  cardList.classList.add("list-group-flush");
-
-  for (let i = 0; i < 3; i++) { //change to for each screening?
-    let cardElement = document.createElement("li");
-    cardElement.classList.add("list-group-item");
-    cardElement.innerText = "Screening " + i;
-    cardList.append(cardElement);
+  function showCardModal() {
   }
 
-  let trailerLink = movie.trailerLink;
-  movieElement.append(cardList);
-  cardBody = document.createElement("div");
-  let link = document.createElement("a");
-  link.href = trailerLink;
+  function initModalBox() {
+    const modalDiv = document.createElement("div");
+    modalDiv.id = "modalYoutube";
+    modalDiv.classList.add("modal");
+    modalDiv.classList.add("fade");
+    modalDiv.setAttribute("aria-labelledby", "modalYoutube");
+    document.body.append(modalDiv);
 
-  link.classList.add("movie-link")
-  link.innerText = "Trailer link"; //link to something??
-  cardBody.append(link);
+    const modalDialog = document.createElement("div");
+    modalDialog.classList.add("modal-dialog");
+    modalDialog.classList.add("modal-dialog-centered");
+    modalDialog.classList.add("modal-lg");
+    modalDiv.append(modalDialog);
+
+    const modalContent = document.createElement("div");
+    modalContent.classList.add("modal-content");
+    modalDialog.append(modalContent);
+
+    const modalHeader = document.createElement("div");
+    modalHeader.classList.add("modal-header");
+    modalContent.append(modalHeader);
+
+    const modalTitle = document.createElement("h5");
+    modalTitle.classList.add("modal-title");
+    modalTitle.textContent = "Test";
+    modalHeader.append(modalTitle);
+
+    const modalBody = document.createElement("div");
+    modalBody.classList.add("modal-body");
+    modalContent.append(modalBody);
+
+    const youtubeIframe = document.createElement("iframe");
+    youtubeIframe.setAttribute("src", "https://www.youtube.com/embed/tgbNymZ7vqY");
+    youtubeIframe.setAttribute("width", "100%");
+    youtubeIframe.setAttribute("height", "400px");
+    youtubeIframe.setAttribute("title", movie.title);
+    youtubeIframe.setAttribute("frameborder", "0");
+    youtubeIframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+    youtubeIframe.setAttribute("allowfullscreen", "");
+
+    modalBody.append(youtubeIframe);
+
+    const modalCloseButton = document.createElement("button");
+    modalCloseButton.classList.add("btn-close");
+    modalCloseButton.setAttribute("data-bs-dismiss", "modal");
+    modalHeader.append(modalCloseButton);
+  }
 
   movieElement.append(cardBody);
 
