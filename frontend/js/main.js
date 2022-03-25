@@ -67,12 +67,11 @@ function buildMovie(movie) {
 
   const cardButtonLink = document.createElement("button");
   cardButtonLink.textContent = "Se trailer";
-  cardButtonLink.id = "trailerButton";
   cardButtonLink.classList.add("btn");
   cardButtonLink.classList.add("btn-outline-secondary");
   cardButtonLink.classList.add("mx-2");
   cardButtonLink.setAttribute("data-bs-toggle", "modal");
-  cardButtonLink.setAttribute("data-bs-target", "#modalYoutube");
+  cardButtonLink.setAttribute("data-bs-target", "#modalYoutube-" + movie.id );
 
   cardBody.append(cardButtonLink);
 
@@ -85,10 +84,10 @@ function buildMovie(movie) {
 
   function initModalBox() {
     const modalDiv = document.createElement("div");
-    modalDiv.id = "modalYoutube";
+    modalDiv.id = "modalYoutube-" + movie.id;
     modalDiv.classList.add("modal");
     modalDiv.classList.add("fade");
-    modalDiv.setAttribute("aria-labelledby", "modalYoutube");
+    modalDiv.setAttribute("aria-labelledby", "modalYoutube-" + movie.id);
     document.body.append(modalDiv);
 
     const modalDialog = document.createElement("div");
@@ -113,14 +112,6 @@ function buildMovie(movie) {
     const modalBody = document.createElement("div");
     modalBody.classList.add("modal-body");
     modalContent.append(modalBody);
-
-    /*
-    let movieLink = document.createElement("iframe");
-    movieLink.src = movietrailerlink;
-    console.log("TEst==" + movietrailerlink)
-    movieLink.classList.add("trailerButton");
-    movieElement.append(movieLink);
-    */
 
     //"https://www.youtube.com/embed/y40LA-5sK4o"
 
