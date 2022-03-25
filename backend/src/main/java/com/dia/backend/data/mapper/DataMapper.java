@@ -74,15 +74,15 @@ public class DataMapper implements CommandLineRunner {
     flugt.setImagesrc("/img/moviecovers/flugt.jpg");
     // "https://m.media-amazon.com/images/M/MV5BNGE1MWViOWYtZjg1NC00MWE4LWI4MDItNzBmYzNiMjg5ZTBlXkEyXkFqcGdeQXVyMDc0MzMwNA@@._V1_.jpg");
 
-    movie.setTitle("Flugt");
-    movie.setYear(2021);
-    movie.setCountry("Danmark");
-    movie.setLanguage("Dansk");
-    movie.setDuration(89);
-    movie.setDirector("Jonas Poher Rasmussen");
-    movie.setParentalGuide(14);
-    movie.setTrailerLink("https://www.youtube.com/embed/XcQV_hC9rMw");
-    movieRepository.save(movie);
+    flugt.setTitle("Flugt");
+    flugt.setYear(2021);
+    flugt.setCountry("Danmark");
+    flugt.setLanguage("Dansk");
+    flugt.setDuration(89);
+    flugt.setDirector("Jonas Poher Rasmussen");
+    flugt.setParentalGuide(14);
+    flugt.setTrailerLink("https://www.youtube.com/embed/XcQV_hC9rMw");
+    movieRepository.save(flugt);
     // --------------------------------------Product  below this
     // line----------------------------------------------------
     Product product = new Product();
