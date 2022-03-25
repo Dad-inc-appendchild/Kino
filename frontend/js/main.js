@@ -57,13 +57,13 @@ function buildMovie(movie) {
   cardParagraph.classList.add("card-text");
   cardBody.append(cardParagraph);
 
-  const cardButton = document.createElement("a");
+  const cardButton = document.createElement("button");
   cardButton.textContent = "Læs mere";
-  cardButton.href = "film?id=" + movie.id;
   cardButton.classList.add("btn");
-  cardButton.classList.add("btn-outline-primary");
+  cardButton.classList.add("btn-primary");
+  cardButton.setAttribute("data-bs-toggle", "modal");
+  cardButton.setAttribute("data-bs-target", "#modalMore-" + movie.id);
   cardBody.append(cardButton);
-  cardButton.addEventListener("click", showCardModal);
 
   const cardButtonLink = document.createElement("button");
   cardButtonLink.textContent = "Se trailer";
@@ -71,18 +71,89 @@ function buildMovie(movie) {
   cardButtonLink.classList.add("btn-outline-secondary");
   cardButtonLink.classList.add("mx-2");
   cardButtonLink.setAttribute("data-bs-toggle", "modal");
-  cardButtonLink.setAttribute("data-bs-target", "#modalYoutube-" + movie.id );
-
+  cardButtonLink.setAttribute("data-bs-target", "#modalYoutube-" + movie.id);
   cardBody.append(cardButtonLink);
 
-  initModalBox();
+  initModalTrailer();
+  initModalMore()
 
   movieElement.append(cardBody);
 
-  function showCardModal() {
+  function initModalMore() {
+    const modalDiv = document.createElement("div");
+    modalDiv.id = "modalMore-" + movie.id;
+    modalDiv.classList.add("modal");
+    modalDiv.classList.add("fade");
+    modalDiv.setAttribute("aria-labelledby", "modalMore-" + movie.id);
+    document.body.append(modalDiv);
+
+    const modalDialog = document.createElement("div");
+    modalDialog.classList.add("modal-dialog");
+    modalDialog.classList.add("modal-dialog-centered");
+    modalDialog.classList.add("modal-lg");
+    modalDiv.append(modalDialog);
+
+    const modalContent = document.createElement("div");
+    modalContent.classList.add("modal-content");
+    modalDialog.append(modalContent);
+
+    const modalHeader = document.createElement("div");
+    modalHeader.classList.add("modal-header");
+    modalContent.append(modalHeader);
+
+    const modalTitle = document.createElement("h5");
+    modalTitle.classList.add("modal-title");
+    modalTitle.textContent = movie.title;
+    modalHeader.append(modalTitle);
+
+    const modalBody = document.createElement("div");
+    modalBody.classList.add("modal-body");
+    modalContent.append(modalBody);
+
+    const contentTable = document.createElement("table");
+    contentTable.classList.add("table");
+    contentTable.classList.add("table-borderless");
+
+    contentTable.innerHTML = `
+  <tr>
+    <td>Movie</td>
+    <td>${movie.title}</td>
+  </tr>
+  <tr>
+    <td>Year</td>
+    <td>${movie.year}</td>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td>${movie.country}</td>
+  </tr>
+  <tr>
+    <td>Language</td>
+    <td>${movie.language}</td>
+  </tr>
+  <tr>
+    <td>Duration</td>
+    <td>${movie.duration} min.</td>
+  </tr>
+  <tr>
+    <td>Director</td>
+    <td>${movie.director}</td>
+  </tr>
+  <tr>
+    <td>Parental Guide</td>
+    <td>${movie.parentalGuide}</td>
+  </tr>
+`;
+    modalBody.append(contentTable);
+
+
+    const modalCloseButton = document.createElement("button");
+    modalCloseButton.classList.add("btn-close");
+    modalCloseButton.setAttribute("data-bs-dismiss", "modal");
+    modalHeader.append(modalCloseButton);
   }
 
-  function initModalBox() {
+  function initModalTrailer() {
     const modalDiv = document.createElement("div");
     modalDiv.id = "modalYoutube-" + movie.id;
     modalDiv.classList.add("modal");
@@ -119,7 +190,7 @@ function buildMovie(movie) {
     youtubeIframe.setAttribute("src", movietrailerlink);
     youtubeIframe.setAttribute("width", "100%");
     youtubeIframe.setAttribute("height", "400px");
-    youtubeIframe.setAttribute("title", movie.title +" trailer");
+    youtubeIframe.setAttribute("title", movie.title + " trailer");
     youtubeIframe.setAttribute("frameborder", "0");
     youtubeIframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
     youtubeIframe.setAttribute("allowfullscreen", "");
