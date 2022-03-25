@@ -147,7 +147,6 @@ function buildMovie(movie) {
 
     modalBody.append(contentTable);
 
-
     const modalCloseButton = document.createElement("button");
     modalCloseButton.classList.add("btn-close");
     modalCloseButton.setAttribute("data-bs-dismiss", "modal");
