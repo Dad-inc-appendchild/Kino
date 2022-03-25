@@ -340,7 +340,7 @@ textarea {
   color: #f8f9fa;
 }
 
-.section-title{
+.section-title {
   color: #f8f9fa;
 }
 
@@ -353,7 +353,7 @@ textarea {
   border-bottom: dotted 2px #f8f9fa;
 }
 
-.container-main{
+.container-main {
   max-width: 1280px;
 }
 
@@ -456,4 +456,18 @@ url("img/Pavilion logocrop.jpg");
 
 .seats-container input:checked + label .check {
   visibility: visible;
+}
+
+.modal-content, .card-body {
+  background-color: #343a40;
+  color: #f8f9fa;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+  transition: 0.3s;
+}
+
+.modal-body table {
+  color: #f8f9fa !important;
 }
