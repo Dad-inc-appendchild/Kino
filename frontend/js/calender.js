@@ -177,7 +177,7 @@ const cal = {
         cCell.classList.add("blank");
       } else {
 
-        if (hasScreenings(screenings, squares[i]) === true) {
+        if (hasScreenings(screenings, squares[i])) {
           cCell.classList.add("teal-600");
         }
 
