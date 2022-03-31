@@ -1,5 +1,5 @@
 'use strict';
-const url = "http://127.0.0.1:8080/api/"
+const url = window.location.protocol + '//' + window.location.hostname + ':8080' + "/api/";
 
 // Setup header
 async function loadHtmlTemplate(link, elementid) {
